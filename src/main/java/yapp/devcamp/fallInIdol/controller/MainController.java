@@ -3,15 +3,18 @@ package yapp.devcamp.fallInIdol.controller;
 import java.io.IOException;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+
 
 @Controller
 public class MainController {
 
-	@GetMapping("/")
-	public String home(){
-		return "index";
+
+	@RequestMapping(value="/")
+	public String home() throws IOException{
+		//TwitterBot.twit();
+		return "home";
 	}
-	
+
 }
