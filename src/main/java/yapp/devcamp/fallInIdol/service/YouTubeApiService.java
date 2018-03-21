@@ -35,7 +35,8 @@ public class YouTubeApiService {
 
 	private static final String PROPERTIES_FILENAME = "application";
 
-	private static final String GOOGLE_YOUTUBE_URL = "https://www.youtube.com/watch?v=";
+//	private static final String GOOGLE_YOUTUBE_URL = "https://www.youtube.com/watch?v=";
+	private static final String GOOGLE_YOUTUBE_URL = "https://www.youtube.com/embed/";
 	private static final String YOUTUBE_SEARCH_TYPE = "video";
 	private static final String YOUTUBE_SEARCH_FIELDS = "items(id/kind,id/videoId,snippet/title,snippet/description,snippet/thumbnails/default/url)";
 	private static final String YOUTUBE_API_APPLICATION = "google-youtube-api-search";
