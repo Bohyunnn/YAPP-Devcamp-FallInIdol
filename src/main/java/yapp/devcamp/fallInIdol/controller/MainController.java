@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-
 	@RequestMapping(value="/")
 	public String home() throws IOException{
 		//TwitterBot.twit();
-		return "home";
+		return "index";
 	}
+
+//	@RequestMapping(value="/")
+//	public String home() throws IOException{
+//		//TwitterBot.twit();
+//		return "home";
+//	}
 
 }

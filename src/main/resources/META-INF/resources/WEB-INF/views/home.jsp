@@ -33,9 +33,9 @@
   <div class="w3-row w3-large w3-light-grey">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
   <a href="/" class="w3-bar-item w3-button w3-padding-large">Logo</a>
-  <a href="#youtube" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="youtube">YOUTUBE</a>
+  <a href="${pageContext.request.contextPath}/youtube" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="youtube">YOUTUBE</a>
   <a href="#photo" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="photo">PHOTO</a>
-  <a href="#twitter" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="twitter">TWITTER</a>
+  <a href="${pageContext.request.contextPath}/twit" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="twitter">TWITTER</a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="chatting">
   <i class="fa fa-comments"></i>
   </a>
