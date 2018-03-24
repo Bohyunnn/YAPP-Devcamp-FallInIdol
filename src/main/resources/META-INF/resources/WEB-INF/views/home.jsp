@@ -24,6 +24,46 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
 	html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+	#myCarousel {
+    		width: 70%;
+	}
+	.carousel-control {
+	    margin-top: 20px;
+	}
+	.carousel-inner .item {
+	    width: 100%;
+	    height: 400px;
+	    /* -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover; */
+	}
+	#choiceList ol {
+		float: left;
+	    list-style: none;
+	    margin: 0px;
+	    padding: 0px;
+	  
+	    max-width: 900px;
+	    width: 100%;
+	}
+  
+	#choiceList li{
+	   /*  margin: 0 0 0 0;
+	    padding: 0 0 0 0;
+	    border : 0;
+	    float: left; */
+	    float:left; list-style:none; margin:2px;
+
+	}
+	#choiceList li a 
+	{display:block; width:150px; height:40px; background:#ffffff; color:#000000; border1px solid blue; font-size:12px;
+ text-align:center; padding-top:10px; text-decoration:none;}
+    #choiceList li a:hover
+ 	{background:#099; text-decoration:none;}
+	/* #selectable .ui-selecting { background: #FECA40; }
+  	#selectable .ui-selected { background: #F39814; color: white; }
+	 */
 	</style>
   </head>
   <body>
@@ -36,7 +76,7 @@
   <a href="#youtube" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="youtube">YOUTUBE</a>
   <a href="#photo" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="photo">PHOTO</a>
   <a href="#twitter" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="twitter">TWITTER</a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="chatting">
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="chattin">
   <i class="fa fa-comments"></i>
   </a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="setting">
@@ -54,7 +94,8 @@
   </div>
 </div>
 
-  <main role="main">		
+  <main role="main">	
+  <div class="w3-main w3-padding" style="max-width:1200px;margin-top:20px">
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -62,8 +103,9 @@
           <li data-target="#myCarousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
+        <c:forEach var="photo" items="${result}" begin="0" end="0">
           <div class="carousel-item active">
-            <img class="first-slide" src="http://cfile6.uf.tistory.com/image/2470AF455962EDC3148836" alt="First slide">
+            <img class="first-slide" src="${photo}" alt="First slide" >
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Example headline.</h1>
@@ -72,8 +114,10 @@
               </div>
             </div>
           </div>
+          </c:forEach>
+          <c:forEach var="photo" items="${result}" begin="1" end="2" >
           <div class="carousel-item">
-            <img class="second-slide" src="http://korepo.com/wp-content/uploads/2016/10/450_red.jpg" alt="Second slide">
+            <img class="second-slide" src="${photo}" alt="Second slide" style="background-color:rgba( 0, 0, 0, 0.5 );">
             <div class="container">
               <div class="carousel-caption">
                 <h1>Another example headline.</h1>
@@ -82,7 +126,8 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item">
+          </c:forEach>
+         <!--  <div class="carousel-item">
             <img class="third-slide" src="http://media.infospesial.net/image/p/2015/12/a5d9a-red-velvet.jpg" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-right">
@@ -91,7 +136,8 @@
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
               </div>
             </div>
-          </div>
+          </div> -->
+         
         </div>
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -101,41 +147,73 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
-      </div> 
-
+      </div>
+      </div>
   <!-- !PAGE CONTENT! -->
-
-  <!-- Photo grid -->
+	<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+   
     <div class="w3-container w3-padding-64 w3-center" id="youtube">
       <img src="/w3images/natureboy.jpg" style="width:100%" onclick="onClick(this)" alt="A boy surrounded by beautiful nature">
       <img src="/w3images/girl_mountain.jpg" style="width:100%" onclick="onClick(this)" alt="What a beautiful scenery this sunset">
       <img src="/w3images/girl.jpg" style="width:100%" onclick="onClick(this)" alt="The Beach. Me. Alone. Beautiful">
     </div>
-     <div class="w3-container w3-padding-64 w3-center" id="photo">
+    
+      <!-- Photo grid -->
+     <div class="w3-container w3-padding-64 w3-center" id = "photo">
+     <div id="choiceList">
+	  <ol>
+	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=paparazzi#photo">직찍</a></li>
+	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=pictorial#photo">화보</a></li>
+	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=broad#photo">방송 사진</a></li>
+	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=temp#photo">temp</a></li>
+	  </ol>
+	</div>
 	    <div class="w3-row">
 		    <div class="w3-third">
 			    	<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="33" >
-				    <img src="${item}" style="width:100%" onclick="onClick(this)" alt="A boy surrounded by beautiful nature">
+				    <img src="${item}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
 				</c:forEach>
 			</div>
 			<div class="w3-third">
 				<c:forEach items="${result}" var="item" varStatus="status" begin="34" end="66" >
-				    <img src="${item}" style="width:100%" onclick="onClick(this)" alt="A boy surrounded by beautiful nature">
+				    <img src="${item}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
 				</c:forEach>
 			</div>
 			<div class="w3-third">
 				<c:forEach items="${result}" var="item" varStatus="status" begin="67" end="100" >
-				    <img src="${item}" style="width:100%" onclick="onClick(this)" alt="A boy surrounded by beautiful nature">
+				    <img src="${item}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
 				</c:forEach>
 			</div>
 		</div>
     </div>
+	
+	<!--  photo modal  -->
+	<div id="id01" class="w3-modal">
+  <div class="w3-modal-content">
+
+    <header class="w3-container w3-teal"> 
+      <span onclick="document.getElementById('id01').style.display='none'" 
+      class="w3-button w3-display-topright">&times;</span>
+      <h2>Modal Header</h2>
+    </header>
+
+    <div class="w3-container">
+      <p>Some text..</p>
+      <p>Some text..</p>
+    </div>
+
+    <footer class="w3-container w3-teal">
+      <p>Modal Footer</p>
+    </footer>
+
+  </div>
+</div>
     <div class="w3-container w3-padding-64 w3-center" id="twitter">
       <img src="/w3images/girl.jpg" style="width:100%" onclick="onClick(this)" alt="Canoeing again">
       <img src="/w3images/girl_train.jpg" style="width:100%" onclick="onClick(this)" alt="A girl, and a train passing">
       <img src="/w3images/closegirl.jpg" style="width:100%" onclick="onClick(this)" alt="What a beautiful day!">
     </div>
-
+	</div>
       <!-- FOOTER -->
       <footer class="container">
         <p class="float-right"><a href="#">Back to top</a></p>
@@ -155,6 +233,7 @@
         x.className = x.className.replace(" w3-show", "");
     }
 	}
+    
     </script>
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
