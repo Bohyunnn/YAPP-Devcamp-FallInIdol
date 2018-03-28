@@ -23,8 +23,6 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.model.SearchListResponse;
 
-
-
 @Service
 public class YouTubeApiService {
 
@@ -35,14 +33,15 @@ public class YouTubeApiService {
 
 	private static final String PROPERTIES_FILENAME = "application";
 
-//	private static final String GOOGLE_YOUTUBE_URL = "https://www.youtube.com/watch?v=";
+	// private static final String GOOGLE_YOUTUBE_URL =
+	// "https://www.youtube.com/watch?v=";
 	private static final String GOOGLE_YOUTUBE_URL = "https://www.youtube.com/embed/";
 	private static final String YOUTUBE_SEARCH_TYPE = "video";
 	private static final String YOUTUBE_SEARCH_FIELDS = "items(id/kind,id/videoId,snippet/title,snippet/description,snippet/thumbnails/default/url)";
 	private static final String YOUTUBE_API_APPLICATION = "google-youtube-api-search";
 	private static final String YOUTUBE_APIKEY_ENV = "YOUTUBE_APIKEY";
 
-	private static final long NUMBER_OF_VIDEOS_RETURNED = 25;
+	private static final long NUMBER_OF_VIDEOS_RETURNED = 26;
 
 	private static YouTube youtube;
 
@@ -69,7 +68,17 @@ public class YouTubeApiService {
 	 *
 	 */
 	public List<YouTubeItem> youTubeSearch(String searchQuery, int maxSearch) {
-		log.info("Starting YouTube search... " + searchQuery);
+		log.info("[1] Starting YouTube search... " + searchQuery);
+		System.out.println("[1] Starting YouTube search... " + searchQuery);
+		if (searchQuery.equals("redvelvet")) {
+			searchQuery = "레드벨벳";
+		} else if (searchQuery.equals("bts")) {
+			searchQuery = "방탄소년단";
+		} else if (searchQuery.equals("exo")) {
+			searchQuery = "엑소";
+		} else if (searchQuery.equals("twice")) {
+			searchQuery = "트와이스";
+		}
 
 		List<YouTubeItem> rvalue = new ArrayList<YouTubeItem>();
 
@@ -81,6 +90,117 @@ public class YouTubeApiService {
 				YouTube.Search.List search = youtube.search().list("id,snippet");
 
 				// Set your developer key from the {{ Google Cloud Console }}
+				// for
+				// non-authenticated requests. See:
+				// {{ https://cloud.google.com/console }}
+
+				String apiKey = System.getenv(YOUTUBE_APIKEY_ENV);
+
+				if (apiKey == null) {
+					apiKey = propertiesBundle.getString("youtube.apikey");
+				}
+
+				search.setKey(apiKey);
+				search.setQ(searchQuery);
+
+				// Restrict the search results to only include videos. See:
+				// https://developers.google.com/youtube/v3/docs/search/list#type
+
+				search.setType(YOUTUBE_SEARCH_TYPE);
+
+				// To increase efficiency, only retrieve the fields that the
+				// application uses.
+
+				String youTubeFields = propertiesBundle.getString("youtube.fields");
+
+				if (youTubeFields != null && !youTubeFields.isEmpty()) {
+					search.setFields(youTubeFields);
+				} else {
+					search.setFields(YOUTUBE_SEARCH_FIELDS);
+				}
+
+				if (maxSearch < 1) {
+					String maxVideosReturned = propertiesBundle.getString("youtube.maxvid");
+
+					if (maxVideosReturned != null && !maxVideosReturned.isEmpty()) {
+						search.setMaxResults(Long.valueOf(maxVideosReturned));
+					} else {
+						search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);
+					}
+				} else {
+					search.setMaxResults((long) maxSearch);
+				}
+
+				// Call the API and print results.
+				SearchListResponse searchResponse = search.execute();
+				List<SearchResult> searchResultList = searchResponse.getItems();
+
+				if (searchResultList != null && searchResultList.size() > 0) {
+
+					for (SearchResult r : searchResultList) {
+						YouTubeItem item = new YouTubeItem(GOOGLE_YOUTUBE_URL + r.getId().getVideoId(),
+								r.getSnippet().getTitle(), r.getSnippet().getThumbnails().getDefault().getUrl(),
+								r.getSnippet().getDescription());
+						rvalue.add(item);
+					}
+
+				} else {
+					log.info("No search results got from YouTube API");
+				}
+
+			} else {
+				log.warn("YouTube API not initialized correctly!");
+			}
+
+		} catch (GoogleJsonResponseException e) {
+			log.warn("There was a service error: " + e.getDetails().getCode() + " : " + e.getDetails().getMessage());
+		} catch (IOException e) {
+			log.warn("There was an IO error: " + e.getCause() + " : " + e.getMessage());
+		} catch (Throwable t) {
+			log.warn("Severe errors!", t);
+			t.printStackTrace();
+		}
+
+		return rvalue;
+	}
+
+	public List<YouTubeItem> youTubeSearch(String searchQuery, String select, int maxSearch) {
+		if (searchQuery.equals("redvelvet")) {
+			searchQuery = "레드벨벳";
+		} else if (searchQuery.equals("bts")) {
+			searchQuery = "방탄소년단";
+		} else if (searchQuery.equals("exo")) {
+			searchQuery = "엑소";
+		} else if (searchQuery.equals("twice")) {
+			searchQuery = "트와이스";
+		}
+
+		if (select.equals("musicvideo")) {
+			searchQuery += " 뮤직비디오";
+		} else if (select.equals("broadcast")) {
+			searchQuery += " 예능방송";
+		} else if (select.equals("mnet")) {
+			searchQuery += " 엠넷";
+		} else if (select.equals("musicbank")) {
+			searchQuery += " 뮤직뱅크";
+		} else if (select.equals("popularmusic")) {
+			searchQuery += " 인기가요";
+		}
+
+		log.info("[2] Starting YouTube search... " + searchQuery);
+		System.out.println("[2] Starting YouTube search... " + searchQuery);
+
+		List<YouTubeItem> rvalue = new ArrayList<YouTubeItem>();
+
+		try {
+
+			if (youtube != null) {
+
+				// Define the API request for retrieving search results.
+				YouTube.Search.List search = youtube.search().list("id,snippet");
+
+				// Set your developer key from the {{ Google Cloud Console
+				// }}
 				// for
 				// non-authenticated requests. See:
 				// {{ https://cloud.google.com/console }}
