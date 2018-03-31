@@ -66,113 +66,107 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	background: #099;
 	text-decoration: none;
 }
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-	}
 
-	/* Modal Content (image) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+	text-align: center;
+	color: #ccc;
+	padding: 10px 0;
+	height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+	-webkit-animation-name: zoom;
+	-webkit-animation-duration: 0.6s;
+	animation-name: zoom;
+	animation-duration: 0.6s;
+}
+
+@
+-webkit-keyframes zoom {
+	from {-webkit-transform: scale(0)
+}
+
+to {
+	-webkit-transform: scale(1)
+}
+
+}
+@
+keyframes zoom {
+	from {transform: scale(0)
+}
+
+to {
+	transform: scale(1)
+}
+
+}
+
+/* The Close Button */
+.close {
+	position: absolute;
+	top: 100px;
+	right: 110px;
+	color: #f1f1f1;
+	z-index: 100;
+	font-size: 30px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.close:hover, .close:focus {
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
 	.modal-content {
-	    margin: auto;
-	    display: block;
-	    width: 80%;
-	    max-width: 700px;
+		width: 100%;
 	}
-	
-	/* Caption of Modal Image */
-	#caption {
-	    margin: auto;
-	    display: block;
-	    width: 80%;
-	    max-width: 700px;
-	    text-align: center;
-	    color: #ccc;
-	    padding: 10px 0;
-	    height: 150px;
-	}
-	
-	/* Add Animation */
-	.modal-content, #caption {    
-	    -webkit-animation-name: zoom;
-	    -webkit-animation-duration: 0.6s;
-	    animation-name: zoom;
-	    animation-duration: 0.6s;
-	}
-	
-	@-webkit-keyframes zoom {
-	    from {-webkit-transform:scale(0)} 
-	    to {-webkit-transform:scale(1)}
-	}
-	
-	@keyframes zoom {
-	    from {transform:scale(0)} 
-	    to {transform:scale(1)}
-	}
-	
-	/* The Close Button */
-	.close {
-	    position: absolute;
-	   	top: 100px;
-	    right: 110px;
-	    color: #f1f1f1;
-	    z-index:100;
-	    font-size: 30px;
-	    font-weight: bold;
-	    transition: 0.3s;
-	}
-	
-	.close:hover,
-	.close:focus {
-	    color: #bbb;
-	    text-decoration: none;
-	    cursor: pointer;
-	}
-	
-	/* 100% Image Width on Smaller Screens */
-	@media only screen and (max-width: 700px){
-	    .modal-content {
-	        width: 100%;
-	    }
-	    .videowrapper {
-		position:absolute;
+	.videowrapper {
+		position: absolute;
 		padding-bottom: 56.25%; /* 16:9 비율인 경우 */
 		/* padding-bottom값은 4:3 비율인 경우 75%로 설정합니다 */
 		padding-top: 25px;
 		height: 0;
-		}
-		
-		.videowrapper iframe {
+	}
+	.videowrapper iframe {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		}
-		}
-		.col-sm-2 {
-		}
-	#schedule {
-	  width: 72px;
-	  height: 18px;
-	  font-family: Futura;
-	  font-size: 9px;
-	  font-weight: bold;
-	  font-style: normal;
-	  font-stretch: normal;
-	  line-height: normal;
-	  letter-spacing: 1.8px;
-	  text-align: left;
-	  color: #ffffff;
-	  background-color: #ffffff;}
+
 </style>
 </head>
 <body>
@@ -194,71 +188,12 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				</c:forEach>
 			</div>
 	</div>
-		<a href="#feed"
-				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
+	<!-- Navbar -->
 	<div class="w3-display-container w3-animate-opacity">
 		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
 			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
 		</c:forEach>
 	</div>
-					
-					
-						
-		<%-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					
-				</div>
-				<div class="carousel-item">
-					<c:forEach items="${mainPhoto}" var="item" varStatus="status"
-						begin="1" end="1">
-						<img class="second-slide" src="${item}" alt="Second slide">
-						<div class="container-fluid">
-							<div class="carousel-caption">
-								<h1>Another example headline.</h1>
-								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-lg btn-primary" href="#" role="button">Learn
-										more</a>
-								</p>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="carousel-item">
-					<c:forEach items="${mainPhoto}" var="item" varStatus="status"
-						begin="2" end="2">
-						<img class="third-slide" src="${item}" alt="Third slide">
-						<div class="container-fluid">
-							<div class="carousel-caption text-right">
-								<h1>One more for good measure.</h1>							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-lg btn-primary" href="#" role="button">Browse
-										gallery</a>
-								</p>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-			
-			<a class="carousel-control-prev" href="#myCarousel" role="button"
-				data-slide="prev"> <span class="carousel-control-prev-icon"
-				aria-hidden="true"></span> <span class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#myCarousel" role="button"
-				data-slide="next"> <span class="carousel-control-next-icon"
-				aria-hidden="true"></span> <span class="sr-only">Next</span>
-			</a>
-	</div> --%>
 
 		<div class="w3-row w3-large w3-white">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
@@ -298,27 +233,28 @@ html, body, h1, h2, h3, h4, h5, h6 {
 		</div> -->
 
 
-	</main>
-	<!-- !PAGE CONTENT! -->
-	 <!-- Photo grid -->
-	<div class="w3-container w3-padding-64 w3-center" id="youtube">
-		<div class="w3-col m12">
-			<div id="choiceList">
-				<ol>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=musicvideo#youtube">뮤직비디오</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=broadcast#youtube">방송</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=mnet#youtube">엠넷</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=musicbank#youtube">뮤직뱅크</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=popularmusic#youtube">인기가요</a></li>
-				</ol>
+
+		</main>
+		<!-- !PAGE CONTENT! -->
+		<!-- Photo grid -->
+		<div class="w3-container w3-padding-64 w3-center" id="youtube">
+			<div class="w3-col m12">
+				<div id="choiceList">
+					<ol>
+						<li><a
+							href="/home?choice=<c:out value="${choice}"/>&select=musicvideo#youtube">뮤직비디오</a></li>
+						<li><a
+							href="/home?choice=<c:out value="${choice}"/>&select=broadcast#youtube">방송</a></li>
+						<li><a
+							href="/home?choice=<c:out value="${choice}"/>&select=mnet#youtube">엠넷</a></li>
+						<li><a
+							href="/home?choice=<c:out value="${choice}"/>&select=musicbank#youtube">뮤직뱅크</a></li>
+						<li><a
+							href="/home?choice=<c:out value="${choice}"/>&select=popularmusic#youtube">인기가요</a></li>
+					</ol>
+				</div>
 			</div>
-		</div>
-		
+	
 		<div class="w3-col m12">
 			<c:forEach items="${youtube}" var="item" varStatus="status" begin="0"
 				end="1">		
@@ -423,49 +359,67 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			</div>
 		</div>
 	</div>
-	
-	<div id="myModal" class="modal">
-	  <span class="close" data-dismiss="modal">&times;</span>  
-	  <img class="modal-content" id="img01">
-	  <div id="caption"></div>
-	</div>
-	
-	<div class="w3-container w3-padding-64 w3-center" id="twitter">
-		<img src="/w3images/girl.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="Canoeing again"> <img
-			src="/w3images/girl_train.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="A girl, and a train passing"> <img
-			src="/w3images/closegirl.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="What a beautiful day!">
-	</div>
 
-	<!-- FOOTER -->
-	<footer class="container">
-		<p class="float-right">
-			<a href="#">Back to top</a>
-		</p>
-	</footer>
+		<div id="myModal" class="modal">
+			<span class="close" data-dismiss="modal">&times;</span> 
+			<img class="modal-content" id="img01">
+			<div id="caption"></div>
+		</div>
 
-	</main>
+		<div class="w3-container w3-padding-64 w3-center" id="twitter">
+			<div class="w3-row">
+				<div class="w3-third">
+					<c:forEach items="${twit_result}" var="item" varStatus="status"
+						begin="0" end="33">
+						<img src="${item}" style="width: 100%" onclick="onClick(this)"
+							alt="A boy surrounded by beautiful nature">
+					</c:forEach>
+				</div>
+				<div class="w3-third">
+					<c:forEach items="${twit_result}" var="item" varStatus="status"
+						begin="34" end="66">
+						<img src="${item}" style="width: 100%" onclick="onClick(this)"
+							alt="A boy surrounded by beautiful nature">
+					</c:forEach>
+				</div>
+				<div class="w3-third">
+					<c:forEach items="${twit_result}" var="
+				item"
+						varStatus="status" begin="67" end="100">
+						<img src="${item}" style="width: 100%" onclick="onClick(this)"
+							alt="A boy surrounded by beautiful nature">
+					</c:forEach>
+				</div>
+			</div>
+		</div>
 
-	<!-- Bootstrap core JavaScript
+		<!-- FOOTER -->
+		<footer class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+		</footer>
+
+		</main>
+
+		<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
-		function openNav() {
-			var x = document.getElementById("navDemo");
-			if (x.className.indexOf("w3-show") == -1) {
-				x.className += " w3-show";
-			} else {
-				x.className = x.className.replace(" w3-show", "");
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+		<script>
+			window.jQuery
+					|| document
+							.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
+			function openNav() {
+				var x = document.getElementById("navDemo");
+				if (x.className.indexOf("w3-show") == -1) {
+					x.className += " w3-show";
+				} else {
+					x.className = x.className.replace(" w3-show", "");
+				}
 			}
-		}
 	</script>
 	<script>
    	function clickImage(image) {
@@ -506,5 +460,6 @@ html, body, h1, h2, h3, h4, h5, h6 {
   
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+
 </body>
 </html>
