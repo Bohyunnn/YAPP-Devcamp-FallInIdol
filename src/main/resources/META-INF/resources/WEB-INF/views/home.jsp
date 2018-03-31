@@ -157,48 +157,55 @@ html, body, h1, h2, h3, h4, h5, h6 {
 		width: 100%;
 		height: 100%;
 		}
-		.imageSize { position: absolute; top: 0; left: 0; right: 0; bottom: 0; max-width:100%; height: 300px;}
-
+		}
+		.col-sm-2 {
+		}
+	#schedule {
+	  width: 72px;
+	  height: 18px;
+	  font-family: Futura;
+	  font-size: 9px;
+	  font-weight: bold;
+	  font-style: normal;
+	  font-stretch: normal;
+	  line-height: normal;
+	  letter-spacing: 1.8px;
+	  text-align: left;
+	  color: #ffffff;
+	  background-color: #ffffff;
+	}
 </style>
 </head>
 <body>
-
-	<!-- Navbar -->
-	<div class="w3-top">
-		<div class="w3-row w3-large w3-light-grey">
-			<a
-				class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
-				href="javascript:void(0);" onclick="openNav()"><i
-				class="fa fa-bars"></i></a> <a href="/"
-				class="w3-bar-item w3-button w3-padding-large">Logo</a> <a
-				href="#youtube"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="youtuberesult">YOUTUBE</a> <a href="#photo"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				title="photo">PHOTO</a> <a
-				href="${pageContext.request.contextPath}/twit"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="twitter">TWITTER</a> <a href="#"
-				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="chatting"> <i class="fa fa-comments"></i>
-			</a> <a href="#"
-				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
-				title="setting"> <i class="fa fa-user"></i>
-			</a>
-		</div>
-
-		<!-- Navbar on small screens -->
-		<div id="navDemo"
-			class="w3-bar-block w3-hide w3-hide-large w3-hide-medium w3-right">
-			<a href="#team" class="w3-bar-item w3-button">Team</a> <a
-				href="#work" class="w3-bar-item w3-button">Work</a> <a
-				href="#pricing" class="w3-bar-item w3-button">Price</a> <a
-				href="#contact" class="w3-bar-item w3-button">Contact</a> <a
-				href="#" class="w3-bar-item w3-button">Search</a>
-		</div>
+	<div class="w3-dropdown-hover w3-hide-small">  
+		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;" >${choice} <i class="fa fa-caret-down"></i></button>     
+			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
+				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
+				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
+				</c:forEach>
+			</div>
 	</div>
-	<div>
-		<main role="main">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<a href="#feed" id = "schedule"
+				class="w3-bar-item w3-button w3-padding-large">Schedule</a>
+	<div class="w3-dropdown-hover w3-hide-small">  
+		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
+			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
+				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
+				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
+				</c:forEach>
+			</div>
+	</div>
+		<a href="#feed"
+				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
+	<div class="w3-display-container w3-animate-opacity">
+		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
+			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
+		</c:forEach>
+	</div>
+					
+					
+						
+		<%-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				<li data-target="#myCarousel" data-slide-to="1"></li>
@@ -206,28 +213,13 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<c:forEach items="${mainPhoto}" var="item" varStatus="status"
-						begin="0" end="0">
-						<img class="first-slide" src="${item}" alt="First slide">
-						<div class="container">
-							<div class="carousel-caption text-left">
-								<h1>Example headline.</h1>
-								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-lg btn-primary" href="#" role="button">Sign
-										up today</a>
-								</p>
-							</div>
-						</div>
-					</c:forEach>
+					
 				</div>
 				<div class="carousel-item">
 					<c:forEach items="${mainPhoto}" var="item" varStatus="status"
 						begin="1" end="1">
 						<img class="second-slide" src="${item}" alt="Second slide">
-						<div class="container">
+						<div class="container-fluid">
 							<div class="carousel-caption">
 								<h1>Another example headline.</h1>
 								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -245,7 +237,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					<c:forEach items="${mainPhoto}" var="item" varStatus="status"
 						begin="2" end="2">
 						<img class="third-slide" src="${item}" alt="Third slide">
-						<div class="container">
+						<div class="container-fluid">
 							<div class="carousel-caption text-right">
 								<h1>One more for good measure.</h1>
 								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -260,7 +252,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 					</c:forEach>
 				</div>
 			</div>
-
+			
 			<a class="carousel-control-prev" href="#myCarousel" role="button"
 				data-slide="prev"> <span class="carousel-control-prev-icon"
 				aria-hidden="true"></span> <span class="sr-only">Previous</span>
@@ -268,7 +260,45 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				data-slide="next"> <span class="carousel-control-next-icon"
 				aria-hidden="true"></span> <span class="sr-only">Next</span>
 			</a>
-	</div>
+	</div> --%>
+
+		<div class="w3-row w3-large w3-white">
+			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
+				href="javascript:void(0);" onclick="openNav()"><i
+				class="fa fa-bars"></i></a> 
+				<div class = "row">
+				<div class ="col-sm-1">&nbsp;</div>
+				<div class ="col-sm-2">
+				<a href="#feed"
+				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
+				<div class ="col-sm-2">
+				<a href="#profile"
+				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
+				<div class ="col-sm-2">
+				<a href="#youtube"			class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+				title="youtuberesult">YOUTUBE</a></div>
+				<div class ="col-sm-2">
+				 <a href="#photo"
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				
+				title="photo">PHOTO</a></div>
+				<div class ="col-sm-2">
+				 <a href="#twitter"
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+				title="twitter">TWITTER</a></div>
+				<div class ="col-sm-1">&nbsp;</div>
+				 </div>
+		</div>
+
+		<!-- Navbar on small screens -->
+		<div id="navDemo"
+			class="w3-bar-block w3-hide w3-hide-large w3-hide-medium w3-right">
+			<a href="#team" class="w3-bar-item w3-button">Team</a> <a
+				href="#work" class="w3-bar-item w3-button">Work</a> <a
+				href="#pricing" class="w3-bar-item w3-button">Price</a> <a
+				href="#contact" class="w3-bar-item w3-button">Contact</a> <a
+				href="#" class="w3-bar-item w3-button">Search</a>
+		</div>
+
 
 	</main>
 	<!-- !PAGE CONTENT! -->

@@ -67,7 +67,28 @@ public class HomeController {
 
 			mv.setViewName("/home?choice=" + choice);
 		}
-
+		
+		List<String> choicelist = new ArrayList<String>();
+		choicelist.add("bts");
+		choicelist.add("redvelvet");
+		choicelist.add("exo");
+		choicelist.add("twice");
+		if (choice.equals( "redvelvet") ) {
+			choicelist.remove(1);
+		}
+		else if(choice.equals("bts")) {
+			choicelist.remove(0);
+		}
+		else if(choice.equals( "exo")) {
+			choicelist.remove(2);
+		}
+		else{
+			choicelist.remove(3);
+		}
+		for (int i = 0; i < 3; i++) {
+			System.out.println(choicelist.get(i));
+		}
+		mv.addObject("choicelist", choicelist);
 		mv.addObject("mainPhoto", mainPhoto);
 		mv.addObject("youtube", youtuberesult);
 		mv.addObject("result", resultUrls);
