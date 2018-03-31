@@ -39,7 +39,8 @@ public class HomeController {
 
 		String choice = request.getParameter("choice");
 		String select = request.getParameter("select");
-
+		String menu = request.getParameter("menu");
+		
 		int max = Integer.parseInt(items);
 
 		// mainCarousel 지정
@@ -47,26 +48,44 @@ public class HomeController {
 		mainPhoto = carouselImageService.getCarouselImage(choice);
 
 		List<YouTubeItem> youtuberesult = youtubeService.youTubeSearch(choice, max);
-
-		if (choice != null && select != null) {
-
-			youtuberesult = youtubeService.youTubeSearch(choice, select, max);
-			mv.addObject("youtube", youtuberesult);
-
-			resultUrls = googleCrawlService.ImageCrawling(choice, select);
-			mv.addObject("result", resultUrls);
-
-			mv.setViewName("/home");
-
-		} else if (choice != null && select == null) {
-			youtuberesult = youtubeService.youTubeSearch(choice, max);
-			mv.addObject("youtube", youtuberesult);
-
-			resultUrls = googleCrawlService.firstCrawling(choice);
-			mv.addObject("result", resultUrls);
-
-			mv.setViewName("/home?choice=" + choice);
+		
+		if (menu != null) {
+			if (menu.equals("youtube")) {
+				if (choice != null && select != null) {
+					youtuberesult = youtubeService.youTubeSearch(choice, select, max);
+					mv.addObject("youtube", youtuberesult);
+					mv.setViewName("/youtube");
+				}
+				if (choice != null && select == null)  {
+					youtuberesult = youtubeService.youTubeSearch(choice, max);
+					mv.addObject("youtube", youtuberesult);
+					mv.setViewName("/youtube");
+					
+				}
+			}
+			else if (menu.equals("photo")) {
+				if (choice != null && select != null) {
+					resultUrls = googleCrawlService.ImageCrawling(choice, select);
+					mv.addObject("result", resultUrls);
+					mv.setViewName("/photo");
+				}
+				if (choice != null && select == null)  {
+					resultUrls = googleCrawlService.firstCrawling(choice);
+					mv.addObject("result", resultUrls);
+					mv.setViewName("/photo");
+				}
+			}
 		}
+		else {
+				youtuberesult = youtubeService.youTubeSearch(choice, max);
+				mv.addObject("youtube", youtuberesult);
+
+				resultUrls = googleCrawlService.firstCrawling(choice);
+				mv.addObject("result", resultUrls);
+
+				mv.setViewName("/home");
+		}
+		
 		
 		List<String> choicelist = new ArrayList<String>();
 		choicelist.add("bts");
@@ -85,15 +104,13 @@ public class HomeController {
 		else{
 			choicelist.remove(3);
 		}
-		for (int i = 0; i < 3; i++) {
-			System.out.println(choicelist.get(i));
-		}
+
 		mv.addObject("choicelist", choicelist);
 		mv.addObject("mainPhoto", mainPhoto);
-		mv.addObject("youtube", youtuberesult);
-		mv.addObject("result", resultUrls);
+//		mv.addObject("youtube", youtuberesult);
+//		mv.addObject("result", resultUrls);
 		mv.addObject("choice", choice);
-		mv.setViewName("/home");
+//		mv.setViewName("/home");
 
 		return mv;
 	}

@@ -1,20 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../../../favicon.ico">
-
-<title>LookingForStar</title>
-
-<!-- Bootstrap core CSS -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
@@ -26,11 +18,8 @@
 	href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 <style>
-html, body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Roboto", sans-serif;
-}
-
 #choiceList ol {
 	float: left;
 	list-style: none;
@@ -160,19 +149,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 		}
 		.col-sm-2 {
 		}
-	#schedule {
-	  width: 72px;
-	  height: 18px;
-	  font-family: Futura;
-	  font-size: 9px;
-	  font-weight: bold;
-	  font-style: normal;
-	  font-stretch: normal;
-	  line-height: normal;
-	  letter-spacing: 1.8px;
-	  text-align: left;
-	  color: #ffffff;
-	  background-color: #ffffff;}
+
 </style>
 </head>
 <body>
@@ -201,66 +178,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
 		</c:forEach>
 	</div>
-					
-					
-						
-		<%-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					
-				</div>
-				<div class="carousel-item">
-					<c:forEach items="${mainPhoto}" var="item" varStatus="status"
-						begin="1" end="1">
-						<img class="second-slide" src="${item}" alt="Second slide">
-						<div class="container-fluid">
-							<div class="carousel-caption">
-								<h1>Another example headline.</h1>
-								<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-lg btn-primary" href="#" role="button">Learn
-										more</a>
-								</p>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="carousel-item">
-					<c:forEach items="${mainPhoto}" var="item" varStatus="status"
-						begin="2" end="2">
-						<img class="third-slide" src="${item}" alt="Third slide">
-						<div class="container-fluid">
-							<div class="carousel-caption text-right">
-								<h1>One more for good measure.</h1>							<p>Cras justo odio, dapibus ac facilisis in, egestas eget
-									quam. Donec id elit non mi porta gravida at eget metus. Nullam
-									id dolor id nibh ultricies vehicula ut id elit.</p>
-								<p>
-									<a class="btn btn-lg btn-primary" href="#" role="button">Browse
-										gallery</a>
-								</p>
-							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-			
-			<a class="carousel-control-prev" href="#myCarousel" role="button"
-				data-slide="prev"> <span class="carousel-control-prev-icon"
-				aria-hidden="true"></span> <span class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#myCarousel" role="button"
-				data-slide="next"> <span class="carousel-control-next-icon"
-				aria-hidden="true"></span> <span class="sr-only">Next</span>
-			</a>
-	</div> --%>
-
-		<div class="w3-row w3-large w3-white">
+	
+			<div class="w3-row w3-large w3-white">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
 				href="javascript:void(0);" onclick="openNav()"><i
 				class="fa fa-bars"></i></a> 
@@ -286,105 +205,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				<div class ="col-sm-1">&nbsp;</div>
 				 </div>
 		</div>
-
-		<!-- Navbar on small screens -->
-		<!-- <div id="navDemo"
-			class="w3-bar-block w3-hide w3-hide-large w3-hide-medium w3-right">
-			<a href="#team" class="w3-bar-item w3-button">Team</a> <a
-				href="#work" class="w3-bar-item w3-button">Work</a> <a
-				href="#pricing" class="w3-bar-item w3-button">Price</a> <a
-				href="#contact" class="w3-bar-item w3-button">Contact</a> <a
-				href="#" class="w3-bar-item w3-button">Search</a>
-		</div> -->
-
-
-	</main>
-	<!-- !PAGE CONTENT! -->
-	 <!-- Photo grid -->
-	<div class="w3-container w3-padding-64 w3-center" id="youtube">
-		<div class="w3-col m12">
-			<div id="choiceList">
-				<ol>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=musicvideo#youtube">뮤직비디오</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=broadcast#youtube">방송</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=mnet#youtube">엠넷</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=musicbank#youtube">뮤직뱅크</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=popularmusic#youtube">인기가요</a></li>
-				</ol>
-			</div>
-		</div>
-		
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status" begin="0"
-				end="1">		
-				<iframe width="593" height="333" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status" begin="2"
-				end="4">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status" begin="5"
-				end="7">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="8" end="10">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="11" end="13">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="14" end="16">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="17" end="19">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="20" end="22">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="23" end="25">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-	</div>
-	
+	<main>
 	<div class="w3-container w3-padding-64 w3-center" id="photo">
 		<div id="choiceList">
 			<ol>
@@ -429,45 +250,14 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	  <img class="modal-content" id="img01">
 	  <div id="caption"></div>
 	</div>
-	
-	<div class="w3-container w3-padding-64 w3-center" id="twitter">
-		<img src="/w3images/girl.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="Canoeing again"> <img
-			src="/w3images/girl_train.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="A girl, and a train passing"> <img
-			src="/w3images/closegirl.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="What a beautiful day!">
-	</div>
-
-	<!-- FOOTER -->
-	<footer class="container">
-		<p class="float-right">
-			<a href="#">Back to top</a>
-		</p>
-	</footer>
-
 	</main>
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
-		function openNav() {
-			var x = document.getElementById("navDemo");
-			if (x.className.indexOf("w3-show") == -1) {
-				x.className += " w3-show";
-			} else {
-				x.className = x.className.replace(" w3-show", "");
-			}
-		}
-	</script>
-	<script>
+</body>
+<script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+	
+<script>
    	function clickImage(image) {
    		/* var width, height;
   	  
@@ -505,6 +295,5 @@ html, body, h1, h2, h3, h4, h5, h6 {
     </script>
   
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-</body>
+</script>
 </html>
