@@ -82,7 +82,7 @@ public class GoogleCrawlService {
 	}
 
 	public List<String> firstCrawling(String choice) throws IOException {
-
+		
 		String userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
 		String url = "https://www.google.co.kr/search?q=redvelvet%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiI_fLA-fLZAhUBoZQKHRHiBt0QsAQIJw";
 
@@ -120,7 +120,6 @@ public class GoogleCrawlService {
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
-
 		return resultUrls;
 	}
 	// destinationkpop 에서 가져오는 사진은 엑박 남.

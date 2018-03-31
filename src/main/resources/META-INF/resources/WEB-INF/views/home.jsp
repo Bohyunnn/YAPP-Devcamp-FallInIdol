@@ -30,7 +30,6 @@
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif;
 }
-
 #choiceList ol {
 	float: left;
 	list-style: none;
@@ -39,7 +38,6 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	max-width: 900px;
 	width: 100%;
 }
-
 #choiceList li {
 	/*  margin: 0 0 0 0;
 	    padding: 0 0 0 0;
@@ -49,7 +47,6 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	list-style: none;
 	margin: 2px;
 }
-
 #choiceList li a {
 	display: block;
 	width: 150px;
@@ -61,7 +58,6 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	padding-top: 10px;
 	text-decoration: none;
 }
-
 #choiceList li a:hover {
 	background: #099;
 	text-decoration: none;
@@ -86,7 +82,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				title="youtuberesult">YOUTUBE</a> <a href="#photo"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="photo">PHOTO</a> <a
-				href="${pageContext.request.contextPath}/twit"
+				href="#twitter"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="twitter">TWITTER</a> <a href="#"
 				class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
@@ -281,7 +277,8 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				</c:forEach>
 			</div>
 			<div class="w3-third">
-				<c:forEach items="${result}" var="item" varStatus="status"
+				<c:forEach items="${result}" var="
+				item" varStatus="status"
 					begin="67" end="100">
 					<img src="${item}" style="width: 100%" onclick="onClick(this)"
 						alt="A boy surrounded by beautiful nature">
@@ -290,12 +287,30 @@ html, body, h1, h2, h3, h4, h5, h6 {
 		</div>
 	</div>
 	<div class="w3-container w3-padding-64 w3-center" id="twitter">
-		<img src="/w3images/girl.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="Canoeing again"> <img
-			src="/w3images/girl_train.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="A girl, and a train passing"> <img
-			src="/w3images/closegirl.jpg" style="width: 100%"
-			onclick="onClick(this)" alt="What a beautiful day!">
+		<div class="w3-row">
+			<div class="w3-third">
+				<c:forEach items="${twit_result}" var="item" varStatus="status" begin="0"
+					end="33">
+					<img src="${item}" style="width: 100%" onclick="onClick(this)"
+						alt="A boy surrounded by beautiful nature">
+				</c:forEach>
+			</div>
+			<div class="w3-third">
+				<c:forEach items="${twit_result}" var="item" varStatus="status"
+					begin="34" end="66">
+					<img src="${item}" style="width: 100%" onclick="onClick(this)"
+						alt="A boy surrounded by beautiful nature">
+				</c:forEach>
+			</div>
+			<div class="w3-third">
+				<c:forEach items="${twit_result}" var="
+				item" varStatus="status"
+					begin="67" end="100">
+					<img src="${item}" style="width: 100%" onclick="onClick(this)"
+						alt="A boy surrounded by beautiful nature">
+				</c:forEach>
+			</div>
+		</div>
 	</div>
 
 	<!-- FOOTER -->
