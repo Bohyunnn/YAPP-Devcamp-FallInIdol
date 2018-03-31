@@ -17,8 +17,8 @@ public class OpenCV {
 
 	public static void main(String[] args) {
 		// Set image path
-		String filename1 = "C:\\images\\iphone1.jpeg";
-		String filename2 = "C:\\images\\iphone2.jpeg";
+		String filename1 = "../../src/main/resources/META-INF/resources/img/bts.jpg";
+		String filename2 = "../../src/main/resources/META-INF/resources/img/sugar.jpg";
 
 		int ret;
 		ret = compareFeature(filename1, filename2);
