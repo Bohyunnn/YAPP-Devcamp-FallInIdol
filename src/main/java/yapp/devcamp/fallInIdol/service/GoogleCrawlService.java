@@ -64,6 +64,10 @@ public class GoogleCrawlService {
 			for (Element element : elements) {
 				if (element.childNodeSize() > 0) {
 					jsonObject = (JSONObject) new JSONParser().parse(element.childNode(0).toString());
+					if ((((String)jsonObject.get("ou")).indexOf("theqoo") > -1)) {
+		            		System.out.println("제외된 url "+jsonObject.get("ou"));
+		            		continue;
+					}
 					resultUrls.add((String) jsonObject.get("ou"));
 				}
 			}
@@ -107,6 +111,10 @@ public class GoogleCrawlService {
 			for (Element element : elements) {
 				if (element.childNodeSize() > 0) {
 					jsonObject = (JSONObject) new JSONParser().parse(element.childNode(0).toString());
+					if ((((String)jsonObject.get("ou")).indexOf("theqoo") > -1)) {
+	            			System.out.println("제외된 url "+jsonObject.get("ou"));
+	            			continue;
+					}
 					resultUrls.add((String) jsonObject.get("ou"));
 				}
 			}
@@ -123,5 +131,4 @@ public class GoogleCrawlService {
 
 		return resultUrls;
 	}
-	// destinationkpop 에서 가져오는 사진은 엑박 남.
 }

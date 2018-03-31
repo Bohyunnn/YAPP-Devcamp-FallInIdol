@@ -66,9 +66,99 @@ html, body, h1, h2, h3, h4, h5, h6 {
 	background: #099;
 	text-decoration: none;
 }
-/* #selectable .ui-selecting { background: #FECA40; }
-  	#selectable .ui-selected { background: #F39814; color: white; }
-	 */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+	}
+
+	/* Modal Content (image) */
+	.modal-content {
+	    margin: auto;
+	    display: block;
+	    width: 80%;
+	    max-width: 700px;
+	}
+	
+	/* Caption of Modal Image */
+	#caption {
+	    margin: auto;
+	    display: block;
+	    width: 80%;
+	    max-width: 700px;
+	    text-align: center;
+	    color: #ccc;
+	    padding: 10px 0;
+	    height: 150px;
+	}
+	
+	/* Add Animation */
+	.modal-content, #caption {    
+	    -webkit-animation-name: zoom;
+	    -webkit-animation-duration: 0.6s;
+	    animation-name: zoom;
+	    animation-duration: 0.6s;
+	}
+	
+	@-webkit-keyframes zoom {
+	    from {-webkit-transform:scale(0)} 
+	    to {-webkit-transform:scale(1)}
+	}
+	
+	@keyframes zoom {
+	    from {transform:scale(0)} 
+	    to {transform:scale(1)}
+	}
+	
+	/* The Close Button */
+	.close {
+	    position: absolute;
+	   	top: 100px;
+	    right: 110px;
+	    color: #f1f1f1;
+	    z-index:100;
+	    font-size: 30px;
+	    font-weight: bold;
+	    transition: 0.3s;
+	}
+	
+	.close:hover,
+	.close:focus {
+	    color: #bbb;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
+	
+	/* 100% Image Width on Smaller Screens */
+	@media only screen and (max-width: 700px){
+	    .modal-content {
+	        width: 100%;
+	    }
+	    .videowrapper {
+		position:absolute;
+		padding-bottom: 56.25%; /* 16:9 비율인 경우 */
+		/* padding-bottom값은 4:3 비율인 경우 75%로 설정합니다 */
+		padding-top: 25px;
+		height: 0;
+		}
+		
+		.videowrapper iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		}
+		.imageSize { position: absolute; top: 0; left: 0; right: 0; bottom: 0; max-width:100%; height: 300px;}
+
 </style>
 </head>
 <body>
@@ -84,8 +174,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				href="#youtube"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="youtuberesult">YOUTUBE</a> <a href="#photo"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="photo">PHOTO</a> <a
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				title="photo">PHOTO</a> <a
 				href="${pageContext.request.contextPath}/twit"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="twitter">TWITTER</a> <a href="#"
@@ -179,11 +268,11 @@ html, body, h1, h2, h3, h4, h5, h6 {
 				data-slide="next"> <span class="carousel-control-next-icon"
 				aria-hidden="true"></span> <span class="sr-only">Next</span>
 			</a>
-		</div>
 	</div>
+
 	</main>
 	<!-- !PAGE CONTENT! -->
-	<!-- Photo grid -->
+	 <!-- Photo grid -->
 	<div class="w3-container w3-padding-64 w3-center" id="youtube">
 		<div class="w3-col m12">
 			<div id="choiceList">
@@ -251,6 +340,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			</c:forEach>
 		</div>
 	</div>
+	
 	<div class="w3-container w3-padding-64 w3-center" id="photo">
 		<div id="choiceList">
 			<ol>
@@ -266,29 +356,36 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			</ol>
 		</div>
 		<div class="w3-row">
-			<div class="w3-third">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="0"
-					end="33">
-					<img src="${item}" style="width: 100%" onclick="onClick(this)"
-						alt="A boy surrounded by beautiful nature">
+			<div class="w3-quarter">
+				<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="25" >
+				    <img src="${item}" style="max-width: 100%;width: 600px;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
-			<div class="w3-third">
-				<c:forEach items="${result}" var="item" varStatus="status"
-					begin="34" end="66">
-					<img src="${item}" style="width: 100%" onclick="onClick(this)"
-						alt="A boy surrounded by beautiful nature">
+			<div class="w3-quarter">
+				<c:forEach items="${result}" var="item" varStatus="status" begin="26" end="50" >
+				    <img src="${item}" style="max-width: 100%;width: 600px;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
-			<div class="w3-third">
-				<c:forEach items="${result}" var="item" varStatus="status"
-					begin="67" end="100">
-					<img src="${item}" style="width: 100%" onclick="onClick(this)"
-						alt="A boy surrounded by beautiful nature">
+			
+			<div class="w3-quarter">
+				<c:forEach items="${result}" var="item" varStatus="status" begin="51" end="75" >
+				    <img src="${item}" style="max-width: 100%;width: 600px;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+				</c:forEach>
+			</div>
+			<div class="w3-quarter">
+				<c:forEach items="${result}" var="item" varStatus="status" begin="75" end="100" >
+				    <img src="${item}" style="max-width: 100%;width: 600px;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 		</div>
 	</div>
+	
+	<div id="myModal" class="modal">
+	  <span class="close" data-dismiss="modal">&times;</span>
+	  <img class="modal-content" id="img01">
+	  <div id="caption"></div>
+	</div>
+	
 	<div class="w3-container w3-padding-64 w3-center" id="twitter">
 		<img src="/w3images/girl.jpg" style="width: 100%"
 			onclick="onClick(this)" alt="Canoeing again"> <img
@@ -304,6 +401,7 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			<a href="#">Back to top</a>
 		</p>
 	</footer>
+
 	</main>
 
 	<!-- Bootstrap core JavaScript
@@ -325,6 +423,43 @@ html, body, h1, h2, h3, h4, h5, h6 {
 			}
 		}
 	</script>
+	<script>
+   	function clickImage(image) {
+   		var width, height;
+  	  
+	    if(image.naturalWidth){
+	        width = image.naturalWidth;
+	        height = image.naturalHeight;
+	    } else {
+	        var tImg = new Image();
+	        tImg.src = image.src;
+	        width = tImg.width;
+	        height = tImg.height;
+	    }
+	    console.log("Image width:" + width + ", height:" + height);
+	    var modal = document.getElementById('myModal');
+	
+		 // Get the image and insert it inside the modal - use its "alt" text as a caption
+		 var modalImg = document.getElementById("img01");
+		 var captionText = document.getElementById("caption");
+		 
+		 modal.style.display = "block";
+		 modalImg.src = image.src;
+		 captionText.innerHTML = image.alt;
+		 
+		
+		 // Get the <span> element that closes the modal	 var span = document.getElementsByClassName("close")[0];
+		
+		 // When the user clicks on <span> (x), close the modal
+		 span.onclick = function() { 
+		     modal.style.display = "none";
+		 } 
+		
+   	}
+   
+   	
+    </script>
+  
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 </body>
