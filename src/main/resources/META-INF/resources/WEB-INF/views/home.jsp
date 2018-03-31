@@ -10,6 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
+	<link href="../Styles/Site.css" rel="stylesheet" type="text/css" />    
 
     <title>LookingForStar</title>
 
@@ -54,16 +55,99 @@
 	    border : 0;
 	    float: left; */
 	    float:left; list-style:none; margin:2px;
-
+		display:block; width:150px; height:40px; background:#ffffff; color:#000000; border1px solid blue; font-size:12px;
+ text-align:center; padding-top:10px; text-decoration:none;
 	}
-	#choiceList li a 
-	{display:block; width:150px; height:40px; background:#ffffff; color:#000000; border1px solid blue; font-size:12px;
- text-align:center; padding-top:10px; text-decoration:none;}
     #choiceList li a:hover
- 	{background:#099; text-decoration:none;}
+ 	{background:#099; text-decoration:none;}  */
+
 	/* #selectable .ui-selecting { background: #FECA40; }
   	#selectable .ui-selected { background: #F39814; color: white; }
 	 */
+	.w3-third {
+		position:relative;
+		float:left
+	}
+	.w3-third.text {
+		position:absolute;
+		
+	}
+	.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+	}
+
+	/* Modal Content (image) */
+	.modal-content {
+	    margin: auto;
+	    display: block;
+	    width: 80%;
+	    max-width: 700px;
+	}
+	
+	/* Caption of Modal Image */
+	#caption {
+	    margin: auto;
+	    display: block;
+	    width: 80%;
+	    max-width: 700px;
+	    text-align: center;
+	    color: #ccc;
+	    padding: 10px 0;
+	    height: 150px;
+	}
+	
+	/* Add Animation */
+	.modal-content, #caption {    
+	    -webkit-animation-name: zoom;
+	    -webkit-animation-duration: 0.6s;
+	    animation-name: zoom;
+	    animation-duration: 0.6s;
+	}
+	
+	@-webkit-keyframes zoom {
+	    from {-webkit-transform:scale(0)} 
+	    to {-webkit-transform:scale(1)}
+	}
+	
+	@keyframes zoom {
+	    from {transform:scale(0)} 
+	    to {transform:scale(1)}
+	}
+	
+	/* The Close Button */
+	.close {
+	    position: absolute;
+	   	top: 100px;
+	    right: 110px;
+	    color: #f1f1f1;
+	    z-index:100;
+	    font-size: 30px;
+	    font-weight: bold;
+	    transition: 0.3s;
+	}
+	
+	.close:hover,
+	.close:focus {
+	    color: #bbb;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
+	
+	/* 100% Image Width on Smaller Screens */
+	@media only screen and (max-width: 700px){
+	    .modal-content {
+	        width: 100%;
+	    }
 	</style>
   </head>
   <body>
@@ -76,7 +160,7 @@
   <a href="#youtube" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="youtube">YOUTUBE</a>
   <a href="#photo" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="photo">PHOTO</a>
   <a href="#twitter" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="twitter">TWITTER</a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="chattin">
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="chatting">
   <i class="fa fa-comments"></i>
   </a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="setting">
@@ -160,54 +244,44 @@
     
       <!-- Photo grid -->
      <div class="w3-container w3-padding-64 w3-center" id = "photo">
-     <div id="choiceList">
+      <div id="choiceList">
 	  <ol>
-	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=paparazzi#photo">직찍</a></li>
-	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=pictorial#photo">화보</a></li>
-	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=broad#photo">방송 사진</a></li>
-	    <li><a href="/home?choice=<c:out value="${choice}"/>&select=temp#photo">temp</a></li>
+	    <li id = "paparazzi"><a href="/home?choice=<c:out value="${choice}"/>&select=paparazzi#photo">직찍</a></li>
+	    <li id = "pictorial"><a href="/home?choice=<c:out value="${choice}"/>&select=pictorial#photo">화보</a></li>
+	    <li id = "broad"><a href="/home?choice=<c:out value="${choice}"/>&select=broad#photo">방송 사진</a></li>
+	    <li id = "temp"><a href="/home?choice=<c:out value="${choice}"/>&select=temp#photo">temp</a></li>
 	  </ol>
 	</div>
 	    <div class="w3-row">
-		    <div class="w3-third">
-			    	<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="33" >
-				    <img src="${item}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+		    <div class="w3-quarter">
+			    	<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="25" >
+				    <img src="${item}" style="width:100%" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
-			<div class="w3-third">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="34" end="66" >
-				    <img src="${item}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+			<div class="w3-quarter">
+				<c:forEach items="${result}" var="item" varStatus="status" begin="36" end="50" >
+				    <img src="${item}" style="width:100%" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
-			<div class="w3-third">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="67" end="100" >
-				    <img src="${item}" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity">
+			<div class="w3-quarter">
+				<c:forEach items="${result}" var="item" varStatus="status" begin="51" end="75" >
+				    <img src="${item}" style="width:100%" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+				</c:forEach>
+			</div>
+			<div class="w3-quarter">
+				<c:forEach items="${result}" var="item" varStatus="status" begin="76" end="100" >
+				    <img src="${item}" style="width:100%" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 		</div>
     </div>
-	
-	<!--  photo modal  -->
-	<div id="id01" class="w3-modal">
-  <div class="w3-modal-content">
+    <div id="myModal" class="modal">
+	  <span class="close" data-dismiss="modal">&times;</span>
+	  <img class="modal-content" id="img01">
+	  <div id="caption"></div>
+	</div>
 
-    <header class="w3-container w3-teal"> 
-      <span onclick="document.getElementById('id01').style.display='none'" 
-      class="w3-button w3-display-topright">&times;</span>
-      <h2>Modal Header</h2>
-    </header>
-
-    <div class="w3-container">
-      <p>Some text..</p>
-      <p>Some text..</p>
-    </div>
-
-    <footer class="w3-container w3-teal">
-      <p>Modal Footer</p>
-    </footer>
-
-  </div>
-</div>
+    
     <div class="w3-container w3-padding-64 w3-center" id="twitter">
       <img src="/w3images/girl.jpg" style="width:100%" onclick="onClick(this)" alt="Canoeing again">
       <img src="/w3images/girl_train.jpg" style="width:100%" onclick="onClick(this)" alt="A girl, and a train passing">
@@ -226,14 +300,49 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
     function openNav() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
+	    var x = document.getElementById("navDemo");
+	    if (x.className.indexOf("w3-show") == -1) {
+	        x.className += " w3-show";
+	    } else { 
+	        x.className = x.className.replace(" w3-show", "");
+	    }
 	}
     
+    
+    </script>
+    <script language="javascript">
+    		$(document).ready(function() {
+    			$(".paparazzi, .pictorial, .broad, .temp").click(function() {
+    				alert("버튼클릭 ");
+    			});
+    		});
+    		
+    </script>
+    <script>
+   	function clickImage(image) {
+   		
+	    var modal = document.getElementById('myModal');
+	
+		 // Get the image and insert it inside the modal - use its "alt" text as a caption
+		 var modalImg = document.getElementById("img01");
+		 var captionText = document.getElementById("caption");
+		 
+		 modal.style.display = "block";
+		 modalImg.src = image.src;
+		 captionText.innerHTML = image.alt;
+		 
+		
+		 // Get the <span> element that closes the modal
+		 var span = document.getElementsByClassName("close")[0];
+		
+		 // When the user clicks on <span> (x), close the modal
+		 span.onclick = function() { 
+		     modal.style.display = "none";
+		 }
+		
+   	}
+   
+   	
     </script>
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->

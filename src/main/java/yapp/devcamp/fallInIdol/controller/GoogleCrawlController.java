@@ -40,7 +40,7 @@ public class GoogleCrawlController {
 			mv.addObject("result", resultUrls);
 			mv.setViewName("/home?choice="+choice+"#photo");
 		}
-		
+	 
 		mv.addObject("result", resultUrls);
 		mv.addObject("choice", choice);
 		mv.setViewName("/home");
@@ -112,7 +112,8 @@ public class GoogleCrawlController {
 		
 	
 		List<String> resultUrls = new ArrayList<String>();
-	
+		int index = 0;
+		
 		try {
 		    Document doc = Jsoup.connect(url).userAgent(userAgent).referrer("https://www.google.com/").get();
 	
@@ -122,14 +123,18 @@ public class GoogleCrawlController {
 		    for (Element element : elements) {
 		        if (element.childNodeSize() > 0) {
 		            jsonObject = (JSONObject) new JSONParser().parse(element.childNode(0).toString());
-		            resultUrls.add((String) jsonObject.get("ou"));
+		            if ((((String)jsonObject.get("ou")).indexOf("theqoo") > -1)) {
+		            		System.out.println("제외된 url "+jsonObject.get("ou"));
+		            		continue;
+		            }
+		            	resultUrls.add((String) jsonObject.get("ou"));
 		        }
 		    }
 	
 		    System.out.println("number of results: " + resultUrls.size());
 	
 		    for (String imageUrl : resultUrls) {
-		        System.out.println(imageUrl);
+		    		System.out.println(index + "번: " +imageUrl);
 		    }
 	
 		} catch (IOException | ParseException e) {
@@ -164,19 +169,31 @@ public class GoogleCrawlController {
 		    Document doc = Jsoup.connect(url).userAgent(userAgent).referrer("https://www.google.com/").get();
 	
 		    Elements elements = doc.select("div.rg_meta");
-	
+		    	
+		    int index = 0;
 		    JSONObject jsonObject;
 		    for (Element element : elements) {
 		        if (element.childNodeSize() > 0) {
-		            jsonObject = (JSONObject) new JSONParser().parse(element.childNode(0).toString());
+		            jsonObject = (JSONObject) new JSONParser().parse(element.childNode(0).toString()); 
+//		            if ((((String)jsonObject.get("ou")).indexOf("cdninstagram") > -1) 
+//		            		|| (((String)jsonObject.get("ou")).indexOf("destinationkpop") > -1) || (((String)jsonObject.get("ou")).indexOf("theqoo") > -1) 
+//		            		|| (((String)jsonObject.get("ou")).indexOf("theqoo") > -1) || (((String)jsonObject.get("ou")).indexOf("postfiles") > -1) 
+//		            		|| (((String)jsonObject.get("ou")).indexOf("blogthumb") > -1) ) {
+//		            		System.out.println("제외된 url "+jsonObject.get("ou"));
+//		            		continue;
+//		            }
+		            if ((((String)jsonObject.get("ou")).indexOf("theqoo") > -1)) {
+		            		System.out.println("제외된 url "+jsonObject.get("ou"));
+		            		continue;
+		            }
 		            resultUrls.add((String) jsonObject.get("ou"));
 		        }
 		    }
 	
 		    System.out.println("number of results: " + resultUrls.size());
-	
+		    	
 		    for (String imageUrl : resultUrls) {
-		        System.out.println(imageUrl);
+		        System.out.println(index + "번: " +imageUrl);
 		    }
 	
 		} catch (IOException | ParseException e) {
