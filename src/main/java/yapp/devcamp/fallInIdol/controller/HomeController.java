@@ -139,8 +139,9 @@ public class HomeController {
 			//System.out.println("*****"+twitUrls.get(i).getDate());
 			//System.out.println("*****"+twitUrls.get(i).getImage());
 		}
+		
 		 for (CalendarItem imageUrl : calendarList) {
-					 System.out.println(imageUrl);
+					 System.out.println(imageUrl.getContent());
 					 }
 
 		mv.addObject("choicelist", choicelist);

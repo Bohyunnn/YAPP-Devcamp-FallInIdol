@@ -178,7 +178,7 @@ to {
 				</c:forEach>
 			</div>
 	</div>
-	<a href="#feed" 
+	<a href="#calendarModal" 
 				class="w3-bar-item w3-button w3-padding-large">Schedule</a>
 	<div class="w3-dropdown-hover ">  
 		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
@@ -188,6 +188,31 @@ to {
 				</c:forEach>
 			</div>
 	</div>
+	<a href="#FEED"
+				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
+				
+	<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+			<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
+			${item.date}
+			<p>
+			${item.content }
+		</c:forEach>	
+	      </div>
+	      <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<!-- Navbar -->
 	<div class="w3-display-container w3-animate-opacity">
 		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
@@ -205,7 +230,7 @@ to {
 				<a href="/home?menu=feed&choice=<c:out value="${choice}"/>"
 				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
 				<div class ="col-sm-2">
-				<a href="/home?menu=profile"
+				<a href="/home?menu=profile&choice=<c:out value="${choice}"/>"
 				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
 				<div class ="col-sm-2">
 				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>"			class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
@@ -372,14 +397,14 @@ to {
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
 						begin="0" end="33">
 						<img src="${item}" style="width: 100%" onclick="onClick(this)"
-							alt="A boy surrounded by beautiful nature">
+							>
 					</c:forEach>
 				</div>
 				<div class="w3-third">
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
 						begin="34" end="66">
 						<img src="${item}" style="width: 100%" onclick="onClick(this)"
-							alt="A boy surrounded by beautiful nature">
+							>
 					</c:forEach>
 				</div>
 				<div class="w3-third">
@@ -387,7 +412,7 @@ to {
 				item"
 						varStatus="status" begin="67" end="100">
 						<img src="${item}" style="width: 100%" onclick="onClick(this)"
-							alt="A boy surrounded by beautiful nature">
+							>
 					</c:forEach>
 				</div>
 			</div>
@@ -457,9 +482,24 @@ to {
    
    	
     </script>
+    
+    <script>
+    function clickCalendar() {
+	    	<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
+			${item.date}
+			<p>
+			${item.content }
+		</c:forEach>		
+    		${#content}.html
+    	
+    }
+    </script>
   
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
+<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
 </body>
 </html>
