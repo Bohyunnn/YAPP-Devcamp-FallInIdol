@@ -148,6 +148,7 @@ to {
 	cursor: pointer;
 }
 
+
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
 	.modal-content {
@@ -241,10 +242,8 @@ to {
 				title="photo">PHOTO</a></div>
 				<div class ="col-sm-2">
 				 <a href="/home?menu=twitter&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="twitter">TWITTER</a></div>
-				<div class ="col-sm-1">&nbsp;</div>
-				 </div>
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">TWITTER</a>
+				</div>
 		</div>
 
 		<!-- Navbar on small screens -->
@@ -425,6 +424,10 @@ to {
 			</p>
 		</footer>
 
+
+
+
+
 		</main>
 
 		<!-- Bootstrap core JavaScript
@@ -444,6 +447,7 @@ to {
 				} else {
 					x.className = x.className.replace(" w3-show", "");
 				}
+
 			}
 	</script>
 	<script>
@@ -501,5 +505,6 @@ to {
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
+
 </body>
 </html>

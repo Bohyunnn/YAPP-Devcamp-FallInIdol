@@ -44,6 +44,8 @@ public class HomeController {
 	@Autowired
 	GoogleCalendarService googleCalendarService;
 	
+	@Autowired
+	AlbumCrawlService AlbumCrawlService;
 	List<String> resultUrls = new ArrayList<String>();
 	List<String> mainPhoto = new ArrayList<String>();
 	List<TwitterItem> twitUrls =new ArrayList<TwitterItem>();
@@ -68,6 +70,7 @@ public class HomeController {
 		mainPhoto = carouselImageService.getCarouselImage(choice);
 
 		List<YouTubeItem> youtuberesult = youtubeService.youTubeSearch(choice, max);
+
 		
 		if (menu != null) {
 			if (menu.equals("youtube")) {
@@ -151,6 +154,7 @@ public class HomeController {
 		mv.addObject("choice", choice);
 		mv.addObject("twit_result", twitterImage);
 //		mv.setViewName("/home");
+
 
 		return mv;
 	}
