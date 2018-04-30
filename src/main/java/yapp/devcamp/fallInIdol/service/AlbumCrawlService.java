@@ -57,9 +57,9 @@ public class AlbumCrawlService {
 						String date=el.select("span.date").text();
 							
 						
-						//System.out.println("*****"+image);
-						//System.out.println("-----"+content);
-						//System.out.println("/////"+date);
+						System.out.println("*****"+image);
+						System.out.println("-----"+content);
+						System.out.println("/////"+date);
 											
 						item=new AlbumItem(content,image,date);
 						AlbumList.add(item);

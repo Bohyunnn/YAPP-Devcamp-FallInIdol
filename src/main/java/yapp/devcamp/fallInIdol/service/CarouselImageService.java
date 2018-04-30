@@ -12,7 +12,7 @@ public class CarouselImageService {
 
 		List<String> mainPhoto = new ArrayList<String>();
 		if (choice.equals("redvelvet")) {
-			mainPhoto.add("http://cfile6.uf.tistory.com/image/2470AF455962EDC3148836");
+			mainPhoto.add("http://dazedimg.dazedgroup.netdna-cdn.com/1600/azure/dazed-prod/1190/2/1192442.jpg");
 			mainPhoto.add("http://korepo.com/wp-content/uploads/2016/10/450_red.jpg");
 			mainPhoto.add("http://media.infospesial.net/image/p/2015/12/a5d9a-red-velvet.jpg");
 		} else if (choice.equals("bts")) {

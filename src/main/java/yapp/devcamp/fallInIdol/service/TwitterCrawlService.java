@@ -44,6 +44,7 @@ public class TwitterCrawlService {
 			
 			Elements c = doc.select("div.content");
 			if(c != null){
+				System.out.println(url);
 				for(Element el : c){
 					Elements t = el.select("p.TweetTextSize.js-tweet-text.tweet-text");
 					if(t.size() > 0){

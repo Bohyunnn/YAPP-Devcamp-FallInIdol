@@ -252,7 +252,6 @@
 	</div>
 	</main>
 </body>
-<script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
@@ -272,7 +271,7 @@
 	    }
 	    console.log("Image width:" + width + ", height:" + height); */
 	    var modal = document.getElementById('myModal');
-	
+		
 		 // Get the image and insert it inside the modal - use its "alt" text as a caption
 		 var modalImg = document.getElementById("img01");
 		 var captionText = document.getElementById("caption");
@@ -282,13 +281,15 @@
 		 captionText.innerHTML = image.alt;
 		 
 		
-		 // Get the <span> element that closes the modal	 var span = document.getElementsByClassName("close")[0];
+		 // Get the <span> element that closes the modal
+		 var span = document.getElementsByClassName("close")[0];
 		
 		 // When the user clicks on <span> (x), close the modal
 		 span.onclick = function() { 
 		     modal.style.display = "none";
-		 } 
+		 }
 		
+  	
    	}
    
    	

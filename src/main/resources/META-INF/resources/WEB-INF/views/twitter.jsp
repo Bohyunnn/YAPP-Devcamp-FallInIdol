@@ -83,14 +83,14 @@
 				<div class="w3-third">
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
 						begin="0" end="33">
-						<img src="${item}" style="width: 100%" onclick="onClick(this)"
+						<img src="${item.image}" style="width: 100%" onclick="onClick(this)"
 							>
 					</c:forEach>
 				</div>
 				<div class="w3-third">
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
 						begin="34" end="66">
-						<img src="${item}" style="width: 100%" onclick="onClick(this)"
+						<img src="${item.image}" style="width: 100%" onclick="onClick(this)"
 							>
 					</c:forEach>
 				</div>
@@ -98,7 +98,7 @@
 					<c:forEach items="${twit_result}" var="
 				item"
 						varStatus="status" begin="67" end="100">
-						<img src="${item}" style="width: 100%" onclick="onClick(this)"
+						<img src="${item.image}" style="width: 100%" onclick="onClick(this)"
 							>
 					</c:forEach>
 				</div>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import yapp.devcamp.fallInIdol.model.AlbumItem;
 import yapp.devcamp.fallInIdol.model.CalendarItem;
 import yapp.devcamp.fallInIdol.model.TwitterItem;
 import yapp.devcamp.fallInIdol.model.YouTubeItem;
@@ -21,6 +22,7 @@ import yapp.devcamp.fallInIdol.service.GoogleCrawlService;
 import yapp.devcamp.fallInIdol.service.GoogleTranslateService;
 import yapp.devcamp.fallInIdol.service.TwitterCrawlService;
 import yapp.devcamp.fallInIdol.service.YouTubeApiService;
+import yapp.devcamp.fallInIdol.service.AlbumCrawlService;
 
 @EnableAutoConfiguration
 @Controller
@@ -45,20 +47,23 @@ public class HomeController {
 	GoogleCalendarService googleCalendarService;
 	
 	@Autowired
-	AlbumCrawlService AlbumCrawlService;
+	AlbumCrawlService albumCrawlService;
+	
 	List<String> resultUrls = new ArrayList<String>();
 	List<String> mainPhoto = new ArrayList<String>();
-	List<TwitterItem> twitUrls =new ArrayList<TwitterItem>();
+
 	List<CalendarItem> calendarList =new ArrayList<CalendarItem>();
+	List<AlbumItem> albumList =new ArrayList<AlbumItem>();
 	
+	List<TwitterItem> twitUrls =new ArrayList<TwitterItem>();
 	List<String> twitterImage=new ArrayList<String>();
 	
 	@GetMapping("/home")
 	public ModelAndView sendResult(HttpServletRequest request,
 			@RequestParam(value = "items", required = false, defaultValue = "26") String items) throws IOException {
 		ModelAndView mv = new ModelAndView();
-
-
+		
+		
 		String choice = request.getParameter("choice");
 		String select = request.getParameter("select");
 		String menu = request.getParameter("menu");
@@ -93,7 +98,7 @@ public class HomeController {
 					mv.setViewName("/photo");
 				}
 				if (choice != null && select == null)  {
-					resultUrls = googleCrawlService.firstCrawling(choice);
+					resultUrls = googleCrawlService.ImageCrawling(choice);
 					mv.addObject("result", resultUrls);
 					mv.setViewName("/photo");
 				}
@@ -103,6 +108,12 @@ public class HomeController {
 					mv.addObject("twit_result", twitUrls);
 					mv.setViewName("/twitter");
 			}
+			else if (menu.equals("profile")) {
+				albumList = albumCrawlService.AlbumCrawling(choice);
+		        mv.addObject("album_result", albumList);
+				
+				mv.setViewName("/profile");
+			}
 		}
 		else {
 				youtuberesult = youtubeService.youTubeSearch(choice, max);
@@ -110,11 +121,12 @@ public class HomeController {
 				twitUrls = twitterCrawlService.TwitterCrawling(choice);
 				mv.addObject("twit_result", twitUrls);
 
-				resultUrls = googleCrawlService.firstCrawling(choice);
+				resultUrls = googleCrawlService.ImageCrawling(choice);
 				mv.addObject("result", resultUrls);
 		}
 		calendarList = googleCalendarService.CalendarCrawling(choice);
 		mv.addObject("calendar_result", calendarList);
+		
 		
 		
 		List<String> choicelist = new ArrayList<String>();
@@ -138,21 +150,21 @@ public class HomeController {
 		for(int i=0;i<twitUrls.size();i++){
 			//System.out.println("*****"+twitUrls.get(i).getContent());
 			//System.out.println("-----"+googleTranslateService.trnaslate(twitUrls.get(i).getContent()));
-			twitterImage.add(twitUrls.get(i).getImage());
+//			twitterImage.add(twitUrls.get(i).getImage());
 			//System.out.println("*****"+twitUrls.get(i).getDate());
 			//System.out.println("*****"+twitUrls.get(i).getImage());
 		}
 		
-		 for (CalendarItem imageUrl : calendarList) {
-					 System.out.println(imageUrl.getContent());
-					 }
+//		 for (CalendarItem imageUrl : calendarList) {
+//					// System.out.println(imageUrl.getContent());
+//					 }
 
 		mv.addObject("choicelist", choicelist);
 		mv.addObject("mainPhoto", mainPhoto);
 //		mv.addObject("youtube", youtuberesult);
 //		mv.addObject("result", resultUrls);
 		mv.addObject("choice", choice);
-		mv.addObject("twit_result", twitterImage);
+		mv.addObject("twit_result", twitUrls);
 //		mv.setViewName("/home");
 
 

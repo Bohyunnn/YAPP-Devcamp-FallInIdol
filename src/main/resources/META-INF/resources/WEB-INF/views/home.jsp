@@ -148,7 +148,22 @@ to {
 	cursor: pointer;
 }
 
+.closeModal {
+	position: absolute;
+	top: 100px;
+	right: 110px;
+	color: #f1f1f1;
+	z-index: 100;
+	font-size: 30px;
+	font-weight: bold;
+	transition: 0.3s;
+}
 
+.closeModal:hover, .closeModal:focus {
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+}
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px) {
 	.modal-content {
@@ -167,7 +182,8 @@ to {
 		left: 0;
 		width: 100%;
 		height: 100%;
-
+	}
+}
 </style>
 </head>
 <body>
@@ -179,7 +195,7 @@ to {
 				</c:forEach>
 			</div>
 	</div>
-	<a href="#calendarModal" 
+	<a href="#" data-toggle='modal' data-target='#calendarModal'
 				class="w3-bar-item w3-button w3-padding-large">Schedule</a>
 	<div class="w3-dropdown-hover ">  
 		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
@@ -192,27 +208,14 @@ to {
 	<a href="#FEED"
 				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
 				
-	<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div>
-	      <div class="modal-body">
-			<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
-			${item.date}
-			<p>
-			${item.content }
-		</c:forEach>	
-	      </div>
-	      <div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
+	<div id="calendarModal" class="modal">
+		<span class="closeModal" data-dismiss="modal">&times;</span> 
+	  <!-- Modal content -->
+	  	<div class="modal-body">
+  		</div>
 	</div>
+
+	
 	
 	<!-- Navbar -->
 	<div class="w3-display-container w3-animate-opacity">
@@ -228,7 +231,7 @@ to {
 				<div class = "row">
 				<div class ="col-sm-1">&nbsp;</div>
 				<div class ="col-sm-2">
-				<a href="/home?menu=feed&choice=<c:out value="${choice}"/>"
+				<a href="/home"
 				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
 				<div class ="col-sm-2">
 				<a href="/home?menu=profile&choice=<c:out value="${choice}"/>"
@@ -465,7 +468,7 @@ to {
 	    }
 	    console.log("Image width:" + width + ", height:" + height); */
 	    var modal = document.getElementById('myModal');
-	
+		
 		 // Get the image and insert it inside the modal - use its "alt" text as a caption
 		 var modalImg = document.getElementById("img01");
 		 var captionText = document.getElementById("caption");
@@ -475,36 +478,53 @@ to {
 		 captionText.innerHTML = image.alt;
 		 
 		
-		 // Get the <span> element that closes the modal	 var span = document.getElementsByClassName("close")[0];
+		 // Get the <span> element that closes the modal
+		 var span = document.getElementsByClassName("close")[0];
 		
 		 // When the user clicks on <span> (x), close the modal
 		 span.onclick = function() { 
 		     modal.style.display = "none";
-		 } 
-		
+		 }
+
    	}
    
    	
     </script>
     
-    <script>
-    function clickCalendar() {
-	    	<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
-			${item.date}
-			<p>
-			${item.content }
-		</c:forEach>		
-    		${#content}.html
-    	
-    }
-    </script>
-  
+	<script>
+	$('#calendarModal').on('hidden.bs.modal', function () {
+        console.log("removedata");
+        
+		$(this).removeData('modal');
+    });
+	$('#calendarModal').on('show.bs.modal', function (event) {
+		console.log("reloading data") ; 
+		  // Extract info from data-* attributes
+		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		  
+		var list = new Array(); 
+		<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
+			list.push("${item.date}");
+			list.push("<p>")
+			list.push("${item.content}");
+		</c:forEach>
+		
+		$(".modal-body").html(list);
+		
+		var span = document.getElementsByClassName("closeModal")[0];
+			
+		 // When the user clicks on <span> (x), close the modal
+		 span.onclick = function() { 
+			 alert("닫");
+			 document.getElementById('calendarModal').style.display = "none";
+		 }
+	
+		
+	});
+	</script>
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
-<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
 
 </body>
 </html>
