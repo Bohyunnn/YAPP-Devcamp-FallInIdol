@@ -29,14 +29,14 @@ public class GooglePhotoController {
 	List<GooglePhotoItem> list = new ArrayList<GooglePhotoItem> ();
 	
 	@Autowired
-	BtsPhotoDao photoDao;
+	BtsPhotoDao btsPhotoDao;
 	
-	@RequestMapping("/")
+	@RequestMapping("/google")
 	public ModelAndView list() throws IOException {
 //		resultUrls = googleCrawlService.firstCrawling("bts");
 //		photoDao.insertPhoto(resultUrls);
 		ModelAndView mv = new ModelAndView();
-		list = photoDao.selectPhoto();
+		list = btsPhotoDao.selectPhoto();
 		mv.addObject("list", list);
 		mv.setViewName("googlePhoto");
 		return mv;

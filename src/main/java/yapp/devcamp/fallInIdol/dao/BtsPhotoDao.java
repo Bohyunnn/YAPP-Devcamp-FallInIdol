@@ -21,11 +21,14 @@ public class BtsPhotoDao {
 	
 	public void insertPhoto(List<String> list) {
 		for (String imageUrl : list) {
-			System.out.println(imageUrl);
-			template.update("INSERT INTO btsPhoto(url) VALUES(?)",imageUrl);
+//			System.out.println(imageUrl);
+			template.update("INSERT INTO btsPhoto(url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM btsPhoto WHERE url=(?))",imageUrl,imageUrl );
 		}
 		
 	}
+//	INSERT INTO btsPhoto(url)
+//	SELECT 'imageUrl' FROM DUAL  
+//	WHERE NOT EXISTS (SELECT * FROM btsPhoto WHERE url='imageUrl')  
 	
 	public List<GooglePhotoItem> selectPhoto() {
 		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
@@ -36,6 +39,7 @@ public class BtsPhotoDao {
 				return item;
 			}
 		});
+
 //		for (GooglePhotoItem imageUrl : result) {
 //			System.out.println(imageUrl.getUrl());
 //		}

@@ -223,23 +223,23 @@
 		<div class="w3-row">
 			<div class="w3-quarter">
 				<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="25" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 			<div class="w3-quarter">
 				<c:forEach items="${result}" var="item" varStatus="status" begin="26" end="50" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px " onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px " onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 			
 			<div class="w3-quarter">
 				<c:forEach items="${result}" var="item" varStatus="status" begin="51" end="75" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 			<div class="w3-quarter">
 				<c:forEach items="${result}" var="item" varStatus="status" begin="75" end="100" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 		</div>
@@ -274,7 +274,7 @@
 		
 		 // Get the image and insert it inside the modal - use its "alt" text as a caption
 		 var modalImg = document.getElementById("img01");
-		 var captionText = document.getElementById("caption");
+		 var captionText = "";
 		 
 		 modal.style.display = "block";
 		 modalImg.src = image.src;

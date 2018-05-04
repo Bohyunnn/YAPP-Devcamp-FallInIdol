@@ -26,11 +26,23 @@
 	href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+<style type="text/css">
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif;
 }
 
+td {
+    
+    padding: 10px;
+    
+  }
+  tbody tr:nth-child(2n) {
+    background-color: #FFFFFF;
+  }
+  tbody tr:nth-child(2n+1) {
+    background-color: #2F6FF6;
+  }
+  
 #choiceList ol {
 	float: left;
 	list-style: none;
@@ -187,66 +199,102 @@ to {
 </style>
 </head>
 <body>
-	<div class="w3-dropdown-hover">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;" >${choice} <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
+	<div class="w3-dropdown-hover">
+		<button class="w3-button w3-black" title="Notifications"
+			style="width: 110px; height: 31px;">${choice}
+			<i class="fa fa-caret-down"></i>
+		</button>
+		<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
+			<c:forEach items="${choicelist}" var="userChoice" varStatus="status"
+				begin="0" end="2">
+				<a href='/home?choice=<c:out value="${userChoice}"/>'
+					class="w3-bar-item w3-button">${userChoice }</a>
+			</c:forEach>
+		</div>
 	</div>
-	<a href="#" data-toggle='modal' data-target='#calendarModal'
-				class="w3-bar-item w3-button w3-padding-large">Schedule</a>
-	<div class="w3-dropdown-hover ">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#FEED"
-				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
-				
-	<div id="calendarModal" class="modal">
-		<span class="closeModal" data-dismiss="modal">&times;</span> 
-	  <!-- Modal content -->
-	  	<div class="modal-body">
-  		</div>
-	</div>
+	<!-- <button id="schedule" class="w2ui-btn" onclick="showOverlay()">Schedule</button> -->
 
-	
-	
+	<a href="#" data-toggle="popover" title="Schedule"
+		data-placement="right" data-content="">Schedule</a>
+
+	<div id="myPopoverContent" style="display:none">
+		<table>
+			<tbody>
+			<c:forEach items='${calendar_result}' var='item' varStatus='status'
+				begin='0' end='9'>
+				<tr >
+				<td ><font color="white">${item.content }</font></td>
+				</tr>
+				<tr>
+					<td >${item.date}</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<%-- <div>
+		<c:forEach items="${calendar_result}" var="item" varStatus="status"
+			begin="0" end="9">
+			${item.date}
+			<p>${item.content }</p>
+		</c:forEach>
+	</div> --%>
+
+	<div class="w3-dropdown-hover ">
+		<button class="w3-button w3-black" title="Notifications"
+			style="width: 110px; height: 31px;">
+			ENGLISH <i class="fa fa-caret-down"></i>
+		</button>
+		<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
+			<c:forEach items="${choicelist}" var="userChoice" varStatus="status"
+				begin="0" end="2">
+				<a href='/home?choice=<c:out value="${userChoice}"/>'
+					class="w3-bar-item w3-button">${userChoice }</a>
+			</c:forEach>
+		</div>
+	</div>
+	<a href="#FEED" class="w3-bar-item w3-button w3-padding-large">CHAT</a>
+
+
+
 	<!-- Navbar -->
 	<div class="w3-display-container w3-animate-opacity">
-		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
-			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
+		<c:forEach items="${mainPhoto}" var="item" varStatus="status"
+			begin="0" end="0">
+			<img class="First-slide"
+				style="width: 100%; min-height: 350px; max-height: 600px;"
+				src="${item}" alt="First slide">
 		</c:forEach>
 	</div>
 
-		<div class="w3-row w3-large w3-white">
-			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
-				href="javascript:void(0);" onclick="openNav()"><i
-				class="fa fa-bars"></i></a> 
-				<div class = "row">
-				<div class ="col-sm-1">&nbsp;</div>
-				<div class ="col-sm-2">
-				<a href="/home"
-				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=profile&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>"			class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="youtuberesult">YOUTUBE</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=photo&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				
-				title="photo">PHOTO</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=twitter&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">TWITTER</a>
-				</div>
+	<div class="w3-row w3-large w3-white">
+		<a
+			class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
+			href="javascript:void(0);" onclick="openNav()"><i
+			class="fa fa-bars"></i></a>
+		<div class="row">
+			<div class="col-sm-1">&nbsp;</div>
+			<div class="col-sm-2">
+				<a href="/home" class="w3-bar-item w3-button w3-padding-large">FEED</a>
+			</div>
+			<div class="col-sm-2">
+				<a href='/home?menu=profile&amp;choice=<c:out value="${choice}"/>'
+					class="w3-bar-item w3-button w3-padding-large">PROFILE</a>
+			</div>
+			<div class="col-sm-2">
+				<a href='/home?menu=youtube&amp;choice=<c:out value="${choice}"/>'
+					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+					title="youtuberesult">YOUTUBE</a>
+			</div>
+			<div class="col-sm-2">
+				<a href='/home?menu=photo&amp;choice=<c:out value="${choice}"/>'
+					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+					title="photo">PHOTO</a>
+			</div>
+			<div class="col-sm-2">
+				<a href='/home?menu=twitter&amp;choice=<c:out value="${choice}"/>'
+					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">TWITTER</a>
+			</div>
 		</div>
 
 		<!-- Navbar on small screens -->
@@ -261,7 +309,7 @@ to {
 
 
 
-		</main>
+		<main></main>
 		<!-- !PAGE CONTENT! -->
 		<!-- Photo grid -->
 		<div class="w3-container w3-padding-64 w3-center" id="youtube">
@@ -269,127 +317,152 @@ to {
 				<div id="choiceList">
 					<ol>
 						<li><a
-							href="/home?choice=<c:out value="${choice}"/>&select=musicvideo#youtube">뮤직비디오</a></li>
+							href='/home?choice=<c:out value="${choice}"/>&amp;select=musicvideo#youtube'>뮤직비디오</a></li>
 						<li><a
-							href="/home?choice=<c:out value="${choice}"/>&select=broadcast#youtube">방송</a></li>
+							href='/home?choice=<c:out value="${choice}"/>&amp;select=broadcast#youtube'>방송</a></li>
 						<li><a
-							href="/home?choice=<c:out value="${choice}"/>&select=mnet#youtube">엠넷</a></li>
+							href='/home?choice=<c:out value="${choice}"/>&amp;select=mnet#youtube'>엠넷</a></li>
 						<li><a
-							href="/home?choice=<c:out value="${choice}"/>&select=musicbank#youtube">뮤직뱅크</a></li>
+							href='/home?choice=<c:out value="${choice}"/>&amp;select=musicbank#youtube'>뮤직뱅크</a></li>
 						<li><a
-							href="/home?choice=<c:out value="${choice}"/>&select=popularmusic#youtube">인기가요</a></li>
+							href='/home?choice=<c:out value="${choice}"/>&amp;select=popularmusic#youtube'>인기가요</a></li>
 					</ol>
 				</div>
 			</div>
-	
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status" begin="0"
-				end="1">		
-				<iframe width="593" height="333" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status" begin="2"
-				end="4">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status" begin="5"
-				end="7">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="8" end="10">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="11" end="13">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="14" end="16">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="17" end="19">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="20" end="22">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-		<div class="w3-col m12">
-			<c:forEach items="${youtube}" var="item" varStatus="status"
-				begin="23" end="25">
-				<iframe width="393" height="221" src="${item.url}?showinfo=0"
-					frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="padding:3px 3px 3px 3px"></iframe>
-			</c:forEach>
-		</div>
-	</div>
-	
-	<div class="w3-container w3-padding-64 w3-center" id="photo">
-		<div id="choiceList">
-			<ol>
-				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=paparazzi#photo">직찍</a></li>
-				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=pictorial#photo">화보</a></li>
-				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=broad#photo">방송
-						사진</a></li>
-				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=temp#photo">temp</a></li>
-			</ol>
-		</div>
-		<div class="w3-row">
-			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="25" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="0" end="1">
+					<iframe width="593" height="333" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
 				</c:forEach>
 			</div>
-			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="26" end="50" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px " onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="2" end="4">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
 				</c:forEach>
 			</div>
-			
-			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="51" end="75" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="5" end="7">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
 				</c:forEach>
 			</div>
-			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="75" end="100" >
-				    <img src="${item}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="8" end="10">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
+				</c:forEach>
+			</div>
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="11" end="13">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
+				</c:forEach>
+			</div>
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="14" end="16">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
+				</c:forEach>
+			</div>
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="17" end="19">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
+				</c:forEach>
+			</div>
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="20" end="22">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
+				</c:forEach>
+			</div>
+			<div class="w3-col m12">
+				<c:forEach items="${youtube}" var="item" varStatus="status"
+					begin="23" end="25">
+					<iframe width="393" height="221" src="${item.url}?showinfo=0"
+						frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+						style="padding: 3px 3px 3px 3px"></iframe>
 				</c:forEach>
 			</div>
 		</div>
-	</div>
+
+		<div class="w3-container w3-padding-64 w3-center" id="photo">
+			<div id="choiceList">
+				<ol>
+					<li><a
+						href='/home?choice=<c:out value="${choice}"/>&amp;select=paparazzi#photo'>직찍</a></li>
+					<li><a
+						href='/home?choice=<c:out value="${choice}"/>&amp;select=pictorial#photo'>화보</a></li>
+					<li><a
+						href='/home?choice=<c:out value="${choice}"/>&amp;select=broad#photo'>방송
+							사진</a></li>
+					<li><a
+						href='/home?choice=<c:out value="${choice}"/>&amp;select=temp#photo'>temp</a></li>
+				</ol>
+			</div>
+			<div class="w3-row">
+				<div class="w3-quarter">
+					<c:forEach items="${result}" var="item" varStatus="status"
+						begin="0" end="25">
+						<img src="${item.getUrl()}"
+							style="max-width: 100%; width: 600px; padding: 3px"
+							onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
+							onError="this.style.display='none'">
+					</c:forEach>
+				</div>
+				<div class="w3-quarter">
+					<c:forEach items="${result}" var="item" varStatus="status"
+						begin="26" end="50">
+						<img src="${item.getUrl()}"
+							style="max-width: 100%; width: 600px; padding: 3px"
+							onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
+							onError="this.style.display='none'">
+					</c:forEach>
+				</div>
+
+				<div class="w3-quarter">
+					<c:forEach items="${result}" var="item" varStatus="status"
+						begin="51" end="75">
+						<img src="${item.getUrl()}"
+							style="max-width: 100%; width: 600px; padding: 3px"
+							onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
+							onError="this.style.display='none'">
+					</c:forEach>
+				</div>
+				<div class="w3-quarter">
+					<c:forEach items="${result}" var="item" varStatus="status"
+						begin="75" end="100">
+						<img src="${item.getUrl()}"
+							style="max-width: 100%; width: 600px; padding: 3px"
+							onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
+							onError="this.style.display='none'">
+					</c:forEach>
+				</div>
+			</div>
+		</div>
 
 		<div id="myModal" class="modal">
-			<span class="close" data-dismiss="modal">&times;</span> 
-			<img class="modal-content" id="img01">
+			<span class="close" data-dismiss="modal">&times;</span> <img
+				class="modal-content" id="img01" src="" alt="">
 			<div id="caption"></div>
 		</div>
 
@@ -399,14 +472,14 @@ to {
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
 						begin="0" end="33">
 						<img src="${item}" style="width: 100%" onclick="onClick(this)"
-							>
+							alt="">
 					</c:forEach>
 				</div>
 				<div class="w3-third">
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
 						begin="34" end="66">
 						<img src="${item}" style="width: 100%" onclick="onClick(this)"
-							>
+							alt="">
 					</c:forEach>
 				</div>
 				<div class="w3-third">
@@ -414,7 +487,7 @@ to {
 				item"
 						varStatus="status" begin="67" end="100">
 						<img src="${item}" style="width: 100%" onclick="onClick(this)"
-							>
+							alt="">
 					</c:forEach>
 				</div>
 			</div>
@@ -431,15 +504,15 @@ to {
 
 
 
-		</main>
+		<main></main>
 
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-			crossorigin="anonymous"></script>
-		<script>
+			crossorigin="anonymous" type="text/javascript"></script>
+		<script type="text/javascript">
 			window.jQuery
 					|| document
 							.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
@@ -452,79 +525,58 @@ to {
 				}
 
 			}
-	</script>
-	<script>
-   	function clickImage(image) {
-   		/* var width, height;
-  	  
-	    if(image.naturalWidth){
-	        width = image.naturalWidth;
-	        height = image.naturalHeight;
-	    } else {
-	        var tImg = new Image();
-	        tImg.src = image.src;
-	        width = tImg.width;
-	        height = tImg.height;
-	    }
-	    console.log("Image width:" + width + ", height:" + height); */
-	    var modal = document.getElementById('myModal');
-		
-		 // Get the image and insert it inside the modal - use its "alt" text as a caption
-		 var modalImg = document.getElementById("img01");
-		 var captionText = document.getElementById("caption");
-		 
-		 modal.style.display = "block";
-		 modalImg.src = image.src;
-		 captionText.innerHTML = image.alt;
-		 
-		
-		 // Get the <span> element that closes the modal
-		 var span = document.getElementsByClassName("close")[0];
-		
-		 // When the user clicks on <span> (x), close the modal
-		 span.onclick = function() { 
-		     modal.style.display = "none";
-		 }
+		</script>
+		<script type="text/javascript">
+			function clickImage(image) {
+				/* var width, height;
+				
+				if(image.naturalWidth){
+				 width = image.naturalWidth;
+				 height = image.naturalHeight;
+				} else {
+				 var tImg = new Image();
+				 tImg.src = image.src;
+				 width = tImg.width;
+				 height = tImg.height;
+				}
+				console.log("Image width:" + width + ", height:" + height); */
+				var modal = document.getElementById('myModal');
 
-   	}
-   
-   	
-    </script>
-    
-	<script>
-	$('#calendarModal').on('hidden.bs.modal', function () {
-        console.log("removedata");
-        
-		$(this).removeData('modal');
-    });
-	$('#calendarModal').on('show.bs.modal', function (event) {
-		console.log("reloading data") ; 
-		  // Extract info from data-* attributes
-		  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-		  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-		  
-		var list = new Array(); 
-		<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
-			list.push("${item.date}");
-			list.push("<p>")
-			list.push("${item.content}");
-		</c:forEach>
-		
-		$(".modal-body").html(list);
-		
-		var span = document.getElementsByClassName("closeModal")[0];
-			
-		 // When the user clicks on <span> (x), close the modal
-		 span.onclick = function() { 
-			 alert("닫");
-			 document.getElementById('calendarModal').style.display = "none";
-		 }
-	
-		
-	});
-	</script>
-	<script src="../../bootstrap/js/bootstrap.min.js"></script>
-	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+				// Get the image and insert it inside the modal - use its "alt" text as a caption
+				var modalImg = document.getElementById("img01");
+				var captionText = "";
 
+				modal.style.display = "block";
+				modalImg.src = image.src;
+				captionText.innerHTML = image.alt;
+
+				// Get the <span> element that closes the modal
+				var span = document.getElementsByClassName("close")[0];
+
+				// When the user clicks on <span> (x), close the modal
+				span.onclick = function() {
+					modal.style.display = "none";
+				}
+
+			}
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('[data-toggle="popover"]').popover({
+					content: $('#myPopoverContent').html(),
+					   html: true
+				});
+			});
+		</script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+			type="text/javascript"></script>
+
+		<script src="../../bootstrap/js/bootstrap.min.js"
+			type="text/javascript"></script>
+		<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+
+	</div>
 </body>
 </html>

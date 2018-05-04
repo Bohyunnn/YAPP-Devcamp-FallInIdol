@@ -15,8 +15,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import yapp.devcamp.fallInIdol.dao.BtsPhotoDao;
+import yapp.devcamp.fallInIdol.dao.ExoPhotoDao;
+import yapp.devcamp.fallInIdol.dao.RevelPhotoDao;
+import yapp.devcamp.fallInIdol.dao.TwicePhotoDao;
 import yapp.devcamp.fallInIdol.service.GoogleCrawlService;
 
 @Component
@@ -25,7 +29,16 @@ public class Timer {
 	private AtomicInteger loopCounter = new AtomicInteger();
 	
 	@Autowired
-	BtsPhotoDao photoDao;
+	BtsPhotoDao btsPhotoDao;
+	
+	@Autowired
+	ExoPhotoDao exoPhotoDao;
+	
+	@Autowired
+	RevelPhotoDao revelPhotoDao;
+	
+	@Autowired
+	TwicePhotoDao twicePhotoDao;
 	
 	List<String> resultUrls = new ArrayList<String>();
 	
@@ -48,9 +61,23 @@ public class Timer {
 		watch.stop();
 		logger.info(watch.prettyPrint());
 		String taskName = taskNamePrefix + "-" + String.valueOf(loopCounter.getAndIncrement());
-		photoDao.deletePhoto();
+		
+//		btsPhotoDao.deletePhoto();
 		resultUrls = googleCrawlService.ImageCrawling("bts");
-		photoDao.insertPhoto(resultUrls);
+		btsPhotoDao.insertPhoto(resultUrls);
+		
+//		exoPhotoDao.deletePhoto();
+		resultUrls = googleCrawlService.ImageCrawling("exo");
+		exoPhotoDao.insertPhoto(resultUrls);
+		
+//		revelPhotoDao.deletePhoto();
+		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
+		revelPhotoDao.insertPhoto(resultUrls);
+		
+//		twicePhotoDao.deletePhoto();
+		resultUrls = googleCrawlService.ImageCrawling("twice");
+		twicePhotoDao.insertPhoto(resultUrls);
+		
 		watch.start();
 	}
 	

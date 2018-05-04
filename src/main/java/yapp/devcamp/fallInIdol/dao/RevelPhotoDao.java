@@ -19,8 +19,10 @@ public class RevelPhotoDao {
 	
 	public void insertPhoto(List<String> list) {
 		for (String imageUrl : list) {
-			System.out.println(imageUrl);
-			template.update("INSERT INTO revelPhoto(url) VALUES(?)",imageUrl);
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO revelPhoto(url) VALUES(?)",imageUrl);
+			template.update("INSERT INTO revelPhoto(url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM revelPhoto WHERE url=(?))",imageUrl,imageUrl );
+			
 		}
 		
 	}

@@ -19,8 +19,10 @@ public class TwicePhotoDao {
 	
 	public void insertPhoto(List<String> list) {
 		for (String imageUrl : list) {
-			System.out.println(imageUrl);
-			template.update("INSERT INTO twiPhoto(url) VALUES(?)",imageUrl);
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO twiPhoto(url) VALUES(?)",imageUrl);
+			template.update("INSERT INTO twiPhoto(url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM twiPhoto WHERE url=(?))",imageUrl,imageUrl );
+			
 		}
 		
 	}

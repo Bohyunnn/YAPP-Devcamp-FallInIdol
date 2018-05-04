@@ -20,8 +20,10 @@ public class ExoPhotoDao {
 	
 	public void insertPhoto(List<String> list) {
 		for (String imageUrl : list) {
-			System.out.println(imageUrl);
-			template.update("INSERT INTO exoPhoto(url) VALUES(?)",imageUrl);
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO exoPhoto(url) VALUES(?)",imageUrl);
+			template.update("INSERT INTO exoPhoto(url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE url=(?))",imageUrl,imageUrl );
+			
 		}
 		
 	}
