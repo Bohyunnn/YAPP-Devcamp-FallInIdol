@@ -74,7 +74,7 @@ public class Timer {
 		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
 		revelPhotoDao.insertPhoto(resultUrls);
 		
-//		twicePhotoDao.deletePhoto();
+//		twicePhotoDao.deletePhoto();s
 		resultUrls = googleCrawlService.ImageCrawling("twice");
 		twicePhotoDao.insertPhoto(resultUrls);
 		

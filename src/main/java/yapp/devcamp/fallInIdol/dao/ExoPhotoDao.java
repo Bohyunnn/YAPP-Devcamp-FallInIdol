@@ -27,6 +27,12 @@ public class ExoPhotoDao {
 		}
 		
 	}
+	public void insert_select1_Photo(List<String> list) {
+		for (String imageUrl : list) {
+			template.update("INSERT INTO exoPhoto(select1_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE select1_url=(?)) ",imageUrl, imageUrl);
+		}
+		
+	}
 	
 	public List<GooglePhotoItem> selectPhoto() {
 		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
@@ -37,9 +43,21 @@ public class ExoPhotoDao {
 				return item;
 			}
 		});
-//		for (GooglePhotoItem imageUrl : result) {
-//			System.out.println(imageUrl.getUrl());
-//		}
+		List<GooglePhotoItem> select_url = select1_url_Photo();
+		
+		result.addAll(select_url);
+		
+		return result;
+	}
+	public List<GooglePhotoItem> select1_url_Photo() {
+		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
+		result = this.template.query("select select1_url from exoPhoto", new RowMapper<GooglePhotoItem>() {
+			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+				GooglePhotoItem item = new GooglePhotoItem();
+				item.setUrl(rs.getString("select1_url"));
+				return item;
+			}
+		});
 		return result;
 	}
 	

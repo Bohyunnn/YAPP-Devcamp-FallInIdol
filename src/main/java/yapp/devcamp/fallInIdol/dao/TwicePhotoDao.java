@@ -27,6 +27,13 @@ public class TwicePhotoDao {
 		
 	}
 	
+	public void insert_select1_Photo(List<String> list) {
+		for (String imageUrl : list) {
+			template.update("INSERT INTO twiPhoto(select1_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM twiPhoto WHERE select1_url=(?)) ",imageUrl, imageUrl);
+		}
+		
+	}
+	
 	public List<GooglePhotoItem> selectPhoto() {
 		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
 		result = this.template.query("select url from twiPhoto", new RowMapper<GooglePhotoItem>() {
@@ -36,12 +43,24 @@ public class TwicePhotoDao {
 				return item;
 			}
 		});
-//		for (GooglePhotoItem imageUrl : result) {
-//			System.out.println(imageUrl.getUrl());
-//		}
+		List<GooglePhotoItem> select_url = select1_url_Photo();
+		
+		result.addAll(select_url);
+		
 		return result;
 	}
 	
+	public List<GooglePhotoItem> select1_url_Photo() {
+		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
+		result = this.template.query("select select1_url from twiPhoto", new RowMapper<GooglePhotoItem>() {
+			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+				GooglePhotoItem item = new GooglePhotoItem();
+				item.setUrl(rs.getString("select1_url"));
+				return item;
+			}
+		});
+		return result;
+	}
 	public void deletePhoto() {
 		template.update("DELETE FROM twiPhoto");
 		template.update("ALTER TABLE twiPhoto auto_increment=1");

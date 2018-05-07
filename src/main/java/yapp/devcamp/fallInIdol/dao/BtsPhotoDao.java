@@ -38,13 +38,17 @@ public class BtsPhotoDao {
 		
 	public List<GooglePhotoItem> selectPhoto() {
 		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
-		result = this.template.query("select url, select1_url from btsPhoto", new RowMapper<GooglePhotoItem>() {
+		result = this.template.query("select url from btsPhoto", new RowMapper<GooglePhotoItem>() {
 			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 				GooglePhotoItem item = new GooglePhotoItem();
 				item.setUrl(rs.getString("url"));
 				return item;
 			}
 		});
+		List<GooglePhotoItem> select_url = select1_url_Photo();
+		
+		result.addAll(select_url);
+		
 		return result;
 	}
 	

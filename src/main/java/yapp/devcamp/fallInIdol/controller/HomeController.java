@@ -85,6 +85,7 @@ public class HomeController {
 	public List<String> memberName(@RequestParam("choice") String choice) {
 		List<String> names = new ArrayList<String> ();
 		if (choice.equals("bts")) {
+			names.add("BTS");
 			names.add("V");
 			names.add("SUGAR");
 			names.add("JIN");
@@ -94,6 +95,7 @@ public class HomeController {
 			names.add("J-HOPE");
 		}
 		else if (choice.equals("redvelvet")) {
+			names.add("REDVELVET");
 			names.add("JOY");
 			names.add("IRENE");
 			names.add("WENDY");
@@ -155,7 +157,7 @@ public class HomeController {
 		
 		mainPhoto = carouselImageService.getCarouselImage(choice);
 
-		List<YouTubeItem> youtuberesult = youtubeService.youTubeSearch(choice, max);
+		List<YouTubeItem> youtuberesult;
 
 		
 		if (menu != null) {
@@ -174,17 +176,46 @@ public class HomeController {
 			}
 			if (menu.equals("photo")) {
 				if (choice != null && select != null) {
-					list = btsPhotoDao.select1_url_Photo();
-//					for (GooglePhotoItem imageUrl : list) {
-//						System.out.println(imageUrl.getUrl());
-//					}
-
-					GooglePhotoItem imageUrl = list.get(0);
-					if (imageUrl.getUrl() == null) {
-						resultUrls = googleCrawlService.ImageCrawling(choice, select);
-						btsPhotoDao.insert_select1_Photo(resultUrls);
-						list =  btsPhotoDao.select1_url_Photo();
+					if (choice.equals("bts")) {
+						list = btsPhotoDao.select1_url_Photo();
+					
+						GooglePhotoItem imageUrl = list.get(0);
+						if (imageUrl.getUrl() == null) {
+							resultUrls = googleCrawlService.ImageCrawling(choice, select);
+							btsPhotoDao.insert_select1_Photo(resultUrls);
+							list =  btsPhotoDao.select1_url_Photo();
+						}	
+					}
+					else if (choice.equals("redvelvet")) {
+						list = btsPhotoDao.select1_url_Photo();
 						
+						GooglePhotoItem imageUrl = list.get(0);
+						if (imageUrl.getUrl() == null) {
+							resultUrls = googleCrawlService.ImageCrawling(choice, select);
+							btsPhotoDao.insert_select1_Photo(resultUrls);
+							list =  btsPhotoDao.select1_url_Photo();
+						}	
+					}
+					else if (choice.equals("exo")) {
+						list = btsPhotoDao.select1_url_Photo();
+						
+						GooglePhotoItem imageUrl = list.get(0);
+						if (imageUrl.getUrl() == null) {
+							resultUrls = googleCrawlService.ImageCrawling(choice, select);
+							btsPhotoDao.insert_select1_Photo(resultUrls);
+							list =  btsPhotoDao.select1_url_Photo();
+						}	
+					}
+					else {
+						list = btsPhotoDao.select1_url_Photo();
+						
+						GooglePhotoItem imageUrl = list.get(0);
+						if (imageUrl.getUrl() == null) {
+							resultUrls = googleCrawlService.ImageCrawling(choice, select);
+							btsPhotoDao.insert_select1_Photo(resultUrls);
+							list =  btsPhotoDao.select1_url_Photo();
+						}	
+					}
 						for(Iterator<GooglePhotoItem> it = list.iterator() ; it.hasNext() ; )
 						{
 							String value = it.next().getUrl();
@@ -195,7 +226,7 @@ public class HomeController {
 							}
 						}
 						
-					}
+					
 					
 					mv.addObject("result", list);
 					mv.addObject("listNum", list.size());

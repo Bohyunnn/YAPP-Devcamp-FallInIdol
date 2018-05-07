@@ -20,9 +20,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 <style>
-.img-container {
-	width:100%;min-height:350px;max-height:600px;
-}
+
 #choiceList ol {
 	float: left;
 	list-style: none;
@@ -33,10 +31,7 @@
 }
 
 #choiceList li {
-	/*  margin: 0 0 0 0;
-	    padding: 0 0 0 0;
-	    border : 0;
-	    float: left; */
+
 	float: left;
 	list-style: none;
 	margin: 2px;
@@ -58,6 +53,8 @@
 	background: #099;
 	text-decoration: none;
 }
+
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -217,8 +214,6 @@
 					
 			</ol>
 			<ol>
-				<li><a
-					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=group">group </a></li>
 				<c:forEach items ="${names }" var = "name" >
 				<li><a
 					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=<c:out value="${name}"/>">
@@ -262,10 +257,11 @@
 		</div>
 	</div>
 	
-	<div id="myModal" class="modal">
+	<div id="myModal" class="modal" >
 	  <span class="close" data-dismiss="modal">&times;</span>  
 	  <img class="modal-content" id="img01">
 	  <div id="caption"></div>
+	  
 	</div>
 	</main>
 </body>
@@ -275,18 +271,6 @@
 	
 <script>
    	function clickImage(image) {
-   		/* var width, height;
-  	  
-	    if(image.naturalWidth){
-	        width = image.naturalWidth;
-	        height = image.naturalHeight;
-	    } else {
-	        var tImg = new Image();
-	        tImg.src = image.src;
-	        width = tImg.width;
-	        height = tImg.height;
-	    }
-	    console.log("Image width:" + width + ", height:" + height); */
 	    var modal = document.getElementById('myModal');
 		
 		 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -296,7 +280,6 @@
 		 modal.style.display = "block";
 		 modalImg.src = image.src;
 		 captionText.innerHTML = image.alt;
-		 
 		
 		 // Get the <span> element that closes the modal
 		 var span = document.getElementsByClassName("close")[0];
@@ -305,12 +288,18 @@
 		 span.onclick = function() { 
 		     modal.style.display = "none";
 		 }
+		 window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+		}
   	
    	}
    
    	
     </script>
 
+	
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 </script>
 </html>

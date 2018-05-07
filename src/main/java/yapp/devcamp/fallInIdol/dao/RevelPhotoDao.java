@@ -27,6 +27,13 @@ public class RevelPhotoDao {
 		
 	}
 	
+	public void insert_select1_Photo(List<String> list) {
+		for (String imageUrl : list) {
+			template.update("INSERT INTO revelPhoto(select1_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM revelPhoto WHERE select1_url=(?)) ",imageUrl, imageUrl);
+		}
+		
+	}
+	
 	public List<GooglePhotoItem> selectPhoto() {
 		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
 		result = this.template.query("select url from revelPhoto", new RowMapper<GooglePhotoItem>() {
@@ -36,12 +43,24 @@ public class RevelPhotoDao {
 				return item;
 			}
 		});
-//		for (GooglePhotoItem imageUrl : result) {
-//			System.out.println(imageUrl.getUrl());
-//		}
+		List<GooglePhotoItem> select_url = select1_url_Photo();
+		
+		result.addAll(select_url);
+		
 		return result;
 	}
 	
+	public List<GooglePhotoItem> select1_url_Photo() {
+		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
+		result = this.template.query("select select1_url from revelPhoto", new RowMapper<GooglePhotoItem>() {
+			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+				GooglePhotoItem item = new GooglePhotoItem();
+				item.setUrl(rs.getString("select1_url"));
+				return item;
+			}
+		});
+		return result;
+	}
 	public void deletePhoto() {
 		template.update("DELETE FROM revelPhoto");
 		template.update("ALTER TABLE revelPhoto auto_increment=1");
