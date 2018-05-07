@@ -171,94 +171,12 @@ to {
 </style>
 </head>
 <body>
-	<div class="w3-dropdown-hover">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;" >${choice} <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#calendarModal" 
-				class="w3-bar-item w3-button w3-padding-large">Schedule</a>
-	<div class="w3-dropdown-hover ">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#FEED"
-				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
-				
-	<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div>
-	      <div class="modal-body">
-			<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
-			${item.date}
-			<p>
-			${item.content }
-		</c:forEach>	
-	      </div>
-	      <div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
-	<!-- Navbar -->
-	<div class="w3-display-container w3-animate-opacity">
-		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
-			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
-		</c:forEach>
-	</div>
 
-		<div class="w3-row w3-large w3-white">
-			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
-				href="javascript:void(0);" onclick="openNav()"><i
-				class="fa fa-bars"></i></a> 
-				<div class = "row">
-				<div class ="col-sm-1">&nbsp;</div>
-				<div class ="col-sm-2">
-				<a href="/home?menu=feed&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=profile&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>"			class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="youtuberesult">YOUTUBE</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=photo&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				
-				title="photo">PHOTO</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=twitter&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">TWITTER</a>
-				</div>
-		</div>
-
-		<!-- Navbar on small screens -->
-		<!-- <div id="navDemo"
-			class="w3-bar-block w3-hide w3-hide-large w3-hide-medium w3-right">
-			<a href="#team" class="w3-bar-item w3-button">Team</a> <a
-				href="#work" class="w3-bar-item w3-button">Work</a> <a
-				href="#pricing" class="w3-bar-item w3-button">Price</a> <a
-				href="#contact" class="w3-bar-item w3-button">Contact</a> <a
-				href="#" class="w3-bar-item w3-button">Search</a>
-		</div> -->
+		<!-- TOP -->
+		<jsp:include page="top.jsp" flush="false"/>
 
 
-
-		</main>
+		
 		<!-- !PAGE CONTENT! -->
 		<!-- Photo grid -->
 		<div class="w3-container w3-padding-64 w3-center" id="youtube">
@@ -492,9 +410,9 @@ to {
 	    	<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
 			${item.date}
 			<p>
-			${item.content }
+			${item.content}
 		</c:forEach>		
-    		${#content}.html
+    		${item.content}.html
     	
     }
     </script>

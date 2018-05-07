@@ -16,9 +16,11 @@ public class CarouselImageService {
 			mainPhoto.add("http://korepo.com/wp-content/uploads/2016/10/450_red.jpg");
 			mainPhoto.add("http://media.infospesial.net/image/p/2015/12/a5d9a-red-velvet.jpg");
 		} else if (choice.equals("bts")) {
-			mainPhoto.add("https://www.allkpop.com/upload/2018/02/af_org/05224856/bts.jpg");
+			
+			mainPhoto.add("../../img/bts/bts-banner-blue-photo.png");
 			mainPhoto.add("https://www.allkpop.com/upload/2017/09/af_org/03114342/bts.jpg");
 			mainPhoto.add("https://www.allkpop.com/upload/2018/01/af_org/13143944/bts.jpg");
+			
 		} else if (choice.equals("exo")) {
 			mainPhoto.add("https://i.scdn.co/image/9af8e7904dc0ffd511a4136eb11c4235dce8f79f");
 			mainPhoto.add("https://www.dramafever.com/st/news/images/exo_cover.png");

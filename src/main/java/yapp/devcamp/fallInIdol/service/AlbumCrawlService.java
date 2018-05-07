@@ -14,17 +14,15 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import yapp.devcamp.fallInIdol.model.AlbumItem;
-import yapp.devcamp.fallInIdol.model.TwitterItem;
 
 
 @Service
 public class AlbumCrawlService {
 	
-	List<AlbumItem> AlbumList = new ArrayList<AlbumItem>();
-	AlbumItem item;
+	
 	
 	public List<AlbumItem> AlbumCrawling(String choice) throws IOException {				
-		String url = "https://twitter.com/RVsmtown?lang=ko";
+		String url = "";
 				
 		if (choice.equals("redvelvet")) {
 			url = "http://music.naver.com/artist/album.nhn?artistId=343255";
@@ -36,10 +34,12 @@ public class AlbumCrawlService {
 			url = "http://music.naver.com/artist/album.nhn?artistId=460475";
 		}
 		
+		List<AlbumItem> AlbumList = new ArrayList<AlbumItem>();
+		AlbumItem item;
 		
-		Connection con = Jsoup.connect(url);
 		
 		try{
+			Connection con = Jsoup.connect(url);
 			Document doc = con.get();
 			
 			//Elements c = doc.select("div.text table tbody tr td");
@@ -57,9 +57,7 @@ public class AlbumCrawlService {
 						String date=el.select("span.date").text();
 							
 						
-						//System.out.println("*****"+image);
-						//System.out.println("-----"+content);
-						//System.out.println("/////"+date);
+						
 											
 						item=new AlbumItem(content,image,date);
 						AlbumList.add(item);
