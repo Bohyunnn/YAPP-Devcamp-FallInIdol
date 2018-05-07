@@ -2,6 +2,7 @@ package yapp.devcamp.fallInIdol.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,23 +70,45 @@ public class HomeController {
 	@Autowired
 	TwicePhotoDao twicePhotoDao;
 	
-	List<String> resultUrls = new ArrayList<String>();
-	List<String> mainPhoto = new ArrayList<String>();
+	List<String> resultUrls;
+	List<String> mainPhoto;
 
-	List<CalendarItem> calendarList =new ArrayList<CalendarItem>();
-	List<AlbumItem> albumList =new ArrayList<AlbumItem>();
+	List<CalendarItem> calendarList ;
+	List<AlbumItem> albumList;
 	
-	List<TwitterItem> twitUrls =new ArrayList<TwitterItem>();
-	List<String> twitterImage=new ArrayList<String>();
+	List<TwitterItem> twitUrls;
+	List<String> twitterImage;
 	
 	List<GooglePhotoItem> list = new ArrayList<GooglePhotoItem> ();
 
+	@ModelAttribute("names")
+	public List<String> memberName(@RequestParam("choice") String choice) {
+		List<String> names = new ArrayList<String> ();
+		if (choice.equals("bts")) {
+			names.add("V");
+			names.add("SUGAR");
+			names.add("JIN");
+			names.add("JIMIN");
+			names.add("JUNGKOOK");
+			names.add("RM");
+			names.add("J-HOPE");
+		}
+		else if (choice.equals("redvelvet")) {
+			names.add("JOY");
+			names.add("IRENE");
+			names.add("WENDY");
+			names.add("SEULGI");
+			names.add("YERI");
+		}
+		return names;
+	}
+	
 	@ModelAttribute("result") 
 	public List<GooglePhotoItem> crawlingPhoto(@RequestParam("choice") String choice) {
-		GooglePhotoItem googlePhotoItem = new GooglePhotoItem();
-			
+		
+				
 		if (choice.equals("bts")) {
-			list = btsPhotoDao.selectPhoto();
+			list = btsPhotoDao.selectPhoto();	
 		}
 		else if (choice.equals("redvelvet")) {
 			list = revelPhotoDao.selectPhoto();
@@ -96,6 +120,16 @@ public class HomeController {
 			list = twicePhotoDao.selectPhoto();
 		}
 		
+		for(Iterator<GooglePhotoItem> it = list.iterator() ; it.hasNext() ; )
+		{
+			String value = it.next().getUrl();
+				
+			if(value == null)
+			{
+				it.remove();
+			}
+		}
+		
 		return list;
 	}
 	
@@ -104,6 +138,12 @@ public class HomeController {
 			@RequestParam(value = "items", required = false, defaultValue = "26") String items) throws IOException {
 		ModelAndView mv = new ModelAndView();
 		
+		resultUrls = new ArrayList<String>();
+		mainPhoto = new ArrayList<String>();
+		calendarList = new ArrayList<CalendarItem>();
+		albumList =new ArrayList<AlbumItem>();
+		twitUrls =new ArrayList<TwitterItem>();
+		twitterImage=new ArrayList<String>();
 		
 		String choice = request.getParameter("choice");
 		String select = request.getParameter("select");
@@ -134,11 +174,35 @@ public class HomeController {
 			}
 			if (menu.equals("photo")) {
 				if (choice != null && select != null) {
-					resultUrls = googleCrawlService.ImageCrawling(choice, select);
-					mv.addObject("result", resultUrls);
+					list = btsPhotoDao.select1_url_Photo();
+//					for (GooglePhotoItem imageUrl : list) {
+//						System.out.println(imageUrl.getUrl());
+//					}
+
+					GooglePhotoItem imageUrl = list.get(0);
+					if (imageUrl.getUrl() == null) {
+						resultUrls = googleCrawlService.ImageCrawling(choice, select);
+						btsPhotoDao.insert_select1_Photo(resultUrls);
+						list =  btsPhotoDao.select1_url_Photo();
+						
+						for(Iterator<GooglePhotoItem> it = list.iterator() ; it.hasNext() ; )
+						{
+							String value = it.next().getUrl();
+							
+							if(value == null)
+							{
+								it.remove();
+							}
+						}
+						
+					}
+					
+					mv.addObject("result", list);
+					mv.addObject("listNum", list.size());
 					mv.setViewName("/photo");
 				}
 				if (choice != null && select == null) {
+					mv.addObject("listNum", list.size());
 					mv.setViewName("/photo");
 				}
 			}
@@ -161,21 +225,6 @@ public class HomeController {
 				mv.addObject("twit_result", twitUrls);
 		}
 		
-		if (choice.equals("bts")) {
-			list = btsPhotoDao.selectPhoto();
-		}
-		else if (choice.equals("redvelvet")) {
-			list = revelPhotoDao.selectPhoto();
-		}
-		else if (choice.equals("exo")) {
-			list = exoPhotoDao.selectPhoto();
-		}
-		else {
-			list = twicePhotoDao.selectPhoto();
-		}
-		
-		mv.addObject("result", list);
-
 		calendarList = googleCalendarService.CalendarCrawling(choice);
 		mv.addObject("calendar_result", calendarList);
 		
@@ -207,17 +256,10 @@ public class HomeController {
 			//System.out.println("*****"+twitUrls.get(i).getImage());
 		}
 		
-//		 for (CalendarItem imageUrl : calendarList) {
-//					// System.out.println(imageUrl.getContent());
-//					 }
-
 		mv.addObject("choicelist", choicelist);
 		mv.addObject("mainPhoto", mainPhoto);
-//		mv.addObject("youtube", youtuberesult);
-//		mv.addObject("result", resultUrls);
 		mv.addObject("choice", choice);
 		mv.addObject("twit_result", twitUrls);
-//		mv.setViewName("/home");
 
 
 		return mv;

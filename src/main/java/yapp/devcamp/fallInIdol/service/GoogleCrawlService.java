@@ -22,7 +22,7 @@ public class GoogleCrawlService {
 	public List<String> ImageCrawling(String choice, String select) throws IOException {
 		
 		String userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
-		String url = "https://www.google.co.kr/search?q=redvelvet%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiI_fLA-fLZAhUBoZQKHRHiBt0QsAQIJw";
+		String url = "";
 
 		if (choice.equals("redvelvet")) {
 			if (select.equals("paparazzi")) {
@@ -55,6 +55,7 @@ public class GoogleCrawlService {
 				url = "https://www.google.co.kr/search?q=bts+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi7oJ3LmdLZAhVTObwKHc6sDnQQsAQIJA";
 			}
 		}
+		
 
 		List<String> resultUrls = new ArrayList<String>();
 		
@@ -92,14 +93,14 @@ public class GoogleCrawlService {
 	public List<String> ImageCrawling(String choice) throws IOException {
 		
 		String userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
-		String url = "https://www.google.co.kr/search?q=redvelvet%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiI_fLA-fLZAhUBoZQKHRHiBt0QsAQIJw";
+		String url = "";
 
 		if (choice.equals("redvelvet")) {
-			url = "https://www.google.co.kr/search?q=redvelvet%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiI_fLA-fLZAhUBoZQKHRHiBt0QsAQIJw";
+			url = "https://www.google.com/search?q=red+velvet&client=safari&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiJ39Oy2fPaAhVS6bwKHYn5Bx4QsAQIKA";
 		} else if (choice.equals("exo")) {
 			url = "https://www.google.co.kr/search?q=exo%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiuqoXapvPZAhULi7wKHQ10BsMQsAQIJQ";
 		} else if (choice.equals("bts")) {
-			url = "https://www.google.co.kr/search?q=bts%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwjohMigp_PZAhVFabwKHbJ7BUUQsAQIJQ&biw=1138&bih=756&dpr=2";
+			url = "https://www.google.com/search?q=bts&client=safari&sa=X&rls=en&biw=718&bih=862&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjmkKfc1vPaAhVGUbwKHXEEA-4QsAQIJQ";
 		} else {
 			url = "https://www.google.co.kr/search?q=twice%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwikzqezp_PZAhUJTLwKHfgqAMUQsAQIJQ";
 		}

@@ -20,6 +20,9 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 <style>
+.img-container {
+	width:100%;min-height:350px;max-height:600px;
+}
 #choiceList ol {
 	float: left;
 	list-style: none;
@@ -77,17 +80,6 @@
 	    max-width: 700px;
 	}
 	
-	/* Caption of Modal Image */
-	#caption {
-	    margin: auto;
-	    display: block;
-	    width: 80%;
-	    max-width: 700px;
-	    text-align: center;
-	    color: #ccc;
-	    padding: 10px 0;
-	    height: 150px;
-	}
 	
 	/* Add Animation */
 	.modal-content, #caption {    
@@ -192,7 +184,8 @@
 				<a href="/home?menu=profile"
 				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
 				<div class ="col-sm-2">
-				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>"			class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>" 
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 				title="youtuberesult">YOUTUBE</a></div>
 				<div class ="col-sm-2">
 				 <a href="/home?menu=photo&choice=<c:out value="${choice}"/>"
@@ -210,36 +203,60 @@
 		<div id="choiceList">
 			<ol>
 				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=paparazzi#photo">직찍</a></li>
+					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=paparazzi">직찍 </a></li>
 				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=pictorial#photo">화보</a></li>
+					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=official">
+						공식 </a></li>
 				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=broad#photo">방송
-						사진</a></li>
+					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=pictorial">화보 </a></li>
+				
 				<li><a
-					href="/home?choice=<c:out value="${choice}"/>&select=temp#photo">temp</a></li>
+					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=uhd">고화질 </a></li>
+				<li><a
+					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=airport">공항 </a></li>
+					
+			</ol>
+			<ol>
+				<li><a
+					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=group">group </a></li>
+				<c:forEach items ="${names }" var = "name" >
+				<li><a
+					href="/home?menu=photo&choice=<c:out value="${choice}"/>&select=<c:out value="${name}"/>">
+						${name}</a></li>
+				</c:forEach>
 			</ol>
 		</div>
 		<div class="w3-row">
 			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="25" >
-				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
-				</c:forEach>
-			</div>
-			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="26" end="50" >
-				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px " onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+			<c:set var="count" value="${listNum div 4}" /> 
+				<c:forEach items="${result}" var="item" varStatus="status" begin="0" end="${count}" >
+				    <img src="${item.getUrl()}" style="width:100%;min-height:350px;max-height:600px; padding:3px;"  onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 			
 			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="51" end="75" >
-				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+			<c:set var="count2" value="${(listNum - count) div 3}" /> 
+			<c:set var = "total" value = "${ count + count2}"/>
+			
+				<c:forEach items="${result}" var="item" varStatus="status" begin="${count+1}" end="${total}" >
+				    <img src="${item.getUrl()}" style="width:100%;min-height:350px;max-height:600px; padding:3px;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
+			
 			<div class="w3-quarter">
-				<c:forEach items="${result}" var="item" varStatus="status" begin="75" end="100" >
-				    <img src="${item.getUrl()}" style="max-width: 100%;width: 600px; padding:3px" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+			<c:set var="count3" value="${(listNum - total) div 2}" /> 
+			
+			<c:set var = "total2" value = "${total + count3 }"/>
+				<c:forEach items="${result}" var="item" varStatus="status" begin="${total+1}" end="${total2}" >
+				    <img src="${item.getUrl()}" style="width:100%;min-height:350px;max-height:600px; padding:3px;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
+				</c:forEach>
+			</div>
+			
+			<div class="w3-quarter">
+			<c:set var="count4" value="${(listNum - total2)}" /> 
+			
+				<c:forEach items="${result}" var="item" varStatus="status" begin="${total2+1 }" end="${listNum}" >
+				    <img src="${item.getUrl()}" style="width:100%;min-height:350px;max-height:600px; padding:3px;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 		</div>
@@ -288,13 +305,12 @@
 		 span.onclick = function() { 
 		     modal.style.display = "none";
 		 }
-		
   	
    	}
    
    	
     </script>
-  
+
 	<script src="../../bootstrap/js/bootstrap.min.js"></script>
 </script>
 </html>

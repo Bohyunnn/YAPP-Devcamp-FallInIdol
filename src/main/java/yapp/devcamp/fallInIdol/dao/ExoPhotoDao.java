@@ -45,5 +45,6 @@ public class ExoPhotoDao {
 	
 	public void deletePhoto() {
 		template.update("DELETE FROM exoPhoto");
+		template.update("ALTER TABLE exoPhoto auto_increment=1");
 	}
 }

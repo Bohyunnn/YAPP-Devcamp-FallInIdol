@@ -287,7 +287,7 @@ to {
 					title="youtuberesult">YOUTUBE</a>
 			</div>
 			<div class="col-sm-2">
-				<a href='/home?menu=photo&amp;choice=<c:out value="${choice}"/>'
+				<a href='/home?menu=photo&choice=<c:out value="${choice}"/>'
 					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 					title="photo">PHOTO</a>
 			</div>
@@ -312,7 +312,7 @@ to {
 		<main></main>
 		<!-- !PAGE CONTENT! -->
 		<!-- Photo grid -->
-		<div class="w3-container w3-padding-64 w3-center" id="youtube">
+	<%-- 	<div class="w3-container w3-padding-64 w3-center" id="youtube">
 			<div class="w3-col m12">
 				<div id="choiceList">
 					<ol>
@@ -404,8 +404,8 @@ to {
 				</c:forEach>
 			</div>
 		</div>
-
-		<div class="w3-container w3-padding-64 w3-center" id="photo">
+ --%>
+		<%-- <div class="w3-container w3-padding-64 w3-center" id="photo">
 			<div id="choiceList">
 				<ol>
 					<li><a
@@ -465,8 +465,8 @@ to {
 				class="modal-content" id="img01" src="" alt="">
 			<div id="caption"></div>
 		</div>
-
-		<div class="w3-container w3-padding-64 w3-center" id="twitter">
+ --%>
+<%-- 		<div class="w3-container w3-padding-64 w3-center" id="twitter">
 			<div class="w3-row">
 				<div class="w3-third">
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
@@ -492,7 +492,7 @@ to {
 				</div>
 			</div>
 		</div>
-
+ --%>
 		<!-- FOOTER -->
 		<footer class="container">
 			<p class="float-right">

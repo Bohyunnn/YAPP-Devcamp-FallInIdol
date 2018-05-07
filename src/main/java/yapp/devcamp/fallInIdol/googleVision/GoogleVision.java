@@ -22,7 +22,7 @@ public class GoogleVision {
 
 //	    ImageAnnotatorClient vision = ImageAnnotatorClient.create();
 
-	    String fileName = "/Users/shineeseo/Downloads/sugar.jpg";
+	    String fileName = "/Users/shineeseo/Downloads/nayeon.jpg";
 	    
 	    Path path = Paths.get(fileName);
 	    byte[] data = Files.readAllBytes(path);

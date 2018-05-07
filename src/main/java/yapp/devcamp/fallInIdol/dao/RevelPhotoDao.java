@@ -44,5 +44,6 @@ public class RevelPhotoDao {
 	
 	public void deletePhoto() {
 		template.update("DELETE FROM revelPhoto");
+		template.update("ALTER TABLE revelPhoto auto_increment=1");
 	}
 }

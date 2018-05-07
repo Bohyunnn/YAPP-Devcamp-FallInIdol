@@ -44,5 +44,6 @@ public class TwicePhotoDao {
 	
 	public void deletePhoto() {
 		template.update("DELETE FROM twiPhoto");
+		template.update("ALTER TABLE twiPhoto auto_increment=1");
 	}
 }
