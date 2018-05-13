@@ -32,17 +32,17 @@ html, body, h1, h2, h3, h4, h5, h6 {
 }
 
 td {
-    
-    padding: 10px;
-    
-  }
-  tbody tr:nth-child(2n) {
-    background-color: #FFFFFF;
-  }
-  tbody tr:nth-child(2n+1) {
-    background-color: #2F6FF6;
-  }
-  
+	padding: 10px;
+}
+
+tbody tr:nth-child(2n) {
+	background-color: #FFFFFF;
+}
+
+tbody tr:nth-child(2n+1) {
+	background-color: #2F6FF6;
+}
+
 #choiceList ol {
 	float: left;
 	list-style: none;
@@ -199,7 +199,7 @@ to {
 </style>
 </head>
 <body>
-	<div class="w3-dropdown-hover">
+	<%-- <div class="w3-dropdown-hover">
 		<button class="w3-button w3-black" title="Notifications"
 			style="width: 110px; height: 31px;">${choice}
 			<i class="fa fa-caret-down"></i>
@@ -211,24 +211,25 @@ to {
 					class="w3-bar-item w3-button">${userChoice }</a>
 			</c:forEach>
 		</div>
-	</div>
+	</div> --%>
 	<!-- <button id="schedule" class="w2ui-btn" onclick="showOverlay()">Schedule</button> -->
 
-	<a href="#" data-toggle="popover" title="Schedule"
-		data-placement="right" data-content="">Schedule</a>
+	<!-- <a href="#" data-toggle="popover" title="Schedule"
+		data-placement="right" data-content="">Schedule</a> -->
 
-	<div id="myPopoverContent" style="display:none">
+	<div id="myPopoverContent" style="display: none">
+	<!-- style="display: none" -->
 		<table>
 			<tbody>
-			<c:forEach items='${calendar_result}' var='item' varStatus='status'
-				begin='0' end='9'>
-				<tr >
-				<td ><font color="white">${item.content }</font></td>
-				</tr>
-				<tr>
-					<td >${item.date}</td>
-				</tr>
-			</c:forEach>
+				<c:forEach items='${calendarList}' var='item' varStatus='status'
+					begin='0' end='9'>
+					<tr>
+						<td><font color="white">${item.content }</font></td>
+					</tr>
+					<tr>
+						<td>${item.date}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -240,7 +241,7 @@ to {
 		</c:forEach>
 	</div> --%>
 
-	<div class="w3-dropdown-hover ">
+	<%-- <div class="w3-dropdown-hover ">
 		<button class="w3-button w3-black" title="Notifications"
 			style="width: 110px; height: 31px;">
 			ENGLISH <i class="fa fa-caret-down"></i>
@@ -252,19 +253,42 @@ to {
 					class="w3-bar-item w3-button">${userChoice }</a>
 			</c:forEach>
 		</div>
-	</div>
-	<a href="#FEED" class="w3-bar-item w3-button w3-padding-large">CHAT</a>
+	</div> --%>
+	<!-- <a href="#FEED" class="w3-bar-item w3-button w3-padding-large">CHAT</a> -->
 
 
 
 	<!-- Navbar -->
 	<div class="w3-display-container w3-animate-opacity">
-		<c:forEach items="${mainPhoto}" var="item" varStatus="status"
-			begin="0" end="0">
-			<img class="First-slide"
-				style="width: 100%; min-height: 350px; max-height: 600px;"
-				src="${item}" alt="First slide">
-		</c:forEach>
+		<img class="First-slide"
+			style="width: 100%; min-height: 350px; max-height: 600px;"
+			src="${mainPhoto[0]}" alt="First slide">
+			<div class="w3-display-topleft w3-text-white w3-padding-large"
+			style="padding: 100px 48px">
+			<a href="/"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>
+			</div>
+		<div class="w3-display-topright w3-text-white w3-padding-large"
+			style="padding: 100px 48px">
+			
+			<a href='#' data-toggle="popover" id="Schedule"
+				data-placement="right" data-content="">SCHEDULE</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="w3-dropdown-hover ">
+				<button class="w3-button w3-black" title="Notifications"
+				style="width: 110px; height: 31px;">
+				LANGUAGE <i class="fa fa-caret-down"></i></button>
+				
+				<div class="w3-dropdown-content w3-card-4 w3-bar-block">
+					<c:forEach items="${language}" var="lang" varStatus="status"
+						begin="0" end="3">
+						<a href='/home?choice=<c:out value="${choice}"/>'
+							class="w3-bar-item w3-button">${lang}</a>
+					</c:forEach>
+				</div>
+			</div>
+		 <a href="#FEED"
+				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
+		</div>
 	</div>
 
 	<div class="w3-row w3-large w3-white">
@@ -287,7 +311,7 @@ to {
 					title="youtuberesult">YOUTUBE</a>
 			</div>
 			<div class="col-sm-2">
-				<a href='/home?menu=photo&choice=<c:out value="${choice}"/>'
+				<a href='/photoNoOption?choice=<c:out value="${choice}"/>'
 					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
 					title="photo">PHOTO</a>
 			</div>
@@ -306,13 +330,9 @@ to {
 				href="#contact" class="w3-bar-item w3-button">Contact</a> <a
 				href="#" class="w3-bar-item w3-button">Search</a>
 		</div> -->
-
-
-
-		<main></main>
 		<!-- !PAGE CONTENT! -->
 		<!-- Photo grid -->
-	<%-- 	<div class="w3-container w3-padding-64 w3-center" id="youtube">
+		<%-- 	<div class="w3-container w3-padding-64 w3-center" id="youtube">
 			<div class="w3-col m12">
 				<div id="choiceList">
 					<ol>
@@ -466,7 +486,7 @@ to {
 			<div id="caption"></div>
 		</div>
  --%>
-<%-- 		<div class="w3-container w3-padding-64 w3-center" id="twitter">
+		<%-- 		<div class="w3-container w3-padding-64 w3-center" id="twitter">
 			<div class="w3-row">
 				<div class="w3-third">
 					<c:forEach items="${twit_result}" var="item" varStatus="status"
@@ -499,11 +519,6 @@ to {
 				<a href="#">Back to top</a>
 			</p>
 		</footer>
-
-
-
-
-
 		<main></main>
 
 		<!-- Bootstrap core JavaScript
@@ -561,10 +576,10 @@ to {
 			}
 		</script>
 		<script type="text/javascript">
-			$(document).ready(function() {
+		$('#Schedule').on('click', function() {
 				$('[data-toggle="popover"]').popover({
-					content: $('#myPopoverContent').html(),
-					   html: true
+					content : $('#myPopoverContent').html(),
+					html : true
 				});
 			});
 		</script>

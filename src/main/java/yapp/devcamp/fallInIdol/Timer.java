@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.PostConstruct;
 
+import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class Timer {
 	}
 	
 	@Scheduled(fixedDelayString = "${spring.task.fixedDelay}")
-	public void tick() throws InterruptedException, IOException {
+	public void tick() throws InterruptedException, IOException, JSONException {
 		watch.stop();
 		logger.info(watch.prettyPrint());
 		String taskName = taskNamePrefix + "-" + String.valueOf(loopCounter.getAndIncrement());
@@ -74,7 +75,7 @@ public class Timer {
 		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
 		revelPhotoDao.insertPhoto(resultUrls);
 		
-//		twicePhotoDao.deletePhoto();s
+//		twicePhotoDao.deletePhoto();
 		resultUrls = googleCrawlService.ImageCrawling("twice");
 		twicePhotoDao.insertPhoto(resultUrls);
 		
@@ -83,7 +84,7 @@ public class Timer {
 	
 	//매일 12시에 db 내용 삭제하고 다시 삽입함.
 	@Scheduled(cron = "0 0 12 * * *")
-	public void taskPerDay() throws InterruptedException, IOException {
+	public void taskPerDay() throws InterruptedException, IOException, JSONException {
 		watch.stop();
 		logger.info(watch.prettyPrint());
 		String taskName = taskNamePrefix + "-" + String.valueOf(loopCounter.getAndIncrement());

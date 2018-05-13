@@ -27,9 +27,43 @@ public class ExoPhotoDao {
 		}
 		
 	}
-	public void insert_select1_Photo(List<String> list) {
+	public void insert_paparazzi_Photo(List<String> list) {
 		for (String imageUrl : list) {
-			template.update("INSERT INTO exoPhoto(select1_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE select1_url=(?)) ",imageUrl, imageUrl);
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO exoPhoto(select1_url) value (?)",imageUrl );
+			template.update("INSERT INTO exoPhoto(paparazzi_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE paparazzi_url=(?)) ",imageUrl, imageUrl);
+		}
+		
+	}
+	public void insert_official_Photo(List<String> list) {
+		for (String imageUrl : list) {
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO exoPhoto(select1_url) value (?)",imageUrl );
+			template.update("INSERT INTO exoPhoto(official_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE official_url=(?)) ",imageUrl, imageUrl);
+		}
+		
+	}
+	public void insert_pictorial_Photo(List<String> list) {
+		for (String imageUrl : list) {
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO exoPhoto(select1_url) value (?)",imageUrl );
+			template.update("INSERT INTO exoPhoto(pictorial_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE pictorial_url=(?)) ",imageUrl, imageUrl);
+		}
+		
+	}
+	public void insert_uhd_Photo(List<String> list) {
+		for (String imageUrl : list) {
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO exoPhoto(select1_url) value (?)",imageUrl );
+			template.update("INSERT INTO exoPhoto(uhd_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE uhd_url=(?)) ",imageUrl, imageUrl);
+		}
+		
+	}
+	public void insert_airport_Photo(List<String> list) {
+		for (String imageUrl : list) {
+//			System.out.println(imageUrl);
+//			template.update("INSERT INTO exoPhoto(select1_url) value (?)",imageUrl );
+			template.update("INSERT INTO exoPhoto(airport_url) SELECT (?) FROM DUAL WHERE NOT EXISTS (SELECT * FROM exoPhoto WHERE airport_url=(?)) ",imageUrl, imageUrl);
 		}
 		
 	}
@@ -43,18 +77,63 @@ public class ExoPhotoDao {
 				return item;
 			}
 		});
-		List<GooglePhotoItem> select_url = select1_url_Photo();
-		
-		result.addAll(select_url);
+//		List<GooglePhotoItem> select_url = select1_url_Photo();
+//		
+//		result.addAll(select_url);
 		
 		return result;
 	}
-	public List<GooglePhotoItem> select1_url_Photo() {
+	public List<GooglePhotoItem> paparazzi_url_Photo() {
 		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
-		result = this.template.query("select select1_url from exoPhoto", new RowMapper<GooglePhotoItem>() {
+		result = this.template.query("select paparazzi_url from exoPhoto", new RowMapper<GooglePhotoItem>() {
 			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
 				GooglePhotoItem item = new GooglePhotoItem();
-				item.setUrl(rs.getString("select1_url"));
+				item.setUrl(rs.getString("paparazzi_url"));
+				return item;
+			}
+		});
+		return result;
+	}
+	
+	public List<GooglePhotoItem> official_url_Photo() {
+		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
+		result = this.template.query("select official_url from exoPhoto", new RowMapper<GooglePhotoItem>() {
+			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+				GooglePhotoItem item = new GooglePhotoItem();
+				item.setUrl(rs.getString("official_url"));
+				return item;
+			}
+		});
+		return result;
+	}
+	public List<GooglePhotoItem> pictorial_url_Photo() {
+		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
+		result = this.template.query("select pictorial_url from exoPhoto", new RowMapper<GooglePhotoItem>() {
+			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+				GooglePhotoItem item = new GooglePhotoItem();
+				item.setUrl(rs.getString("pictorial_url"));
+				return item;
+			}
+		});
+		return result;
+	}
+	public List<GooglePhotoItem> uhd_url_Photo() {
+		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
+		result = this.template.query("select uhd_url from exoPhoto", new RowMapper<GooglePhotoItem>() {
+			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+				GooglePhotoItem item = new GooglePhotoItem();
+				item.setUrl(rs.getString("uhd_url"));
+				return item;
+			}
+		});
+		return result;
+	}
+	public List<GooglePhotoItem> airport_url_Photo() {
+		List<GooglePhotoItem> result = new ArrayList<GooglePhotoItem> ();
+		result = this.template.query("select airport_url from exoPhoto", new RowMapper<GooglePhotoItem>() {
+			public GooglePhotoItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+				GooglePhotoItem item = new GooglePhotoItem();
+				item.setUrl(rs.getString("airport_url"));
 				return item;
 			}
 		});

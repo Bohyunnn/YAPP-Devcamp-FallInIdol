@@ -35,9 +35,6 @@ import yapp.devcamp.fallInIdol.model.TwitterItem;
 @Service
 public class GoogleCalendarService {
  
-	List<CalendarItem> CalendarList = new ArrayList<CalendarItem>();
-	CalendarItem item;
-	
     private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
  
     private static final java.io.File DATA_STORE_DIR = new java.io.File(
@@ -97,7 +94,8 @@ public class GoogleCalendarService {
     	
     	
     	com.google.api.services.calendar.Calendar service =getCalendarService();
-
+    	List<CalendarItem> CalendarList = new ArrayList<CalendarItem>();
+    	CalendarItem item;
             // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
             com.google.api.services.calendar.model.Events events = service.events().list(CALENDAR_ID)
@@ -121,7 +119,6 @@ public class GoogleCalendarService {
                     CalendarList.add(item);
                 }
             }
-            
             return CalendarList;
 		
     }

@@ -11,6 +11,7 @@ public class CarouselImageService {
 	public List<String> getCarouselImage(String choice) {
 
 		List<String> mainPhoto = new ArrayList<String>();
+		
 		if (choice.equals("redvelvet")) {
 			mainPhoto.add("http://dazedimg.dazedgroup.netdna-cdn.com/1600/azure/dazed-prod/1190/2/1192442.jpg");
 			mainPhoto.add("http://korepo.com/wp-content/uploads/2016/10/450_red.jpg");
