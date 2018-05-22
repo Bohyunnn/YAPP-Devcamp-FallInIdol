@@ -106,7 +106,7 @@
 				<div class ="col-sm-1">&nbsp;</div>
 				 </div>
 		</div>
-	<div class="w3-container w3-padding-64 w3-center" id="youtube">
+	<div class="w3-container w3-center" id="youtube">
 		<div class="w3-col m12">
 			<div id="choiceList">
 				<ol>

@@ -3,20 +3,25 @@ package yapp.devcamp.fallInIdol.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import yapp.devcamp.fallInIdol.dao.BtsPhotoDao;
@@ -84,66 +89,14 @@ public class HomeController {
 	List<TwitterItem> twitUrls;
 	List<String> twitterImage;
 
-
-	//	@ModelAttribute("names")
-	//	public List<String> memberName(@RequestParam("choice") String choice) {
-	//		List<String> names = new ArrayList<String> ();
-	//		if (choice.equals("bts")) {
-	//			names.add("bts");
-	//			names.add("v");
-	//			names.add("sugar");
-	//			names.add("jin");
-	//			names.add("jimin");
-	//			names.add("jungkook");
-	//			names.add("rm");
-	//			names.add("j-hope");
-	//		}
-	//		else if (choice.equals("redvelvet")) {
-	//			names.add("redvelvet");
-	//			names.add("joy");
-	//			names.add("irene");
-	//			names.add("wendy");
-	//			names.add("seulgi");
-	//			names.add("yeri");
-	//		}
-	//		else if (choice.equals("exo")) {
-	//			names.add("exo");
-	//			names.add("XIUMIN");
-	//			names.add("LUHAN");
-	//			names.add("KRIS");
-	//			names.add("LAY");
-	//			names.add("SUHO");
-	//			names.add("BAEKHYUN");
-	//			names.add("CHANYEOL");
-	//			names.add("CHEN");
-	//			names.add("D.O.");
-	//			names.add("TAO");
-	//			names.add("KAI");
-	//			names.add("SEHUN");
-	//		}
-	//		else {
-	//			names.add("twice");
-	//			names.add("momo");
-	//			names.add("nayeon");
-	//			names.add("dahyun");
-	//			names.add("Tzuyu");
-	//			names.add("mina");
-	//			names.add("jungyeon");
-	//			names.add("sana");
-	//			names.add("jihyo");
-	//			names.add("chaeyong");
-	//		}
-	//		return names;
-	//	}
-
 	List<String> resultUrls;
 
 	List<GooglePhotoItem> list = new ArrayList<GooglePhotoItem> ();
-
+	
+	
 	@ModelAttribute("result") 
-	public List<GooglePhotoItem> crawlingPhoto(@RequestParam("choice") String choice) {
-
-
+	public List<GooglePhotoItem> crawlingPhoto(@ModelAttribute("choice") String choice ) {
+		 
 		if (choice.equals("bts")) {
 			list = btsPhotoDao.selectPhoto();	
 		}
@@ -169,19 +122,22 @@ public class HomeController {
 
 		return list;
 	}
+	
 	@RequestMapping("/photoNoOption")
-	public ModelAndView photoResponse(@RequestParam("choice") String choice)  {
+	public ModelAndView photoResponse(@ModelAttribute("choice") String choice)  {
+		System.out.println("photo2 choice = " + choice);
 		ModelAndView mv = new ModelAndView();
 
 		mv.addObject("listNum", list.size());
 		mv.addObject("choice", choice);
 		mv.setViewName("/photo");
-
+		mv.addObject("photo", "photo");
 		return mv;
 	}
 
 	@RequestMapping("/photo")
-	public ModelAndView photoResponse(@RequestParam("choice") String choice, @RequestParam("select") String select) throws IOException, JSONException  {
+	public ModelAndView photoResponse(@ModelAttribute("choice") String choice,@RequestParam("select") String select) throws IOException, JSONException  {
+		System.out.println("photo3 choice = " + choice);
 		ModelAndView mv = new ModelAndView();
 
 		resultUrls = new ArrayList<String>();
@@ -364,12 +320,14 @@ public class HomeController {
 		mv.addObject("listNum", list.size());
 		mv.addObject("choice", choice);
 		mv.addObject("select", select);
+		mv.addObject("photo", "photo");
 
 		return mv;
 	}
 
 	@ModelAttribute("calendarList") 
-	public List<CalendarItem> scheduleService(@RequestParam("choice") String choice) throws IOException {
+	public List<CalendarItem> scheduleService(@ModelAttribute("choice") String choice) throws IOException {
+		System.out.println("schedule choice = " + choice);
 		calendarList = googleCalendarService.CalendarCrawling(choice);
 
 		//		for(CalendarItem content : calendarList) {
@@ -390,7 +348,8 @@ public class HomeController {
 	}
 
 	@ModelAttribute("mainPhoto")
-	public List<String> languageList(@RequestParam("choice") String choice) {
+	public List<String> mainPhotoList(@ModelAttribute("choice") String choice) {
+		System.out.println("mainphoto choice = " + choice);
 		mainPhoto = new ArrayList<String>();
 		mainPhoto = carouselImageService.getCarouselImage(choice); //공통속성 
 		Collections.shuffle(mainPhoto); 
@@ -398,18 +357,15 @@ public class HomeController {
 		return mainPhoto;
 	}
 
-
-
 	@RequestMapping("/home")
-	public ModelAndView sendResult(HttpServletRequest request,
+	public ModelAndView sendResult(HttpServletRequest request, @ModelAttribute("choice") String choice,
 			@RequestParam(value = "items", required = false, defaultValue = "26") String items) throws IOException {
 		ModelAndView mv = new ModelAndView();
 
 		albumList =new ArrayList<AlbumItem>();
 		twitUrls =new ArrayList<TwitterItem>();
 		twitterImage=new ArrayList<String>();
-
-		String choice = request.getParameter("choice"); 
+		
 		String select = request.getParameter("select");
 		String menu = request.getParameter("menu");
 
@@ -449,35 +405,7 @@ public class HomeController {
 			twitUrls = twitterCrawlService.TwitterCrawling(choice);
 			mv.addObject("twit_result", twitUrls);
 		}
-
-		//		List<String> choicelist = new ArrayList<String>();
-		//		choicelist.add("bts");
-		//		choicelist.add("redvelvet");
-		//		choicelist.add("exo");
-		//		choicelist.add("twice");
-		//		if (choice.equals( "redvelvet") ) {
-		//			choicelist.remove(1);
-		//		}
-		//		else if(choice.equals("bts")) {
-		//			choicelist.remove(0);
-		//		}
-		//		else if(choice.equals( "exo")) {
-		//			choicelist.remove(2);
-		//		}
-		//		else{
-		//			choicelist.remove(3);
-		//		}
-
-
-		//		List<String> language = new ArrayList<String>(); //공통속성 
-		//		language.add("ENGLISH");
-		//		language.add("中文");
-		//		language.add("日本語");
-		//		language.add("한국어");
-		//		
-		//
-		//		mv.addObject("language", language);
-		//		mv.addObject("mainPhoto", mainPhoto);
+		
 		mv.addObject("choice", choice);
 		mv.addObject("select", select);
 		mv.addObject("twit_result", twitUrls);

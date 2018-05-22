@@ -207,7 +207,7 @@ to {
 		</div>
 	</div> --%>
 	<main>
-	<div class="w3-container w3-padding-64 " >
+	<div class="w3-container" >
 		<div id="choiceList" class = "w3-right">
 			<ol>
 				<li ><a id = "paparazzi"
@@ -236,13 +236,13 @@ to {
 				</c:forEach>
 			</ol> --%>
 		</div>
-		<div class="w3-row">
-			<div class="w3-quarter">
+		<div class="w3-row ">
+			<div class="w3-quarter ">
 				<c:set var="count" value="${listNum div 4}" />
 				<c:forEach items="${result}" var="item" varStatus="status" begin="0"
 					end="${count}">
 					<img src="${item.getUrl()}"
-						style="width: 100%; min-height: 350px; max-height: 600px; padding: 3px;"
+						style="width: 100%; min-height: 350px; max-height: 600px; padding: 6px 6px 6px 6px; "
 						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
 						onError="this.style.display='none'">
 				</c:forEach>
@@ -255,32 +255,32 @@ to {
 				<c:forEach items="${result}" var="item" varStatus="status"
 					begin="${count+1}" end="${total}">
 					<img src="${item.getUrl()}"
-						style="width: 100%; min-height: 350px; max-height: 600px; padding: 3px;"
+						style="width: 100%; min-height: 350px; max-height: 600px; padding: 6px 6px 6px 6px;"
 						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
 						onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 
-			<div class="w3-quarter">
+			<div class="w3-quarter ">
 				<c:set var="count3" value="${(listNum - total) div 2}" />
 
 				<c:set var="total2" value="${total + count3 }" />
 				<c:forEach items="${result}" var="item" varStatus="status"
 					begin="${total+1}" end="${total2}">
 					<img src="${item.getUrl()}"
-						style="width: 100%; min-height: 350px; max-height: 600px; padding: 3px;"
+						style="width: 100%; min-height: 350px; max-height: 600px;padding: 6px 6px 6px 6px;"
 						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
 						onError="this.style.display='none'">
 				</c:forEach>
 			</div>
 
-			<div class="w3-quarter">
+			<div class="w3-quarter ">
 				<c:set var="count4" value="${(listNum - total2)}" />
 
 				<c:forEach items="${result}" var="item" varStatus="status"
 					begin="${total2+1 }" end="${listNum}">
 					<img src="${item.getUrl()}"
-						style="width: 100%; min-height: 350px; max-height: 600px; padding: 3px;"
+						style="width: 100%; min-height: 350px; max-height: 600px; padding: 6px 6px 6px 6px;"
 						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
 						onError="this.style.display='none'">
 				</c:forEach>
@@ -295,6 +295,12 @@ to {
 
 	</div>
 	</main>
+	<footer class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+		</footer>
+	
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

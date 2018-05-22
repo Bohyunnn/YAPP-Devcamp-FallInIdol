@@ -64,49 +64,49 @@ public class Timer {
 		String taskName = taskNamePrefix + "-" + String.valueOf(loopCounter.getAndIncrement());
 		
 //		btsPhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("bts");
-		btsPhotoDao.insertPhoto(resultUrls);
-		
-//		exoPhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("exo");
-		exoPhotoDao.insertPhoto(resultUrls);
-		
-//		revelPhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
-		revelPhotoDao.insertPhoto(resultUrls);
-		
-//		twicePhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("twice");
-		twicePhotoDao.insertPhoto(resultUrls);
+//		resultUrls = googleCrawlService.ImageCrawling("bts");
+//		btsPhotoDao.insertPhoto(resultUrls);
+//		
+////		exoPhotoDao.deletePhoto();
+//		resultUrls = googleCrawlService.ImageCrawling("exo");
+//		exoPhotoDao.insertPhoto(resultUrls);
+//		
+////		revelPhotoDao.deletePhoto();
+//		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
+//		revelPhotoDao.insertPhoto(resultUrls);
+//		
+////		twicePhotoDao.deletePhoto();
+//		resultUrls = googleCrawlService.ImageCrawling("twice");
+//		twicePhotoDao.insertPhoto(resultUrls);
 		
 		watch.start();
 	}
 	
 	//매일 12시에 db 내용 삭제하고 다시 삽입함.
-	@Scheduled(cron = "0 0 12 * * *")
-	public void taskPerDay() throws InterruptedException, IOException, JSONException {
-		watch.stop();
-		logger.info(watch.prettyPrint());
-		String taskName = taskNamePrefix + "-" + String.valueOf(loopCounter.getAndIncrement());
-		
-		btsPhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("bts");
-		btsPhotoDao.insertPhoto(resultUrls);
-		
-		exoPhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("exo");
-		exoPhotoDao.insertPhoto(resultUrls);
-		
-		revelPhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
-		revelPhotoDao.insertPhoto(resultUrls);
-		
-		twicePhotoDao.deletePhoto();
-		resultUrls = googleCrawlService.ImageCrawling("twice");
-		twicePhotoDao.insertPhoto(resultUrls);
-		
-		watch.start();
-	}
+//	@Scheduled(cron = "0 0 12 * * *")
+//	public void taskPerDay() throws InterruptedException, IOException, JSONException {
+//		watch.stop();
+//		logger.info(watch.prettyPrint());
+//		String taskName = taskNamePrefix + "-" + String.valueOf(loopCounter.getAndIncrement());
+//		
+//		btsPhotoDao.deletePhoto();
+//		resultUrls = googleCrawlService.ImageCrawling("bts");
+//		btsPhotoDao.insertPhoto(resultUrls);
+//		
+//		exoPhotoDao.deletePhoto();
+//		resultUrls = googleCrawlService.ImageCrawling("exo");
+//		exoPhotoDao.insertPhoto(resultUrls);
+//		
+//		revelPhotoDao.deletePhoto();
+//		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
+//		revelPhotoDao.insertPhoto(resultUrls);
+//		
+//		twicePhotoDao.deletePhoto();
+//		resultUrls = googleCrawlService.ImageCrawling("twice");
+//		twicePhotoDao.insertPhoto(resultUrls);
+//		
+//		watch.start();
+//	}
 	
 	@Bean
 	public StopWatch watch() {

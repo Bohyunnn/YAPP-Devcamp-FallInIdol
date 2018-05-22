@@ -20,7 +20,7 @@ public class FaceApi
 	// **********************************************
 
 	// Replace the subscriptionKey string value with your valid subscription key.
-	public static final String subscriptionKey = "ba251cc33ced4f429d84789daff6ee01";
+	public static final String subscriptionKey = "10f495d2a1c44e84992ac10cdad7d47c";
 
 	// Replace or verify the region.
 	//
@@ -79,9 +79,11 @@ public class FaceApi
 					for (int i = 0; i < array_cnt; i++) { //JSONArray 내 json 개수만큼 for문 동작
 				        JSONObject jsonObject = jsonArray.getJSONObject(i); //i번째 Json데이터를 가져옴
 				        JSONObject item = (JSONObject) jsonObject.get("faceAttributes");
-				        gender[i] = item.getString("gender");  //descripton 값을 배열에 저장
+				        if (item.getString("gender") != null) {
+				        		gender[i] = item.getString("gender");  //descripton 값을 배열에 저장
+				        }
 //				        System.out.println("JSON Object"+ jsonObject + "");
-//				        System.out.println("JsonParsing"+ gender[i]);
+				        System.out.println("JsonParsing - "+ gender[i] + " - " + i);
 				 
 				    }
 					
@@ -89,9 +91,9 @@ public class FaceApi
 				}
 				else if (jsonString.charAt(0) == '{') {
 					JSONObject jsonObject = new JSONObject(jsonString);
-//					System.out.println(jsonObject.toString(2));
+					System.out.println(jsonObject.toString(2));
 				} else {
-//					System.out.println(jsonString);
+					System.out.println(jsonString);
 				}
 				
 				return gender;

@@ -265,7 +265,7 @@ to {
 			src="${mainPhoto[0]}" alt="First slide">
 			<div class="w3-display-topleft w3-text-white w3-padding-large"
 			style="padding: 100px 48px">
-			<a href="/"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>
+			<a href="/"><img src="/resources/../img/logo-wh.png"></a>
 			</div>
 		<div class="w3-display-topright w3-text-white w3-padding-large"
 			style="padding: 100px 48px">
@@ -514,13 +514,7 @@ to {
 		</div>
  --%>
 		<!-- FOOTER -->
-		<footer class="container">
-			<p class="float-right">
-				<a href="#">Back to top</a>
-			</p>
-		</footer>
-		<main></main>
-
+		
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->

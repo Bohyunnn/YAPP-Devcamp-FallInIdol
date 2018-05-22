@@ -1,41 +1,216 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
+<head>
 <title>LookingForStar</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<body id="myPage">
+<link rel="stylesheet"
+	href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+ 
+<style type="text/css">
+.dropbtn {
+	background-color: #FFFFFF;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
 
-<!-- Image Header -->
-<div class="w3-display-container w3-animate-opacity">
-  <img src="/resources/../img/logo.png" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+
+#selectable_star   {
+	float: left;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	max-width: 900px;
+	width: 100%;
+	text-transform: uppercase;
+}
+#selectable_lang  {
+	float: left;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	max-width: 900px;
+	width: 100%;
+	text-transform: uppercase;
+}
+
+#selectable_star li  {
+	list-style: none;
+	margin: 2px;
+	display: block;
+	width: 150px;
+	height: 40px;
+	background: #ffffff;
+	color: #000000; 
+	border: none;
+	font-size: 12px;
+	font-weight: bold;
+	/*text-align: center;*/
+	padding-top: 10px;
+	text-decoration: none;
+}
+#selectable_lang li  {
+	list-style: none;
+	margin: 2px;
+	display: block;
+	width: 150px;
+	height: 40px;
+	background: #ffffff;
+	color: #000000; 
+	border: none;
+	font-size: 12px;
+	font-weight: bold;
+	/*text-align: center;*/
+	padding-top: 10px;
+	text-decoration: none;
+}
+
+/* #selectable li  a:hover {
+	background: #e7e7e7;
+	text-decoration: none;
+} */
+
+#selectable_star .ui-selecting{ background: #0d6dff; }
+#selectable_lang .ui-selecting { background: #0d6dff; }
+#selectable_star .ui-selected {
+	background: #0d6dff;
+	color: white;
+}
+#selectable_lang .ui-selected {
+	background: #0d6dff;
+	color: white;
+}
+/*#bts:hover {
+    background-color: #e7e7e7;
+}
+#redvelvet:hover {
+    background-color: #e7e7e7;
+}*/
+#item:hover {
+	background-color: #e7e7e7;
+}
+/* Change the background color of the dropdown button when the dropdown content is shown */
+</style>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	var my_param = [];
+  $( function() {
+    $( "#selectable_star" ).selectable()
+    .on("selectablestop", function() {
+      $('#selectable_star .ui-selected').each(function() {
+        my_param[0] = $(this).html().toLowerCase();
+      });
+    });
+  } );
+  $( function() {
+    $( "#selectable_lang" ).selectable()
+    .on("selectablestop", function() {
+      $('#selectable_lang .ui-selected').each(function() {
+        my_param[1] = $(this).html().toLowerCase();
+      });
+      
+    });
+  } );
   
-</div>
+  $(document).ready(function() {
+	  $("#btnOk").click(function() {
+		  console.log(my_param);
+		  if (my_param[0] == null) {
+			  alert("원하는 스타를 선택해주세요");
+		  }
+		  else if (my_param[1] == null) {
+			  alert("원하는 언어를 선택해주세요");
+		  }
+		  else {
+			  $("#choice").attr('value', my_param[0]);
+			  $("#lang").attr('value' , my_param[1]);
+			  
+			  $("form").submit();
+		  }
+		  
+	  	/* $.ajaxSettings.traditional = true;
+	  	$.ajax({
+	  		url : "/home",
+	  		type: "POST",
+	  		data:  { choice:my_param[0], lang:my_param[1] },
+	  		dataType: "json",
+	  		contentType: "application/json; charset=utf-8",
+	  		success:function() {
+	  			
+	  			window.location.href="http://localhost:8080/home"
+	  		},
+	  		fail:function() {
+	  			window.location.href="http://localhost:8080/home"
+	  		}
+	  	}); */
+	  });
+  });
+  </script>
+</head>
+<body id="myPage">
+	<!-- Image Header -->
+	<div style='position: absolute; left: 60%; top: 30%;'>
+		<div style='position: absolute; width: 800px; left: -360px;'>
+			<img src="/resources/../img/logo-b.png" alt="boat"
+				style="width: 360px;">
+		</div>
+	</div>
+	<div style='position: absolute; left: 65%; top: 50%;'>
+		<div style='position: absolute; width: 800px; left: -400px;'>
+			<img src="/resources/../img/info.png" style="width: 300px;"/>
+		</div>
+	</div>
+	<!-- Team Container -->
+	<form name="f" action="/home" method="POST">
+		<div style='position: absolute; left: 65%; top: 55%;'>
+			<input type="hidden" name="choice" id="choice" />
+			<input type="hidden" name="lang" id="lang"/>
 
-<!-- Team Container -->
-<div class="w3-container w3-padding-64 w3-center" id="team">
-<div class="w3-row"><br>
+			<div style='position: absolute; width:400px; left: -400px;'>
+				
+				<button class="dropbtn">
+						<font color="#707070">STAR</font>
+				</button>
+				<ol id="selectable_star">
+					<li class="ui-widget-content" id="item" value="bts">BTS</li>
+					<li class="ui-widget-content" id="item" value="redvelvet">REDVELVET</li>
+					<li class="ui-widget-content" id="item" value="exo">EXO</li>
+					<li class="ui-widget-content" id="item" value="twice">TWICE</li>
+				</ol>
+			</div>
+			<div style='position: absolute; width: 400px; left: -200px;'>
+				
+			<button class="dropbtn">
+							<font color="#707070">LANGUAGE</font>
+						</button>
+			<ol id="selectable_lang">
+					<li class="ui-widget-content" id="item" value="eng">English</li>
+					<li class="ui-widget-content" id="item" value="china1">繁體中文</li>
+					<li class="ui-widget-content" id="item" value="china2">简体中文</li>
+					<li class="ui-widget-content" id="item" value="japan">日本語</li>
+				</ol>
+			</div>
+		</div>
+		<div style='position: absolute; left: 60%; top: 85%;'>
+			<div style='position: absolute; width: 800px; left: -320px;'>
+				<img src="/resources/../img/letgo.png" 
+					id = "btnOk"
+					style="width: 245px; height: 31px" >
+			</div>
+		</div>
+	</form>
 
-<div class="w3-quarter">
-  <a href="/home?choice=bts"><img src="https://ih1.redbubble.net/image.422776665.7198/flat,800x800,070,f.u2.jpg" alt="BTS" style="width:45%" class="w3-circle w3-hover-opacity"></a>
-</div>
-
-<div class="w3-quarter">
-  <a href="/home?choice=redvelvet"><img src="https://vignette2.wikia.nocookie.net/redvelvet/images/d/dd/Russian_Roulette_Logo.png/revision/latest?cb=20170517145609" alt="REDVELVET" style="width:45%" class="w3-circle w3-hover-opacity"></a>
-</div>
-
-<div class="w3-quarter">
-  <a href="/home?choice=exo"><img src="https://vignette.wikia.nocookie.net/steven-universe/images/4/44/Logo_EXO.png/revision/latest?cb=20171221155634" alt="EXO" style="width:45%" class="w3-circle w3-hover-opacity"></a>
-</div>
-
-<div class="w3-quarter">
-  <a href="/home?choice=twice"><img src="https://ih1.redbubble.net/image.204171845.9095/sticker,375x360-bg,ffffff.png" alt="TWICE" style="width:45%" class="w3-circle w3-hover-opacity"></a>
-</div>
-
-</div>
-</div>
 
 </body>
 </html>

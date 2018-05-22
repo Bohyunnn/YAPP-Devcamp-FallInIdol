@@ -20,13 +20,13 @@ import yapp.devcamp.fallInIdol.dao.BtsPhotoDao;
 
 @Service
 public class GoogleCrawlService {
-	
+	FaceApi faceApi;
 	
 	public List<String> ImageCrawling(String choice, String select) throws IOException, JSONException {
 		
 		String userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
 		String url = "";
-		FaceApi faceApi = new FaceApi();
+		faceApi = new FaceApi();
 		
 		if (choice.equals("redvelvet")) {
 			if (select.equals("paparazzi")) {
@@ -98,6 +98,8 @@ public class GoogleCrawlService {
 					}
 					
 					String[] genderString = faceApi.genderDetected((String) jsonObject.get("ou"));
+					
+					
 					int fe_num = 0;
 					int ma_num = 0;
 					
@@ -134,6 +136,7 @@ public class GoogleCrawlService {
 	}
 
 	public List<String> ImageCrawling(String choice) throws IOException, JSONException {
+		faceApi = new FaceApi();
 		
 		String userAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36";
 		String url = "";
@@ -149,7 +152,8 @@ public class GoogleCrawlService {
 		}
 
 		List<String> resultUrls = new ArrayList<String>();
-
+		int num = 0;
+		
 		try {
 			Document doc = Jsoup.connect(url).userAgent(userAgent).referrer("https://www.google.com/").get();
 
@@ -162,6 +166,30 @@ public class GoogleCrawlService {
 					if ((((String)jsonObject.get("ou")).indexOf("theqoo") > -1)) {
 	            			System.out.println("제외된 url "+jsonObject.get("ou"));
 	            			continue;
+					}
+					
+					String[] genderString = faceApi.genderDetected((String) jsonObject.get("ou"));
+					int fe_num = 0;
+					int ma_num = 0;
+					
+					for (int i = 0; i < genderString.length; i++) {
+						if (genderString[i].equals("female")) {
+							fe_num++;
+						}
+						else {
+							ma_num++;
+						}
+					}
+					
+					if (choice.equals("bts") || choice.equals("exo")) {
+						if (fe_num == genderString.length) {
+							continue;
+						}
+					}
+					else if (choice.equals("redvelvet") || choice.equals("twice")) {
+						if (ma_num == genderString.length) {
+							continue;
+						}
 					}
 					resultUrls.add((String) jsonObject.get("ou"));
 				}
