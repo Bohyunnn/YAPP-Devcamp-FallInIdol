@@ -34,9 +34,7 @@ td {
 	padding: 10px;
 }
 
-tbody tr:nth-child(2n) {
-	background-color: #FFFFFF;
-}
+
 
 </style>
 </head>
@@ -113,10 +111,10 @@ tbody tr:nth-child(2n) {
 					<c:forEach items='${calendarList}' var='item' varStatus='status'
 						begin='0' end='9'>
 						<tr>
-							<td><font color="white">${item.content }</font></td>
+							<td bgcolor="#2F6FF6"><font color="white">${item.content }</font></td>
 						</tr>
 						<tr>
-							<td>${item.date}</td>
+							<td bgcolor="#FFFFFF">${item.date}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -125,6 +123,7 @@ tbody tr:nth-child(2n) {
 
 	</div>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

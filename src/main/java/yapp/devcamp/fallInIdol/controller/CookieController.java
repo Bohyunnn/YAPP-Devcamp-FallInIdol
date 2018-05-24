@@ -22,7 +22,7 @@ public class CookieController {
 		Cookie[] cookies = request.getCookies();
         if (cookies != null) {        	
         	for(int i=0; i<cookies.length; i++){                       
-        		if(cookies[i].getName().equals("cookieS")){            
+        		if(cookies[i].getName().equals("star")){            
         			key=cookies[i].getValue();                        
         		}
         	}

@@ -481,7 +481,7 @@ public class HomeController {
 	
 	
 	public void setCookie(HttpServletRequest request,HttpServletResponse response) {
-		Cookie cookie = new Cookie("cookie", getURL(request));
+		Cookie cookie = new Cookie("star", getURL(request));
 	    //1년으로 설정
 		cookie.setMaxAge(365*24*60*60);
 		cookie.setPath("/");

@@ -185,10 +185,10 @@
 							<font color="#707070">STAR</font>
 					</button>
 					<ol id="selectable_star">
-						<li class="ui-widget-content" id="item" value="bts">&nbsp;&nbsp;&nbsp;BTS</li>
-						<li class="ui-widget-content" id="item" value="redvelvet">&nbsp;&nbsp;&nbsp;REDVELVET</li>
-						<li class="ui-widget-content" id="item" value="exo">&nbsp;&nbsp;&nbsp;EXO</li>
-						<li class="ui-widget-content" id="item" value="twice">&nbsp;&nbsp;&nbsp;TWICE</li>
+						<li class="ui-widget-content" id="item" value="bts">BTS</li>
+						<li class="ui-widget-content" id="item" value="redvelvet">REDVELVET</li>
+						<li class="ui-widget-content" id="item" value="exo">EXO</li>
+						<li class="ui-widget-content" id="item" value="twice">TWICE</li>
 					</ol>
 			</div>
 			<div style='position: absolute; width: 150px; left: -200px;'>
@@ -198,13 +198,13 @@
 							</button>
 				<ol id="selectable_lang">
 						
-						<li class="ui-widget-content" id="ko" value="ko">&nbsp;&nbsp;&nbsp;한국어</li>
-						<li class="ui-widget-content" id="en" value="en">&nbsp;&nbsp;&nbsp;ENGLISH</li>
-						<li class="ui-widget-content" id="ja" value="ja">&nbsp;&nbsp;&nbsp;日本語</li>
-						<li class="ui-widget-content" id="zh" value="zh">&nbsp;&nbsp;&nbsp;简体中文</li>		
-						<li class="ui-widget-content" id="zh-TW" value="zh-TW">&nbsp;&nbsp;&nbsp;繁體中文</li>
-						<li class="ui-widget-content" id="th" value="th">&nbsp;&nbsp;&nbsp;ภาษาไทย</li>
-						<li class="ui-widget-content" id="ru" value="ru">&nbsp;&nbsp;&nbsp;русский</li>
+						<li class="ui-widget-content" id="ko" value="ko">한국어</li>
+						<li class="ui-widget-content" id="en" value="en">ENGLISH</li>
+						<li class="ui-widget-content" id="ja" value="ja">日本語</li>
+						<li class="ui-widget-content" id="zh" value="zh">简体中文</li>		
+						<li class="ui-widget-content" id="zh-TW" value="zh-TW">繁體中文</li>
+						<li class="ui-widget-content" id="th" value="th">ภาษาไทย</li>
+						<li class="ui-widget-content" id="ru" value="ru">русский</li>
 						
 						
 				</ol>

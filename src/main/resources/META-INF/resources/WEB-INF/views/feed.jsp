@@ -179,8 +179,8 @@ to {
 			  	
 			  	 <img src="../../img/twitter-gray-box.png" style="width: 100%; height:18px" alt="Avatar" /><p>
 			  	 	<div class ="col-sm-1">&nbsp;</div>
-			  	 	 DATE : ${item.date}<p>
-					 TITLE : ${item.content} <p>
+			  	  ${item.date}<p>
+					 <span style="color:#6E6E6E">${item.content}</span> <p>
 					 <img src="${item.image}" style="max-width: 100%;width: 100;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" >
 					<div class ="col-sm-1">&nbsp;</div>
 				</c:forEach>

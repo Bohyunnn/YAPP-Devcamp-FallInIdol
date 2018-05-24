@@ -57,11 +57,8 @@ public class TwitterCrawlService {
 						String r_content="";
 						String content = t.first().text();
 						String date = el.select("div.stream-item-header")
-								.select("small.time")
-								.select("a[tweet-timestamp js-permalink js-nav js-tooltip]")
-								.attr("title");
+								.select("small.time").text();
 						
-						System.out.println(date);
 						String image=el.select("div.AdaptiveMedia-container")							
 								.select("img[src~=(?i)\\.(png|jpe?g|gif)]")
 								.attr("src");		
