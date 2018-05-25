@@ -19,91 +19,69 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 <style>
-
-
 </style>
 </head>
 <body>
 <body>
-	<div class="w3-dropdown-hover">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;" >${choice} <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#feed" class="w3-bar-item w3-button w3-padding-large">Schedule</a>
-	<div class="w3-dropdown-hover ">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#feed" class="w3-bar-item w3-button w3-padding-large">CHAT</a>
-	<!-- Navbar -->
-	<div class="w3-display-container w3-animate-opacity">
-		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
-			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
-		</c:forEach>
-	</div>
-
-		<div class="w3-row w3-large w3-white">
-			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
-				href="javascript:void(0);" onclick="openNav()"><i
-				class="fa fa-bars"></i></a> 
-				<div class = "row">
-				<div class ="col-sm-1">&nbsp;</div>
-				<div class ="col-sm-2">
-				<a href="/home?menu=feed&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=profile"
-				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>"			class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="youtuberesult">YOUTUBE</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=photo&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				
-				title="photo">PHOTO</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=twitter&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="twitter">TWITTER</a></div>
-				<div class ="col-sm-1">&nbsp;</div>
-				 </div>
-		</div>
-
 	
-			<div class="w3-container w3-padding-64 w3-center" id="twitter">
-			<div class="w3-row">
-				<div class="w3-third">
-					<c:forEach items="${twit_result}" var="item" varStatus="status"
-						begin="0" end="33">
-						<img src="${item.image}" style="width: 100%" onclick="onClick(this)"
-							>
-					</c:forEach>
-				</div>
-				<div class="w3-third">
-					<c:forEach items="${twit_result}" var="item" varStatus="status"
-						begin="34" end="66">
-						<img src="${item.image}" style="width: 100%" onclick="onClick(this)"
-							>
-					</c:forEach>
-				</div>
-				<div class="w3-third">
-					<c:forEach items="${twit_result}" var="
-				item"
-						varStatus="status" begin="67" end="100">
-						<img src="${item.image}" style="width: 100%" onclick="onClick(this)"
-							>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
+	<jsp:include page="./head.jsp" flush="false" />
+	
+	<!-- !PAGE CONTENT! -->
+		<!-- twitter -->
+		<div class="w3-row w3-container" style="margin-left:83px; margin-right:80px"> 
+	 	 <div class="w3-col " style="width:20%; padding:8px">
+			  	<c:forEach items="${twit_result}" var="item" varStatus="status" begin="0" end="2">
+			  	
+			  	 <img src="../../img/twitter-gray-box.png" style="width: 100%; height:18px" alt="Avatar" /><p>
+			  	 	<div class ="col-sm-1">&nbsp;</div>
+			  	 	 ${item.date}<p>
+					 <span style="color:#6E6E6E">${item.content}</span> <p>
+					 <img src="${item.image}" style="max-width: 100%;width: 100;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" >
+					<div class ="col-sm-1">&nbsp;</div>
+				</c:forEach>
+	  	 </div>
+	  	 <div class="w3-col " style="width:20% ; padding:8px ">
+			  	<c:forEach items="${twit_result}" var="item" varStatus="status" begin="3" end="5">
+			  	  <img src="../../img/twitter-gray-box.png" style="width: 100%; height:18px" alt="Avatar" /><p>
+			  	 	<div class ="col-sm-1">&nbsp;</div>
+			  	 	 ${item.date}<p>
+					 <span style="color:#6E6E6E">${item.content}</span> <p>
+					 <img src="${item.image}" style="max-width: 100%;width: 100;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" >
+					<div class ="col-sm-1">&nbsp;</div>
+				</c:forEach>
+	  	 </div>
+	  	  <div class="w3-col " style="width:20%; padding:8px">
+			  	<c:forEach items="${twit_result}" var="item" varStatus="status" begin="5" end="7">
+			  	  <img src="../../img/twitter-gray-box.png" style="width: 100%; height:18px" alt="Avatar" /><p>
+			  	 	<div class ="col-sm-1">&nbsp;</div>
+			  	 	 ${item.date}<p>
+					 <span style="color:#6E6E6E">${item.content}</span> <p>
+					 <img src="${item.image}" style="max-width: 100%;width: 100;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" >
+					<div class ="col-sm-1">&nbsp;</div>
+				</c:forEach>
+	  	 </div>
+	  	 <div class="w3-col " style="width:20%; padding:8px">
+			  	<c:forEach items="${twit_result}" var="item" varStatus="status" begin="8" end="10">
+			  	  <img src="../../img/twitter-gray-box.png" style="width: 100%; height:18px" alt="Avatar" /><p>
+			  	 	<div class ="col-sm-1">&nbsp;</div>
+			  	 	 ${item.date}<p>
+					 <span style="color:#6E6E6E">${item.content}</span> <p>
+					 <img src="${item.image}" style="max-width: 100%;width: 100;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" >
+					<div class ="col-sm-1">&nbsp;</div>
+				</c:forEach>
+	  	 </div>
+	  	 <div class="w3-col " style="width:20%; padding:8px">
+			  	<c:forEach items="${twit_result}" var="item" varStatus="status" begin="11" end="13">
+			  	 <img src="../../img/twitter-gray-box.png" style="width: 100%; height:18px" alt="Avatar" /><p>
+			  	 	<div class ="col-sm-1">&nbsp;</div>
+			  	 	 ${item.date}<p>
+					<span style="color:#6E6E6E">${item.content}</span> <p>
+					 <img src="${item.image}" style="max-width: 100%;width: 100;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" >
+					<div class ="col-sm-1">&nbsp;</div>
+				</c:forEach>
+	  	 </div>
+	  	
+	  </div>
 	
 </body>
 

@@ -67,7 +67,7 @@ public class Timer {
 //		resultUrls = googleCrawlService.ImageCrawling("bts");
 //		btsPhotoDao.insertPhoto(resultUrls);
 //		
-////		exoPhotoDao.deletePhoto();
+//		exoPhotoDao.deletePhoto();
 //		resultUrls = googleCrawlService.ImageCrawling("exo");
 //		exoPhotoDao.insertPhoto(resultUrls);
 //		
@@ -75,7 +75,7 @@ public class Timer {
 //		resultUrls = googleCrawlService.ImageCrawling("redvelvet");
 //		revelPhotoDao.insertPhoto(resultUrls);
 //		
-////		twicePhotoDao.deletePhoto();
+//		twicePhotoDao.deletePhoto();
 //		resultUrls = googleCrawlService.ImageCrawling("twice");
 //		twicePhotoDao.insertPhoto(resultUrls);
 		

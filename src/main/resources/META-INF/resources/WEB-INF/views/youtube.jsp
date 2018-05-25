@@ -19,6 +19,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+
 #choiceList ol {
 	float: left;
 	list-style: none;
@@ -26,13 +27,10 @@
 	padding: 0px;
 	max-width: 900px;
 	width: 100%;
+	text-transform: uppercase;
 }
 
 #choiceList li {
-	/*  margin: 0 0 0 0;
-	    padding: 0 0 0 0;
-	    border : 0;
-	    float: left; */
 	float: left;
 	list-style: none;
 	margin: 2px;
@@ -51,78 +49,47 @@
 }
 
 #choiceList li a:hover {
-	background: #099;
+	background: #2F6FF6;
 	text-decoration: none;
 }
 </style>
+
 </head>
 <body>
-<div class="w3-dropdown-hover">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;" >${choice} <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#feed" class="w3-bar-item w3-button w3-padding-large">Schedule</a>
-	<div class="w3-dropdown-hover ">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-		<a href="#feed" class="w3-bar-item w3-button w3-padding-large">CHAT</a>
-	<div class="w3-display-container w3-animate-opacity">
-		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
-			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
-		</c:forEach>
-	</div>
-			<div class="w3-row w3-large w3-white">
-			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
-				href="javascript:void(0);" onclick="openNav()"><i
-				class="fa fa-bars"></i></a> 
-				<div class = "row">
-				<div class ="col-sm-1">&nbsp;</div>
-				<div class ="col-sm-2">
-				<a href="/home?menu=feed&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=profile&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>"		class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="youtuberesult">YOUTUBE</a></div>
-				<div class ="col-sm-2">
-					<a href="/home?menu=photo&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				
-				title="photo">PHOTO</a></div>
-				<div class ="col-sm-2">
-				<a href="/home?menu=twitter&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="twitter">TWITTER</a></div>
-				<div class ="col-sm-1">&nbsp;</div>
-				 </div>
-		</div>
-	<div class="w3-container w3-center" id="youtube">
-		<div class="w3-col m12">
-			<div id="choiceList">
-				<ol>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=musicvideo#youtube">뮤직비디오</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=broadcast#youtube">방송</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=mnet#youtube">엠넷</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=musicbank#youtube">뮤직뱅크</a></li>
-					<li><a
-						href="/home?choice=<c:out value="${choice}"/>&select=popularmusic#youtube">인기가요</a></li>
+	<jsp:include page="./head.jsp" flush="false" />
+	
+	<!-- !PAGE CONTENT! -->
+	<!-- youtube -->
+	<div class="w3-container w3-center" id="youtube" style="margin-left:83px; margin-right:80px" >
+		<div id="choiceList" class = "w3-right">
+			<ol>
+					<li ><a id = "musicvideo"
+					href='/youtube?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&select=musicvideo'>뮤직비디오
+					</a></li>
+					<li ><a id = "broadcast"
+					href='/youtube?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&select=broadcast'>방송
+					</a></li>
+					<li ><a id = "mnet"
+					href='/youtube?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&select=mnet'>엠넷
+					</a></li>
+					<li ><a id = "musicbank"
+					href='/youtube?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&select=musicbank'>뮤직뱅크
+					</a></li>
+					<li ><a id = "popularmusic"
+					href='/youtube?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&select=popularmusic'>인기가요
+					</a></li>
+					
 				</ol>
-			</div>
+			<%-- <ol>
+				<c:forEach items="${names }" var="name">
+					<li><a
+						href='/photo?choice=<c:out value="${choice}"/>&select=<c:out value="${name}"/>'>
+							${name}</a></li>
+				</c:forEach>
+			</ol> --%>
 		</div>
+	
+
 		
 		<div class="w3-col m12">
 			<c:forEach items="${youtube}" var="item" varStatus="status" begin="0"

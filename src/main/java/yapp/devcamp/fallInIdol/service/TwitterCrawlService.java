@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.StringTokenizer;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import yapp.devcamp.fallInIdol.model.TwitterItem;
 
@@ -20,12 +20,15 @@ import yapp.devcamp.fallInIdol.model.TwitterItem;
 @Service
 public class TwitterCrawlService {
 	
-	List<TwitterItem> twitUrls = new ArrayList<TwitterItem>();
-	TwitterItem item;
+
+	@Autowired
+	GoogleTranslateService googleTranslateService;
 	
-	public List<TwitterItem> TwitterCrawling(String choice) throws IOException {				
-		String url = "https://twitter.com/RVsmtown?lang=ko";
-				
+	public List<TwitterItem> TwitterCrawling(String choice,String language) throws IOException {				
+		String url = "";
+		
+		
+		
 		if (choice.equals("redvelvet")) {
 			url = "https://twitter.com/RVsmtown?lang=ko";
 		} else if (choice.equals("exo")) {
@@ -36,48 +39,55 @@ public class TwitterCrawlService {
 			url = "https://twitter.com/jypetwice?lang=ko";
 		}
 		
+		List<TwitterItem> TwitList = new ArrayList<TwitterItem>();
+		TwitterItem item;
 		
-		Connection con = Jsoup.connect(url);
 		
 		try{
+			
+			Connection con = Jsoup.connect(url);
 			Document doc = con.get();
 			
 			Elements c = doc.select("div.content");
 			if(c != null){
-				System.out.println(url);
 				for(Element el : c){
 					Elements t = el.select("p.TweetTextSize.js-tweet-text.tweet-text");
 					if(t.size() > 0){
+
+						String r_content="";
 						String content = t.first().text();
-						String date =el.select("div.stream-item-header")
-								.select("small.time")
-								.select("a")
-								.select("span")
-								.attr("data-time-ms");
+						String date = el.select("div.stream-item-header")
+								.select("small.time").text();
+						
+						String image=el.select("div.AdaptiveMedia-container")							
+								.select("img[src~=(?i)\\.(png|jpe?g|gif)]")
+								.attr("src");		
+						
+						
+						
+						if(content.contains("pic")) {							
+							if(!image.equals("")) {
+								r_content=content.substring(0, content.indexOf("pic"));
+								r_content=googleTranslateService.trnaslate(r_content,language);
+								date=googleTranslateService.trnaslate(date,language);
+								item=new TwitterItem(r_content,date,image);
+								TwitList.add(item);
+							}
+							
+						}
 					
 						
-						String image=el.select("div.AdaptiveMediaOuterContainer")
-								.select("img[src]")
-								.attr("abs:src");
-						
-						
-						
-						
-						item=new TwitterItem(content,date,image);
-						
-												
-						twitUrls.add(item);
 					}
+						
+					
 				}
 			}
 		}catch(Exception ex){
 			System.out.println("Connection error...");
 		}		
 		
-		return twitUrls;
+		return TwitList;
 	}
 		
 	
 }
-
-

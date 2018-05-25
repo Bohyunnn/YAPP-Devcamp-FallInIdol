@@ -1,3 +1,4 @@
+
 package yapp.devcamp.fallInIdol.model;
 
 
@@ -31,7 +32,5 @@ public class AlbumItem {
 	      this.date = date;
 	}
 	
-		
-	
-	
 }
+

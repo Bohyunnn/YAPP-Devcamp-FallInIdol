@@ -66,7 +66,6 @@
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgb(0, 0, 0); /* Fallback color */
 	background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
-	
 }
 
 /* Modal Content (image) */
@@ -123,51 +122,19 @@ to {
 	text-decoration: none;
 	cursor: pointer;
 }
-body.modal-open {
-    overflow: hidden;
-}
-
 
 </style>
-
 </head>
 <body>
 	<jsp:include page="./head.jsp" flush="false" />
-	<main>
-	<div class="w3-container" >
-		<div id="choiceList" class = "w3-right">
-			<ol>
-				<li ><a id = "paparazzi"
-					href='/photo?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&amp;select=paparazzi'>직찍
-				</a></li>
-				<li  ><a id = "official"
-					href='/photo?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&amp;select=official'>
-						공식 </a></li>
-				<li ><a id = "pictorial"
-					href='/photo?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&amp;select=pictorial'>화보
-				</a></li>
 
-				<li ><a id = "uhd"
-					href='/photo?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&amp;select=uhd'>고화질
-				</a></li>
-				<li ><a id="airport"
-					href='/photo?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>&amp;select=airport'>공항
-				</a></li>
-
-			</ol>
-			<%-- <ol>
-				<c:forEach items="${names }" var="name">
-					<li><a
-						href='/photo?choice=<c:out value="${choice}"/>&select=<c:out value="${name}"/>'>
-							${name}</a></li>
-				</c:forEach>
-			</ol> --%>
-		</div>
-		<div class="w3-row ">
-			<div class="w3-quarter ">
+	<!-- !PAGE CONTENT! -->
+	<!-- feed -->
+    <div class="w3-row w3-container" style="margin-left:83px; margin-right:80px"> 
+	   <div class="w3-col " style="width:20%">
 				<c:set var="count" value="${listNum div 4}" />
 				<c:forEach items="${result}" var="item" varStatus="status" begin="0"
-					end="${count}">
+					end="${5}">
 					<img src="${item.getUrl()}"
 						style="width: 100%; min-height: 350px; max-height: 600px; padding: 6px 6px 6px 6px; "
 						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
@@ -175,45 +142,57 @@ body.modal-open {
 				</c:forEach>
 			</div>
 
-			<div class="w3-quarter">
+			  
+	  
+	  <div class="w3-col " style="width:20%">
+	  	<c:forEach items="${youtube}" var="item" varStatus="status" begin="0"
+				end="9">
+				<iframe width="100%" height="200" style="padding:3px 3px 3px 3px" src="${item.url}?showinfo=0"
+					frameborder="0" allow="autoplay; encrypted-media" ></iframe>
+		</c:forEach>
+	  </div>
+	  
+	   <div class="w3-col " style="width:20%">
 				<c:set var="count2" value="${(listNum - count) div 3}" />
 				<c:set var="total" value="${ count + count2}" />
 
 				<c:forEach items="${result}" var="item" varStatus="status"
-					begin="${count+1}" end="${total}">
+					begin="${count+1}" end="${count+6}">
 					<img src="${item.getUrl()}"
 						style="width: 100%; min-height: 350px; max-height: 600px; padding: 6px 6px 6px 6px;"
 						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
 						onError="this.style.display='none'">
 				</c:forEach>
-			</div>
-
-			<div class="w3-quarter ">
-				<c:set var="count3" value="${(listNum - total) div 2}" />
-
-				<c:set var="total2" value="${total + count3 }" />
-				<c:forEach items="${result}" var="item" varStatus="status"
-					begin="${total+1}" end="${total2}">
-					<img src="${item.getUrl()}"
-						style="width: 100%; min-height: 350px; max-height: 600px;padding: 6px 6px 6px 6px;"
-						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
-						onError="this.style.display='none'">
-				</c:forEach>
-			</div>
-
-			<div class="w3-quarter ">
-				<c:set var="count4" value="${(listNum - total2)}" />
-
-				<c:forEach items="${result}" var="item" varStatus="status"
-					begin="${total2+1 }" end="${listNum}">
-					<img src="${item.getUrl()}"
-						style="width: 100%; min-height: 350px; max-height: 600px; padding: 6px 6px 6px 6px;"
-						onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}"
-						onError="this.style.display='none'">
-				</c:forEach>
-			</div>
 		</div>
+			
+	  <div class="w3-col" style="width:20%">
+	  	<c:forEach items="${youtube}" var="item" varStatus="status" begin="10"
+				end="19">
+				<iframe width="100%" height="200"style="padding:3px 3px 3px 3px" src="${item.url}?showinfo=0"
+					frameborder="0" allow="autoplay; encrypted-media" ></iframe>
+		</c:forEach>
+	  </div>
+	  
+	  	
+	  <div class="w3-col" style="width:20%;padding:8px">
+	  	<c:forEach items="${twit_result}" var="item" varStatus="status" begin="0" end="2">
+			  	
+			  	 <img src="../../img/twitter-gray-box.png" style="width: 100%; height:18px" alt="Avatar" /><p>
+			  	 	<div class ="col-sm-1">&nbsp;</div>
+			  	  ${item.date}<p>
+					 <span style="color:#6E6E6E">${item.content}</span> <p>
+					 <img src="${item.image}" style="max-width: 100%;width: 100;" onclick="clickImage(this)" class="w3-hover-opacity" alt="${item}" >
+					<div class ="col-sm-1">&nbsp;</div>
+				</c:forEach>
+	  </div>
+	  
+	  
+
+
 	</div>
+
+	
+		
 
 	<div id="myModal" class="modal">
 		<span class="close" data-dismiss="modal">&times;</span> 
@@ -245,8 +224,9 @@ body.modal-open {
 		modalImg.src = image.src;
 		captionText.innerHTML = image.alt;
 
+		// Get the <span> element that closes the modal
 		var span = document.getElementsByClassName("close")[0];
-		$("body").addClass("modal-open");
+
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
 			modal.style.display = "none";
@@ -254,7 +234,6 @@ body.modal-open {
 		window.onclick = function(event) {
 			if (event.target == modal) {
 				modal.style.display = "none";
-				 $("body").removeClass("modal-open")
 			}
 		}
 

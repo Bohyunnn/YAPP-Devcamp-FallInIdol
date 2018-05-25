@@ -8,7 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 
 import org.json.JSONException;
 import org.json.JSONArray;
@@ -86,8 +90,9 @@ public class HomeController {
 	List<CalendarItem> calendarList ;
 	List<AlbumItem> albumList;
 
-	List<TwitterItem> twitUrls;
-	List<String> twitterImage;
+
+	List<TwitterItem> twitList;
+
 
 	List<String> resultUrls;
 
@@ -124,19 +129,27 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/photoNoOption")
-	public ModelAndView photoResponse(@ModelAttribute("choice") String choice)  {
+
+	public ModelAndView photoResponse(HttpServletRequest request,HttpServletResponse response,@ModelAttribute("choice") String choice,
+			@RequestParam("language") String lang)  {
+
 		System.out.println("photo2 choice = " + choice);
 		ModelAndView mv = new ModelAndView();
 
 		mv.addObject("listNum", list.size());
 		mv.addObject("choice", choice);
 		mv.setViewName("/photo");
-		mv.addObject("photo", "photo");
+
+		setCookie(request,response);
 		return mv;
 	}
 
+
+	
 	@RequestMapping("/photo")
-	public ModelAndView photoResponse(@ModelAttribute("choice") String choice,@RequestParam("select") String select) throws IOException, JSONException  {
+	public ModelAndView photoResponse(HttpServletRequest request,HttpServletResponse response,@RequestParam("language") String lang,
+			@ModelAttribute("choice") String choice,@RequestParam("select") String select) throws IOException, JSONException  {
+
 		System.out.println("photo3 choice = " + choice);
 		ModelAndView mv = new ModelAndView();
 
@@ -320,7 +333,9 @@ public class HomeController {
 		mv.addObject("listNum", list.size());
 		mv.addObject("choice", choice);
 		mv.addObject("select", select);
-		mv.addObject("photo", "photo");
+		
+		setCookie(request,response);
+
 
 		return mv;
 	}
@@ -329,22 +344,25 @@ public class HomeController {
 	public List<CalendarItem> scheduleService(@ModelAttribute("choice") String choice) throws IOException {
 		System.out.println("schedule choice = " + choice);
 		calendarList = googleCalendarService.CalendarCrawling(choice);
-
-		//		for(CalendarItem content : calendarList) {
-		//			System.out.println(content.getContent());
-		//		}
 		return calendarList;
 	}
 
-	@ModelAttribute("language")
-	public List<String> languageList() {
-		List<String> language = new ArrayList<String>(); //공통속성 
-		language.add("ENGLISH");
-		language.add("中文");
-		language.add("日本語");
-		language.add("한국어");
 
-		return language;
+	@ModelAttribute("languagelist")
+	public List<String> languageList() {
+		List<String> languagelist = new ArrayList<String>(); //공통속성 
+		
+		languagelist.add("한국어");
+		languagelist.add("ENGLISH");		
+		languagelist.add("日本語");
+		languagelist.add("简体中文");
+		languagelist.add("繁體中文");
+		languagelist.add("ภาษาไทย");
+		languagelist.add("русский");
+		
+	
+		return languagelist;
+
 	}
 
 	@ModelAttribute("mainPhoto")
@@ -357,60 +375,158 @@ public class HomeController {
 		return mainPhoto;
 	}
 
-	@RequestMapping("/home")
-	public ModelAndView sendResult(HttpServletRequest request, @ModelAttribute("choice") String choice,
+
+	@RequestMapping("/twitter")
+	public ModelAndView twitterResponse(HttpServletRequest request,HttpServletResponse response,
+			@ModelAttribute("choice") String choice,@RequestParam("language") String lang) throws IOException  {
+		System.out.println("twitter choice = " + choice);
+		System.out.println("twitter language = " + lang);
+		ModelAndView mv = new ModelAndView();
+
+		
+		twitList = twitterCrawlService.TwitterCrawling(choice,lang);
+		mv.addObject("twit_result", twitList);
+		mv.setViewName("/twitter");
+		
+		mv.addObject("choice", choice);
+		mv.addObject("lang", lang);
+		mv.setViewName("/twitter");
+		setCookie(request,response);
+		return mv;
+	}
+
+	
+	@RequestMapping("/feed")
+	public ModelAndView feedResponse(HttpServletRequest request,HttpServletResponse response,
+			@ModelAttribute("choice") String choice,@RequestParam("language") String lang,
+			@RequestParam(value = "items", required = false, defaultValue = "26") String items) throws IOException  {
+		System.out.println("feed choice = " + choice);
+		ModelAndView mv = new ModelAndView();
+		
+		
+		List<YouTubeItem> youtuberesult;
+		int max = Integer.parseInt(items);
+		youtuberesult = youtubeService.youTubeSearch(choice, max);
+		mv.addObject("youtube", youtuberesult);
+		
+		twitList = twitterCrawlService.TwitterCrawling(choice,lang);
+		mv.addObject("twit_result", twitList);
+		
+		
+		mv.addObject("listNum", list.size());
+		mv.addObject("photo", "photo");
+		mv.addObject("choice", choice);
+		mv.addObject("lang", lang);
+		mv.setViewName("/feed");
+		setCookie(request,response);
+		return mv;
+	}
+	
+	@RequestMapping("/youtube")
+	public ModelAndView youtubeResponse(HttpServletRequest request,HttpServletResponse response,
+			@ModelAttribute("choice") String choice,@RequestParam("language") String lang,
+			@RequestParam(value = "items", required = false, defaultValue = "26") String items) throws IOException  {
+		String select = request.getParameter("select");
+		
+		System.out.println("youtube choice = " + choice);
+		System.out.println("youtube select = " + select);
+		
+		ModelAndView mv = new ModelAndView();
+		
+		
+		List<YouTubeItem> youtuberesult;
+		int max = Integer.parseInt(items);
+		
+		
+			
+		if (choice != null && select != null) {
+			youtuberesult = youtubeService.youTubeSearch(choice, select, max);
+			mv.addObject("youtube", youtuberesult);
+			mv.setViewName("/youtube");
+		}
+		else if (choice != null && select == null)  {
+			youtuberesult = youtubeService.youTubeSearch(choice, max);
+			mv.addObject("youtube", youtuberesult);
+			mv.setViewName("/youtube");
+		}
+			
+			
+		mv.addObject("lang", lang);
+		mv.addObject("choice", choice);
+		mv.addObject("select", select);
+
+		setCookie(request,response);
+		
+		return mv;
+	}
+	
+	
+	
+	
+	@RequestMapping("/profile")
+	public ModelAndView sendResult(HttpServletRequest request,HttpServletResponse response,
+			@ModelAttribute("choice") String choice,@RequestParam("language") String lang,
 			@RequestParam(value = "items", required = false, defaultValue = "26") String items) throws IOException {
 		ModelAndView mv = new ModelAndView();
 
 		albumList =new ArrayList<AlbumItem>();
-		twitUrls =new ArrayList<TwitterItem>();
-		twitterImage=new ArrayList<String>();
+
+		albumList = albumCrawlService.AlbumCrawling(choice);
+		mv.addObject("album_result", albumList);
+
 		
-		String select = request.getParameter("select");
-		String menu = request.getParameter("menu");
-
-		int max = Integer.parseInt(items);
-
-		List<YouTubeItem> youtuberesult;
-
-
-		if (menu != null) {
-			if (menu.equals("youtube")) {
-				if (choice != null && select != null) {
-					youtuberesult = youtubeService.youTubeSearch(choice, select, max);
-					mv.addObject("youtube", youtuberesult);
-					mv.setViewName("/youtube");
-				}
-				if (choice != null && select == null)  {
-					youtuberesult = youtubeService.youTubeSearch(choice, max);
-					mv.addObject("youtube", youtuberesult);
-					mv.setViewName("/youtube");
-				}
-			}
-			else if (menu.equals("twitter")) {
-				twitUrls = twitterCrawlService.TwitterCrawling(choice);
-				mv.addObject("twit_result", twitUrls);
-				mv.setViewName("/twitter");
-			}
-			else if (menu.equals("profile")) {
-				albumList = albumCrawlService.AlbumCrawling(choice);
-				mv.addObject("album_result", albumList);
-
-				mv.setViewName("/profile");
-			}
-		}
-		else {
-			youtuberesult = youtubeService.youTubeSearch(choice, max);
-			mv.addObject("youtube", youtuberesult);
-			twitUrls = twitterCrawlService.TwitterCrawling(choice);
-			mv.addObject("twit_result", twitUrls);
-		}
+		mv.setViewName("/profile");
 		
+		mv.addObject("lang", lang);
 		mv.addObject("choice", choice);
-		mv.addObject("select", select);
-		mv.addObject("twit_result", twitUrls);
 
+		setCookie(request,response);
+		
 		return mv;
 	}
+	
+	
+	public void setCookie(HttpServletRequest request,HttpServletResponse response) {
+		Cookie cookie = new Cookie("star", getURL(request));
+	    //1년으로 설정
+		cookie.setMaxAge(365*24*60*60);
+		cookie.setPath("/");
+	    response.addCookie(cookie);
+	}
+	
+	public String getURL(HttpServletRequest request)
+	  {
+	    Enumeration<?> param = request.getParameterNames();
+
+	    StringBuffer strParam = new StringBuffer();
+	    StringBuffer strURL = new StringBuffer();
+
+	    if (param.hasMoreElements())
+	    {
+	      strParam.append("?");
+	    }
+
+	    while (param.hasMoreElements())
+	    {
+	      String name = (String) param.nextElement();
+	      String value = request.getParameter(name);
+
+	      strParam.append(name + "=" + value);
+
+	      if (param.hasMoreElements())
+	      {
+	        strParam.append("&");
+	      }
+	  }
+
+	  strURL.append(request.getRequestURI());
+	  strURL.append(strParam);
+	  	  
+		
+
+	  return strURL.toString();
+	  
+	}
+
 
 }

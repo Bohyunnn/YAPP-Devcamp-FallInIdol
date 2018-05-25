@@ -34,11 +34,11 @@ public class GoogleCrawlService {
 			} else if (select.equals("pictorial")) {
 				url = "https://www.google.co.kr/search?q=redvelvet+pictorial&client=safari&sa=X&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjr3JmbmdLZAhVX6bwKHUU3Ar0QsAQIJw";
 			} else if (select.equals("official")) {
-				url = "https://www.google.co.kr/search?q=redvelvet+pictorial&client=safari&sa=X&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjr3JmbmdLZAhVX6bwKHUU3Ar0QsAQIJw";
+				url = "https://www.google.com/search?q=red+velvet+%2B레드벨벳+%2B공식&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwio3_npxqDbAhUBFZQKHSy8DFAQsAQIiQE";
 			} else if (select.equals("uhd")) {
-				url = "https://www.google.co.kr/search?q=redvelvet+pictorial&client=safari&sa=X&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjr3JmbmdLZAhVX6bwKHUU3Ar0QsAQIJw";
+				url = "https://www.google.com/search?q=red+velvet+%2B레드벨벳+%2B고화질+-팬&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwiQ7e-Ix6DbAhUEnpQKHfUBBcIQsAQIJQ";
 			} else {
-				url = "https://www.google.co.kr/search?q=redvelvet+pictorial&client=safari&sa=X&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjr3JmbmdLZAhVX6bwKHUU3Ar0QsAQIJw";
+				url = "https://www.google.com/search?q=red+velvet+%2B레드벨벳+%2B공항사진+-팬+-평양&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwiBw5eex6DbAhWDqJQKHVX5B04QsAQIJQ";
 			}
 		} else if (choice.equals("exo")) {
 			if (select.equals("paparazzi")) {
@@ -46,11 +46,11 @@ public class GoogleCrawlService {
 			} else if (select.equals("pictorial")) {
 				url = "https://www.google.co.kr/search?q=exo+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwjZiqDAmdLZAhWKULwKHfenAugQsAQIJw";
 			} else if (select.equals("official")) {
-				url = "https://www.google.co.kr/search?q=exo+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwjZiqDAmdLZAhWKULwKHfenAugQsAQIJw";
+				url = "https://www.google.com/search?q=exo+%2B기사사진+%2B엑소&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjHjcf_w6DbAhUBkpQKHdt7AWsQsAQIJQ";
 			} else if (select.equals("uhd")) {
-				url = "https://www.google.co.kr/search?q=exo+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwjZiqDAmdLZAhWKULwKHfenAugQsAQIJw";
+				url = "https://www.google.com/search?q=exo+%2B고화질+%2B엑소&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwij2cauxKDbAhWGoZQKHc6zCG8QsAQIJQ";
 			} else {
-				url = "https://www.google.co.kr/search?q=exo+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwjZiqDAmdLZAhWKULwKHfenAugQsAQIJw";
+				url = "https://www.google.com/search?q=exo+%2B공항사진+%2B엑소&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwj0t4vBxKDbAhWCtpQKHR6xBnoQsAQIJQ";
 			}
 		} else if (choice.equals("bts")) {
 			if (select.equals("paparazzi")) {
@@ -58,11 +58,11 @@ public class GoogleCrawlService {
 			} else if (select.equals("pictorial")) {
 				url = "https://www.google.co.kr/search?q=bts+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi7oJ3LmdLZAhVTObwKHc6sDnQQsAQIJA";
 			} else if (select.equals("official")) {
-				url = "https://www.google.co.kr/search?q=bts+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi7oJ3LmdLZAhVTObwKHc6sDnQQsAQIJA";
+				url = "https://www.google.com/search?q=bts+%2B기사사진+%2B공식+%2B방탄소년단+-twitter+-빌보드+-게임&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwit4pSOxqDbAhWEjZQKHZ3LCRoQsAQIJQ";
 			} else if (select.equals("uhd")) {
-				url = "https://www.google.co.kr/search?q=bts+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi7oJ3LmdLZAhVTObwKHc6sDnQQsAQIJA";
+				url = "https://www.google.com/search?q=bts+%2B고화질+%2B방탄소년단+-아미+-배경화면+-굿즈&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjgyZqfxaDbAhXFoJQKHXFICjAQsAQIJQ";
 			} else {
-				url = "https://www.google.co.kr/search?q=bts+pictorial&client=safari&rls=en&dcr=0&biw=1264&bih=733&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwi7oJ3LmdLZAhVTObwKHc6sDnQQsAQIJA";
+				url = "https://www.google.com/search?q=bts+%2B공항사진+%2B방탄소년단+-마비+-아미&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjNrqv3xKDbAhXMm5QKHeF8BQoQsAQIJQ";
 			}
 		} else {
 			if (select.equals("paparazzi")) {
@@ -70,11 +70,11 @@ public class GoogleCrawlService {
 			} else if (select.equals("pictorial")) {
 				url = "https://www.google.com/search?q=twice+%ED%99%94%EB%B3%B4+%2B%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjD4qW7_vXaAhUDvrwKHRFEBhsQsAQIJQ";
 			} else if (select.equals("official")) {
-				url = "https://www.google.com/search?q=twice+broad+picture+%2B트와이스&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjV58j9_vXaAhWIEbwKHdi0A5YQsAQIJQ";
+				url = "https://www.google.com/search?q=twice+%2B트와이스+%2B기사사진+-vlive&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwif5puyyKDbAhXEn5QKHbJaCv8QsAQIJQ";
 			} else if (select.equals("uhd")) {
-				url = "https://www.google.com/search?q=twice+%EA%B3%A0%ED%99%94%EC%A7%88+%2B%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwid0I6L__XaAhVRNrwKHVJsCMsQsAQIJQ";
+				url = "https://www.google.com/search?q=twice+%2B트와이스+%2B고화질+-굿즈&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwiBs-rPx6DbAhVMm5QKHca3BAUQsAQIJQ";
 			} else {
-				url = "https://www.google.com/search?q=twice+공항사진+%2B트와이스&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwib2dai__XaAhUIvLwKHdy-A9EQsAQIJQ";
+				url = "https://www.google.com/search?q=twice+%2B트와이스+%2B공항사진+-패션&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwiBl6a9x6DbAhUOC6YKHW8zCzMQsAQIJQ";
 			}
 		}
 		
@@ -144,11 +144,11 @@ public class GoogleCrawlService {
 		if (choice.equals("redvelvet")) {
 			url = "https://www.google.com/search?q=red+velvet&client=safari&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiJ39Oy2fPaAhVS6bwKHYn5Bx4QsAQIKA";
 		} else if (choice.equals("exo")) {
-			url = "https://www.google.co.kr/search?q=exo%EC%A7%81%EC%B0%8D&client=safari&rls=en&dcr=0&tbm=isch&tbo=u&source=univ&sa=X&ved=0ahUKEwiuqoXapvPZAhULi7wKHQ10BsMQsAQIJQ";
+			url = "https://www.google.com/search?q=exo+%2B엑소+%2B단체+-방송+-instagram&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwiRzbL_wKDbAhUKyLwKHfePAEEQsAQIJQ";
 		} else if (choice.equals("bts")) {
 			url = "https://www.google.com/search?q=bts&client=safari&sa=X&rls=en&biw=718&bih=862&tbm=isch&tbo=u&source=univ&ved=0ahUKEwjmkKfc1vPaAhVGUbwKHXEEA-4QsAQIJQ";
 		} else {
-			url = "https://www.google.com/search?q=twice+%2B트와이스&client=safari&sa=N&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwiDmpjx__XaAhWGVrwKHWJbB-44ChCwBAgk";
+			url = "https://www.google.com/search?q=twice+%2B트와이스+-예능+-방송&client=safari&sa=X&rls=en&biw=1440&bih=839&tbm=isch&tbo=u&source=univ&ved=0ahUKEwj28ayevaDbAhUEk5QKHV9pAlIQsAQIQg";
 		}
 
 		List<String> resultUrls = new ArrayList<String>();

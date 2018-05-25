@@ -29,28 +29,51 @@
 html, body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Roboto", sans-serif;
 }
-
 td {
 	padding: 10px;
 }
 
-tbody tr:nth-child(2n) {
-	background-color: #FFFFFF;
-}
-
-tbody tr:nth-child(2n+1) {
-	background-color: #2F6FF6;
-}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="../../bootstrap/js/jquery.cookie.js"></script>
+
+
+
 </head>
 <body>
+<%-- <%
+
+Cookie[] cookies = request.getCookies();            // 요청정보로부터 쿠키를 가져온다.
+
+
+
+out.println("현재 설정된 쿠키의 개수 : " + cookies.length);    // 쿠키가 저장된 배열의 길이를 가져온다.
+
+
+
+for(int i = 0 ; i<cookies.length; i++){                            // 쿠키 배열을 반복문으로 돌린다.
+
+
+
+out.println(i + "번째 쿠키 이름 : " + cookies[i].getName());            // 쿠키의 이름을 가져온다.
+
+out.println(i + "번째 쿠키에 설정된 값 : " + cookies[i].getValue());    // 쿠키의 값을 가져온다.
+
+
+
+}
+
+%>
+ --%>
 	<div class="w3-display-container w3-animate-opacity">
 		<img class="First-slide"
 			style="width: 100%; min-height: 350px; max-height: 600px;"
 			src="${mainPhoto[0]}" alt="First slide">
 		<div class="w3-display-topleft w3-text-white w3-padding-large"
 			style="padding: 100px 48px">
-			<a href="/"><img src="/resources/../img/logo-wh.png"></a>
+			
+			<a href="/home" name="logo" id="logo" ><img src="/resources/../img/logo-wh.png"></a>
+			
 		</div>
 		<div class="w3-display-topright w3-text-white w3-padding-large"
 			style="padding: 100px 48px">
@@ -65,9 +88,9 @@ tbody tr:nth-child(2n+1) {
 				</button>
 
 				<div class="w3-dropdown-content w3-card-4 w3-bar-block">
-					<c:forEach items="${language}" var="lang" varStatus="status"
-						begin="0" end="3">
-						<a href='/home?choice=<c:out value="${choice}"/>'
+					<c:forEach items="${languagelist}" var="lang" varStatus="status"
+						begin="0" end="6">
+						<a href='/feed?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>'
 							class="w3-bar-item w3-button">${lang}</a>
 					</c:forEach>
 				</div>
@@ -77,32 +100,29 @@ tbody tr:nth-child(2n+1) {
 	</div>
 
 	<div class="w3-row w3-large w3-white">
-		<a
-			class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
-			href="javascript:void(0);" onclick="openNav()"><i
-			class="fa fa-bars"></i></a>
 		<div class="row">
 			<div class="col-sm-1">&nbsp;</div>
 			<div class="col-sm-2">
-				<a href="/home" class="w3-bar-item w3-button w3-padding-large">FEED</a>
+				<a href='/feed?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>' 
+				class="w3-bar-item w3-button w3-padding-large" id ="feed" >FEED</a>
 			</div>
 			<div class="col-sm-2">
-				<a href='/home?menu=profile&amp;choice=<c:out value="${choice}"/>'
-					class="w3-bar-item w3-button w3-padding-large">PROFILE</a>
+				<a href='/profile?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>'
+					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id = "profile">PROFILE</a>
 			</div>
 			<div class="col-sm-2">
-				<a href='/home?menu=youtube&amp;choice=<c:out value="${choice}"/>'
+				<a href='/youtube?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>'
 					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-					title="youtuberesult">YOUTUBE</a>
+					id="youtube">YOUTUBE</a>
 			</div>
 			<div class="col-sm-2">
-				<a href='/photoNoOption?choice=<c:out value="${choice}"/>'
+				<a href='/photoNoOption?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>'
 					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				style="background: #2F6FF6;" title="photo"><font color="white">PHOTO</font></a>
+				id="photo">PHOTO</font></a>
 			</div>
 			<div class="col-sm-2">
-				<a href='/home?menu=twitter&amp;choice=<c:out value="${choice}"/>'
-					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">TWITTER</a>
+				<a href='/twitter?choice=<c:out value="${choice}"/>&language=<c:out value="${lang}"/>'
+					class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" id = "twitter">TWITTER</a>
 			</div>
 		</div>
 
@@ -113,10 +133,10 @@ tbody tr:nth-child(2n+1) {
 					<c:forEach items='${calendarList}' var='item' varStatus='status'
 						begin='0' end='9'>
 						<tr>
-							<td><font color="white">${item.content }</font></td>
+							<td bgcolor="#2F6FF6"><font color="white">${item.content }</font></td>
 						</tr>
 						<tr>
-							<td>${item.date}</td>
+							<td bgcolor="#FFFFFF">${item.date}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -125,31 +145,51 @@ tbody tr:nth-child(2n+1) {
 
 	</div>
 </body>
+<script type="text/javascript" >
+
+    // 저장된 쿠키값을 읽어오기
+   var cookies = $.cookie("star");
+   var menu = cookies.split("?");
+  
+   if (menu[0].indexOf("feed") > 0 ) {
+	   var x = document.getElementById("feed");
+	    x.style.color="#0d6dff";
+
+   }
+   else if (menu[0].indexOf("profile") > 0 ) {
+	   var x = document.getElementById("profile");
+	    x.style.color="#0d6dff";
+
+  } else if (menu[0].indexOf("youtube") > 0 ) {
+	   var x = document.getElementById("youtube");
+	    x.style.color="#0d6dff";
+
+ }else if (menu[0].indexOf("photo") > 0 ) {
+	   var x = document.getElementById("photo");
+	    x.style.color="#0d6dff";
+
+ } else if (menu[0].indexOf("twitter") > 0 ) {
+	   var x = document.getElementById("twitter");
+	    x.style.color="#0d6dff";
+
+ }
+   
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous" type="text/javascript"></script>
-			<script type="text/javascript">
-			window.jQuery
-					|| document
-							.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')
-			function openNav() {
-				var x = document.getElementById("navDemo");
-				if (x.className.indexOf("w3-show") == -1) {
-					x.className += " w3-show";
-				} else {
-					x.className = x.className.replace(" w3-show", "");
-				}
-
-			}
-		</script>
-			<script type="text/javascript">
-		$('#Schedule').on('click', function() {
-				$('[data-toggle="popover"]').popover({
-					content : $('#myPopoverContent').html(),
-					html : true
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+<script type="text/javascript" src="jquery.cookie.js"></script>
+		<script type="text/javascript">
+			$('#Schedule').on('click', function() {
+					$('[data-toggle="popover"]').popover({
+						content : $('#myPopoverContent').html(),
+						html : true
+					});
 				});
-			});
 		</script>
+
 
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"

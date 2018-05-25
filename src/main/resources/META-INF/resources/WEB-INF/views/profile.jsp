@@ -17,86 +17,39 @@
 	href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+</style>
+
 </head>
 <body>
-	<div class="w3-dropdown-hover">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;" >${choice} <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#calendarModal" 
-				class="w3-bar-item w3-button w3-padding-large">Schedule</a>
-	<div class="w3-dropdown-hover ">  
-		<button class="w3-button w3-black" title="Notifications" style="  width: 110px;height: 31px;">ENGLISH <i class="fa fa-caret-down"></i></button>     
-			<div class="w3-container w3-dropdown-content w3-card-4 w3-bar-block">
-				<c:forEach items="${choicelist}" var="userChoice" varStatus="status" begin="0" end="2">
-				     <a href="/home?choice=<c:out value="${userChoice}"/>" class="w3-bar-item w3-button">${userChoice }</a>
-				</c:forEach>
-			</div>
-	</div>
-	<a href="#FEED"
-				class="w3-bar-item w3-button w3-padding-large">CHAT</a>
-				
-	<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-	      </div>
-	      <div class="modal-body">
-			<c:forEach items="${calendar_result}" var="item" varStatus="status" begin="0" end="9">
-			${item.date}
-			<p>
-			${item.content }
-		</c:forEach>	
-	      </div>
-	      <div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="w3-display-container w3-animate-opacity">
-		<c:forEach items="${mainPhoto}" var="item" varStatus="status" begin="0" end="0">
-			<img class="First-slide" style="width:100%;min-height:350px;max-height:600px;" src="${item}" alt="First slide">
-		</c:forEach>
-	</div>
-			<div class="w3-row w3-large w3-white">
-			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large"
-				href="javascript:void(0);" onclick="openNav()"><i
-				class="fa fa-bars"></i></a> 
-				<div class = "row">
-				<div class ="col-sm-1">&nbsp;</div>
-				<div class ="col-sm-2">
-				<a href="/home?menu=feed&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">FEED</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=profile&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-padding-large">PROFILE</a></div> 
-				<div class ="col-sm-2">
-				<a href="/home?menu=youtube&choice=<c:out value="${choice}"/>"			class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-				title="youtuberesult">YOUTUBE</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=photo&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"				
-				title="photo">PHOTO</a></div>
-				<div class ="col-sm-2">
-				 <a href="/home?menu=twitter&choice=<c:out value="${choice}"/>"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">TWITTER</a>
-				</div>
-		</div>
-	
-<!-- profile -->
-      <div class="container-fluid" id="profile">
-         <div class="row">
-            <div style="margin-left: 83px" class="col-sm-7">
-               <div class="col-sm-2 text-center">
+	<jsp:include page="./head.jsp" flush="false" />
+
+	 <!-- !PAGE CONTENT! -->
+	  <!-- profile -->
+      <div class="row" style="margin-left:84px; margin-right:83px" >
+	  		<div class="column"  >
+	  		  	 <div class="col-sm-2 text-center">
                   <!--  class="img-circle" -->
                   <img src="../../img/bts/profile-contents-bts-gray-bar.png"
                      height="18px" alt="Avatar" />
@@ -149,45 +102,35 @@
                      </tr>
                   </table>
    
-               </div>
-   
-   
             </div>
-   
-            <div class="row-sm-5" >
-               <!--  앨범 들어갈 자리 -->
-               <img src="../../img/bts/bts-profile-contents-album-gray-bar.png"
-                  height=18px " alt="Avatar" />
-               <c:forEach items="${album_result}" var="item" varStatus="status"
-                  begin="0" end="33">
-                  
-            <table border="0" width="500" height="100">
-               <tr>
-                  <td rowspan="2">
-                     <!--  앨범 들어갈 장소 -->
-                     
-                  <img src="${item.image}"  onclick="onClick(this)"
-                     alt="A boy surrounded by beautiful nature">
-               
-                  </td>
-                  
-                  <td> <!-- 타이틀 들어갈 장소 -->
-                     TITLE : ${item.content}" <p>
-                     
-               <!--  앨범 날짜 -->
-               DATE : ${item.date}
-                  </td>
-
-               </tr>
-               
-         
-                     </table>
-          </c:forEach>
-   
-   
-            </div>
-         </div>
-      </div>
+ 		    </div>
+		  	<div class="column" >
+		     	<!--  앨범 들어갈 자리 -->
+               <img src="../../img/bts/bts-profile-contents-album-gray-bar.png; height=18px" alt="Avatar" />
+               <div style="width:100%; height:900px; overflow:auto">
+	               <c:forEach items="${album_result}" var="item" varStatus="status" begin="0" end="33">                  
+	           		 <table border="0" width="500" height="100">
+	            	   <tr>
+	               		   <td rowspan="2">
+	                    	 <!--  앨범 들어갈 장소 -->
+	                    	 
+	                          <img src="${item.image}"  style="height: 230px;width: 230px;" onclick="onClick(this)" alt="A boy surrounded by beautiful nature">               
+	               		   </td>
+	                  
+	                	  <td> <!-- 타이틀 들어갈 장소 -->
+	                  		   <strong>TITLE</strong>&nbsp;&nbsp;  ${item.content} <p>                     
+	              			   <!--  앨범 날짜 -->
+	               			   <strong>DATE</strong>&nbsp;&nbsp;   ${item.date}
+	                	  </td>
+	           	      </tr>
+	               
+	         
+	                 </table>
+	              </c:forEach>
+	            </div>
+		    </div>
+	  </div>
+      
 </body>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
