@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "youtubtapi",
+  "private_key_id": "f50b1cf2ae50204a38be7671b8da9f7c3580d197",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0QAtj6RdOAAcp\nxKKO4Nil3l4q2Q00m6p4awZJjHl9WyiH2RUlm0WpZgqXvBDdni3A5MGY70mUZvI1\nRODcBkokdG3xBlsw6jY6Xj0jq9uoEEhr14AKWU3iuaHQ2Me+Ipy0mn+o0q7n574H\nvKbzUvkUDhstfwc0gfx/quKp13t8zKh2e9gzndyBDk+y4bNBZfG5H0uzI73ns5tW\nl65x6xvWRQm3eHNE/D+Opv/KsPMh6coUGOogyLf/lwNdO1iJotqdgQxxqaM+dJTl\nxkdb5pswwQIGgNUzYJbG5ERHIYvBW5dYQqUQTbrN41qmT++QiNTUzpEvLpLUogf7\nlOy2A25FAgMBAAECggEAEnXctMbSlDJ8iVKSM3/jsFkt28WPDKxEsUCEzFOOvb/w\nTrl06P0WDVteClxAffINTYwgJ8GaD5DbjYkYXnBmd4VVHTJBdKkIFMJCEL0xKe1A\n/Yp8mpK631WTtQf+rQJuejC4klnBgA7D75bqolEFIYCwV+CCpGYLrieaPzrKcuV2\ny8AqJF8pTDLVgabulJcxhK7HhQZinu/zWX3YheATIYlOU/08gsNPgkyOYOwKZQPO\nHOjTiTSHAeSReydKVUT3OnawRIOX96lECTdLXsFTcZjKiJkFJRQrz4K5q911Qy6w\nkY2dmT1d97ph63Fl+3wdeQgqPT34KF1eVosBu+meoQKBgQDrdksFJfDTVkFrXWPm\nC1UclHvGrOGdp366t800aQ3u4jgDEg4QpT2NR84XXj9zV2GvAifAob1DlzfAmJTc\njeJjg+ZpBStaAtbuVXOiLD9+kDeXL3o4wkqyP0GzECqn4NusIOVp28OgxfghIUoI\nWU//B7iR3E+jFsit8oOmpvPUvwKBgQDD+OhI9r3oFeTuiX+fnPpTUSz4hZNNgu5O\naQsWHeUSCnX+gszr7is7+rdRe5t63m73V9stFI28LCBGvtLSxSlBuZGvgbRtaysW\nczV7w3WZAbXO3jaaEsBseae1lA+P8W+ap2oUMWAGTv/pDK1czsoJx/0oTzOOKkNH\nlCc7a7Dp+wKBgQCqybLAmTSFFht9dM/xHGcvw8PD58H+SG9zn74INesVSqC2GXJ6\nQGDVCTBDYulDEC6ackXDQ420aQrXd9UB5ShAZnvJ0SYQs96SIQkuqEml05V+48ET\nSlpDz/4nk6JdAoxT3ciJcA4Fn5LK9Qpt49pScZc+tT5OXUhSY4V6a76QoQKBgF0a\nxEDl+RNqU3mAmcGbMtKinlr0GyeYLN/TyBCZ41rO3YAtZG4ymRfF5ZIwx414X//j\nHZ4tRalAzZTO1BqO0SsIns5jMPVLFQ11btN96UDoLxg5One4sPLYWXVLApnAeuVe\n5Gbzjktw/OQbwcF1/UboXL3p4vSH368CFCGG6GZBAoGBAJd3fEhJzyW5SF1XtUYF\nLFy8mT6KsQYt3Z9rwkV7nl+IkFWPw2Ebi3XdLqMPCnkokUrmoMPDqrVggtjLnXlL\nQPb+nxR/QHEdRFtZecMlZVyLs9DY0zXkucT2LlPu8IjurFrPswg3dUxxF/P0Z8W9\nmIHVbQRN9w+2KzfT02WMsPKH\n-----END PRIVATE KEY-----\n",
+  "client_email": "compute-engine-default-service@youtubtapi.iam.gserviceaccount.com",
+  "client_id": "114482595786565499360",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/compute-engine-default-service%40youtubtapi.iam.gserviceaccount.com"
+}
