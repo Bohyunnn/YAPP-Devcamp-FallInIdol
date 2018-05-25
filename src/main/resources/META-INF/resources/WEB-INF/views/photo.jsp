@@ -249,12 +249,14 @@ body.modal-open {
 		$("body").addClass("modal-open");
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
+			$("body").removeClass("modal-open");
 			modal.style.display = "none";
 		}
 		window.onclick = function(event) {
 			if (event.target == modal) {
+				$("body").removeClass("modal-open");
 				modal.style.display = "none";
-				 $("body").removeClass("modal-open")
+				 
 			}
 		}
 
