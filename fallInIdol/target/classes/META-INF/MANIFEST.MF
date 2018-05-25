@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: fallInIdol
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: juri
+Implementation-Vendor-Id: yapp.devcamp.fallInIdol
+Build-Jdk: 1.8.0_161
+Implementation-URL: http://projects.spring.io/spring-boot/fallInIdol/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
