@@ -138,6 +138,7 @@ public class HomeController {
 
 		mv.addObject("listNum", list.size());
 		mv.addObject("choice", choice);
+		mv.addObject("lang", lang);
 		mv.setViewName("/photo");
 
 		setCookie(request,response);
@@ -333,6 +334,7 @@ public class HomeController {
 		mv.addObject("listNum", list.size());
 		mv.addObject("choice", choice);
 		mv.addObject("select", select);
+		mv.addObject("lang", lang);
 		
 		setCookie(request,response);
 
